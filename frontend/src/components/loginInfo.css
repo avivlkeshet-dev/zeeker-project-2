@@ -1,13 +1,30 @@
 body{
     margin: 0;
     background-color: #000000;
-    height: 100vh;
     width: 100%;
 }
 
 .login-container{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
+    align-items: right;
+    color: #ffffff;
+    margin: 0px;
+}
+
+.login-container p{
+    font-size: 16px;
+    text-align: right;
+    margin-bottom: 5px;
+    margin-right: 10px;
+}
+
+.login-container input{
+    direction: rtl;
+    font-size: 20px;
+    padding: 10px;
+    padding-right: 24px;
+    border: none;
+    border-radius: 5px;
+    background: radial-gradient( #3A3E40, #24292B);
 }
