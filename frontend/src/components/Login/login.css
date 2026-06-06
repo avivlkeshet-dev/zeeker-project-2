@@ -1,0 +1,15 @@
+body{
+    background-color: #000000;
+}
+
+.img-container{
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    height: auto !important;
+}
+
+.img-container img{
+    width: 100%;
+    height: auto;
+}

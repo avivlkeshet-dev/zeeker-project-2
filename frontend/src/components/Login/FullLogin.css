@@ -1,0 +1,64 @@
+body{
+    background-color: #000000;
+}
+
+.img-container{
+    justify-content: center !important;
+    align-items: center !important;
+
+}
+
+.topImage{
+    width: 100% !important;
+    height: auto !important;
+}
+
+.img-container img{
+    width: 100%;
+    height: auto;
+}
+
+
+.login-container{
+    display: flex;
+    flex-direction: column;
+    align-items: right;
+    color: #ffffff;
+}
+
+.login-container p{
+    font-size: 16px;
+    text-align: right;
+    margin-bottom: 5px;
+    margin-right: 10px;
+}
+
+.login-container input{
+    direction: rtl;
+    font-size: 20px;
+    padding: 10px;
+    padding-right: 24px;
+    border: none;
+    border-radius: 5px;
+    background: radial-gradient( #3A3E40, #24292B);
+}
+
+.login-footer {
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: flex-start !important;
+    width: 236px;
+    margin: 20px auto 0 !important;
+}
+
+.alert-text{
+    margin: 0;
+    font-size: 14px;
+    color: #A7A9AA;
+    text-align: right;
+}
+
+.exclamation-mark{
+    margin-top: 5px !important;
+    margin-left: 5px !important;
+}

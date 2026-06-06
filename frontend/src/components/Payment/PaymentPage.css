@@ -1,0 +1,86 @@
+﻿body{
+    justify-content: center;
+}
+
+.payment-page{
+    height: 100vh;
+}
+
+.carName{
+    font-size: 18px !important;
+}
+
+.requestText{
+    font-size: 18px !important;
+}
+
+.Line-1{
+    border-left: 1px solid white;
+    height: 140px;
+}
+
+.Line-2{
+    border-left: 1px solid white;
+    height: 120px;
+
+}
+
+.Line-3{
+    border-left: 1px solid white;
+    height: 220px;
+
+}
+
+.bottom-elipse{
+    width: 20px;
+    height: 20px;
+}
+
+.smallLine{
+    width: 90%;
+}
+
+.BubbleText{
+    width: 90%;
+}
+
+.BubbleTitle{
+    font-size: 20px;
+}
+
+.textbox{
+    direction: rtl;
+}
+
+.textbubble{
+    border: 1px solid black;
+    border-radius: 12px;
+    background-color: #24292B;
+}
+
+.downloadButton{
+    border: 1px solid #FF5800;
+    border-radius: 33px;
+    color: white;
+    width: 248px;
+    height: 35px;
+    align-self: center;
+}
+
+.uploadButton{
+    border: 1px dashed white;
+    border-radius: 10px;
+    color: white;
+    width: 248px;
+    height: 65px;
+    align-self: center;
+}
+
+.finishButton{
+    border: 1px solid #919495;
+    border-radius: 33px;
+    color: #919495;
+    width: 248px;
+    height: 35px;
+    align-self: center;
+}

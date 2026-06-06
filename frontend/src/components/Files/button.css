@@ -1,0 +1,17 @@
+.login-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 220px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin: 15px auto 0;
+    background-color: #FF5800;
+    border-radius: 16px;
+    border: none;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+}
