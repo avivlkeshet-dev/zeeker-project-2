@@ -1,0 +1,42 @@
+.Frontpage-image{
+    display: block;
+    margin: 0 auto;
+}
+
+.bubble{
+    display: block;
+    margin: 0 auto;
+    width: 320px;
+    border: 1px solid black;
+    border-radius: 12px;
+    background-color: #24292B;
+    direction: rtl;
+}
+
+.ContinueProcess{
+    text-align: center;
+}
+
+.ProcessTitle{
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.FinishProcessButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 220px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin: 15px auto 0;
+    background-color: #FF5800;
+    border-radius: 33px;
+    border: none;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 100px;
+}

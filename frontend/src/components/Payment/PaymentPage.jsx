@@ -42,7 +42,10 @@ function PaymentPage() {
                 <h1 className='BubbleTitle text-white mt-3 me-3'>פניה לסוכן</h1>
                 <img className='smallLine mt-3 me-3' src="./src/assets/smallLine.png" alt="" />
                 <p className='BubbleText mt-3 me-3'>העברנו את הבקשה לנציג/ת המכירות. בקרוב נעדכן אותך לגבי התקדמות הטיפול</p>
-                <button className='uploadButton mb-4'><img className='ms-2' src="./src/assets/Upload.png" alt="" />מסמך אישור מימון</button>
+                <form action="/upload-destination" method="POST" enctype="multipart/form-data">
+                <label htmlFor="file-upload" className='uploadLabel mb-4'><img className='ms-2' src="./src/assets/Upload.png" alt="" />מסמך אישור מימון</label>
+                <input type='file' id='file-upload'></input>
+ </form>
             </div>
             </div>
             <div>
@@ -69,7 +72,7 @@ function PaymentPage() {
         </div>
         </div>
         </div>
-        <button className='finishButton mb-5 mt-3'>סיום תהליך</button>
+        <button className='finishButton mb-5 mt-3 me-3'>סיום תהליך</button>
         </div>
     )
 }

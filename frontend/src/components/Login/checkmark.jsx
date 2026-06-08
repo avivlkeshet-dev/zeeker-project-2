@@ -6,7 +6,7 @@ function CustomCheckbox() {
 
   return (
     <div className="custom-checkbox">
-      <p>אישור <a href="/terms" target="_blank" rel="noopener noreferrer">תנאי השימוש</a> באפליקציה</p>
+      <p>אישור <a className='text-white' href="/terms" target="_blank" rel="noopener noreferrer">תנאי השימוש</a> באפליקציה</p>
       <button
       onClick={() => setChecked(!checked)}
       style={{

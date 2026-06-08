@@ -25,3 +25,7 @@ p{
   color: white;
   margin-right: 10px;
 }
+
+.TermsAndConditions{
+  text-decoration: none !important;
+}
