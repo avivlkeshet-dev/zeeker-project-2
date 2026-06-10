@@ -1,0 +1,9 @@
+.transfer-docs .top-container .upload-file {
+    border-style: dashed !important;
+    border-radius: 15px;
+}
+
+.transfer-docs .top-container .upload-file .icon {
+    color: #E65C00;
+    margin-left: 25px;
+}

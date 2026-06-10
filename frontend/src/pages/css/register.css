@@ -1,0 +1,5 @@
+input {
+    border: 1px solid #434242;
+    border-radius: 10px;
+    background-image: radial-gradient(#3A3E40, #24292B);
+}

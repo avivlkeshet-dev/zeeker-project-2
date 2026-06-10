@@ -1,0 +1,242 @@
+.main {
+    background-color: black;
+    
+}
+
+.profile .profile-name {
+    color: white;
+}
+
+.profile-btn {
+    background-color: gray !important;
+    border: none !important;    
+}
+
+.profile span {
+    width: 50px !important;
+}
+
+.top-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center !important;
+    justify-self: center !important;
+}
+
+.top-container .content {
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.top-container .content .image {
+    position: absolute;
+    object-fit: contain;
+    width: 300px;
+    height: auto;
+    z-index: 10;
+    margin-bottom: 15rem;
+}
+
+.top-container .content .image img {
+    object-fit: auto;
+    width: 100%;
+    height: auto;
+}
+
+/* .top-container .content .content-slider {
+    
+} */
+
+.top-container .content .content-slider .details {
+    position: relative;
+    width: 400px;
+    height: 200px;
+    background-color: #24292b;
+    border: none;
+    border-radius: 15px;
+    margin-top: 100px;
+}
+
+.top-container .content .content-slider .details h1 {
+    color:  white;
+}
+
+.top-container .content .content-slider .details p {
+    color: white;
+}
+
+.top-container .content .content-slider .details button {
+    border: 1px solid rgb(238, 154, 28);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.top-container .content .content-slider .details button:hover {
+    background-color: rgb(238, 154, 28);
+    color: black;
+    border: none;
+}
+
+.slideshow-dots .dot {
+    height: 12px;
+    width: 12px;
+    margin: 0 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+
+.bottom-container h1 {
+    color: white;
+}
+
+.bottom-container .viewport {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 15px 20px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.bottom-container .viewport::-webkit-scrollbar {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.bottom-container .links {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.bottom-container .links li {
+    margin-left: 15px;
+}
+
+.bottom-container .links li .link {
+    width: 100px;
+    height: 110px;
+    border-radius: 15px;
+    border: none;
+    background: radial-gradient(#3A3E40, #24292b);
+    color: #FFFFFF
+}
+
+.bottom-container .links li .link .image img {
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+    margin-bottom: 5px;
+}
+
+.bottom-container .links li .link span {
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    line-height: 1.2;
+}
+
+/* Container sizing */
+.zeekr-navbar-container {
+    position: relative;
+    width: 480px; /* Adjust width to fit your layout scale */
+    height: 65px;
+}
+
+/* Background canvas with the curve cutout */
+.zeekr-navbar-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #212529; /* Matches dark theme dashboard background */
+    border-radius: 16px;
+    
+    /* Smooth dip in the center for the orange button */
+    clip-path: path("M 0 0 L 190 0 C 205 0, 205 32, 240 32 C 275 32, 275 0, 290 0 L 480 0 L 480 65 L 0 65 Z");
+    z-index: 1;
+}
+
+/* Flex overlay alignment */
+.zeekr-navbar-content {
+    position: relative;
+    z-index: 2;
+}
+
+/* Standard left/right icon button styles */
+.zeekr-nav-btn {
+    background: none;
+    border: none;
+    color: #8A8D91; /* Muted silver/gray icon color */
+    padding: 8px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.zeekr-nav-btn:hover, .zeekr-nav-btn.active {
+    color: #FFFFFF;
+}
+
+/* Absolute positioned orange circular button wrapper */
+.zeekr-fab-wrapper {
+    position: absolute;
+    top: -24px; /* Pulls the circle upwards over the dip cut */
+    left: calc(50% - 28px);
+    width: 56px;
+    height: 56px;
+    z-index: 3;
+}
+
+/* The actual orange center button */
+.zeekr-orange-btn {
+    width: 56px;
+    height: 56px;
+    background-color: #E65C00; /* Vivid orange theme color */
+    border: 3px solid #212529; /* Dark stroke border separating it from the gap */
+    border-radius: 50%;
+    color: #FFFFFF;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Text styles inside the center button */
+.fab-text-top {
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 1.1;
+}
+.fab-text-bottom {
+    font-size: 10px;
+    line-height: 1.1;
+}
+
+/* White Pill Button ("ראשי") Style */
+.zeekr-pill-btn {
+    background-color: #FFFFFF;
+    border: none;
+    border-radius: 20px;
+    padding: 6px 16px;
+    color: #212529;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.zeekr-pill-btn .pill-text {
+    font-size: 13px;
+}
+
+.zeekr-pill-btn:hover {
+    opacity: 0.9;
+}
