@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom'
 import LoginPage from '../pages/login.jsx'
 import Contact from '../pages/contact.jsx'
 import Pages from '../pages/Pages.jsx'
-import PaymentFinalize from '../pages/PaymentPage.jsx'
+import PaymentFinalize from '../pages/MainPaymentPage.jsx'
 import Message from '../pages/MessagePage.jsx'
 import Repair from '../pages/Repair.jsx'
 import AgencyPage from '../pages/AgencyPage.jsx'
@@ -27,7 +27,7 @@ const router = createBrowserRouter([
   },
     {
     path: "/Payment",
-    element: <Payment />
+    element: <PaymentFinalize />
   },
     {
     path: "/Message",
