@@ -1,14 +1,13 @@
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import "./Document.css";
+import menuIcon from "../../assets/Menu.png";
+import fileIcon from "../../assets/Letter.png";
 
 function Document() {
   return (
     <div className="container-fluid my-docs text-white border-bottom">
-      <div className="top-container d-flex justify-content-end w-100 mt-3 position-relative">
+      <div className="d-flex justify-content-end w-100 mt-3 position-relative">
         <div className="menuDiv position-absolute mt-1">
-        <img className="menu" src='../src/assets/Menu.png' />
+        <img className="menu" src={menuIcon} alt="Menu" />
         </div>
         <div className="d-flex flex-column align-items-center justify-content-end me-3">
           <div className="d-flex flex-column align-items-center m-0">
@@ -20,7 +19,9 @@ function Document() {
             </p>
           </div>
         </div>
-        <img className="file mt-2 me-3" src="../src/assets/Letter.png" />
+        <div>
+                <img className="file mt-2 me-3" src={fileIcon} alt="Document" />
+                </div>
       </div>
     </div>
   );

@@ -20,7 +20,7 @@ function PaymentPage() {
         <div className='mt-5 text-white text-center'>
             <h2 className='requestText'>מעקב אחרי בקשת המימון</h2>
         </div>
-        <div className='d-flex'>
+        <div className='d-flex text-white'>
             <div className='d-flex flex-column textbox d-flex mt-3'>
             <div className='textbubble d-flex flex-column align-items-start me-2'>
                 <h1 className='BubbleTitle text-white mt-3 me-3'>פניה לסוכן</h1>

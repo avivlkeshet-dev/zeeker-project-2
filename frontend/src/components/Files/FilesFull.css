@@ -1,4 +1,4 @@
-body.pages-page {
+/* body.pages-page {
   background-color: black;
   background-size: cover;
   background-position: center;
@@ -23,3 +23,39 @@ body.pages-page {
 .Separator{
     color: #919495 !important;
 }
+
+.title{
+    font-size: 18px !important;
+}
+
+.update{
+    color: #B4B4C3 !important;
+    font-size: 16px !important;
+}
+
+.file{
+    height: 30px !important;
+    width: 22px !important;
+}
+
+.menuDiv{
+    margin-right: 95%;
+}
+
+.login-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 220px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin: 15px auto 0;
+    background-color: #FF5800;
+    border-radius: 16px;
+    border: none;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+} */

@@ -26,7 +26,7 @@ const router = createBrowserRouter([
     element: <Pages />
   },
     {
-    path: "/Payment",
+    path: "/PaymentFinalize",
     element: <PaymentFinalize />
   },
     {

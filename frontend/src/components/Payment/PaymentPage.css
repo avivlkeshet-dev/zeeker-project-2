@@ -1,6 +1,7 @@
 ﻿.payment-page{
-    height: 100vh;
     align-items: center;
+    min-height: 100vh;
+    background-color: black;
 }
 
 .carName{
@@ -13,7 +14,7 @@
 
 .Line-1{
     border-left: 1px solid white;
-    height: 140px;
+    height: 150px;
 }
 
 .Line-2{
