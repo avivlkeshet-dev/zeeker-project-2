@@ -4,6 +4,7 @@ import MyDocs from '../components/Files/MyDocs.jsx'
 import Document from '../components/Files/Document.jsx'
 import Titles from '../components/Files/Titles.jsx'
 import Button from '../components/Files/Button.jsx'
+import FilesFull from '../components/Files/FilesFull.jsx'
 import { useEffect } from 'react'
 
 function Pages() {
@@ -16,17 +17,7 @@ function Pages() {
     }, []);
     return (
         <div>
-            <Header />
-            <MyDocs />
-            <Document />
-            <Document />
-            <Document />
-            <Titles />
-            <Document />
-            <Titles />
-            <Document />
-            <Document />
-            <Button />
+          <FilesFull />
         </div>
     )
 }

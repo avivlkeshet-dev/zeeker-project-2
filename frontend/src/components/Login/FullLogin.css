@@ -1,5 +1,7 @@
-body{
-    background-color: #000000;
+body.login-page {
+  background-color: black;
+  background-size: cover;
+  background-position: center;
 }
 
 .img-container{
@@ -39,7 +41,7 @@ body{
     padding: 10px;
     padding-right: 24px;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     background: radial-gradient( #3A3E40, #24292B);
 }
 
@@ -61,4 +63,65 @@ body{
 .exclamation-mark{
     margin-top: 5px !important;
     margin-left: 5px !important;
+    height: 13px !important;
+    width: 13px !important;
+}
+
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+  margin: 20px auto 0;
+  justify-content: center;
+  border: 2px solid #000;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.custom-checkbox a{
+  color: white;
+  font-size: 14px;
+}
+
+.custom-checkbox p{
+  font-size: 14px;
+  color: white;
+  margin-right: 10px;
+}
+
+.TermsAndConditions{
+  text-decoration: none !important;
+}
+
+.login-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+    width: 197px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin: 20px auto 0;
+    background-color: #FF5800;
+    border-radius: 20px;
+    border: none;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+}
+
+.contact{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 18px;
+    margin-bottom: 20px;
+    text-decoration: underline;
+    color: white;
 }

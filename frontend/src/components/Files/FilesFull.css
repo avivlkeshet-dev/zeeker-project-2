@@ -1,0 +1,25 @@
+body.pages-page {
+  background-color: black;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.carName{
+    font-size: 18px !important;
+}
+
+.my-docs{
+    font-size: 20px !important;
+}
+
+.Border{
+    height: 30px !important;
+    width: 30px !important;
+    position: absolute !important;
+}
+
+.Separator{
+    color: #919495 !important;
+}
