@@ -45,7 +45,7 @@ function PaymentPage() {
                 <form action="/upload-destination" method="POST" enctype="multipart/form-data">
                 <label htmlFor="file-upload" className='uploadLabel mb-4'><img className='ms-2' src="./src/assets/Upload.png" alt="" />מסמך אישור מימון</label>
                 <input type='file' id='file-upload'></input>
- </form>
+            </form>
             </div>
             </div>
             <div>

@@ -11,3 +11,9 @@
     width: 100%;
     height: auto;
 }
+
+body.login-page {
+  background-color: black;
+  background-size: cover;
+  background-position: center;
+}
