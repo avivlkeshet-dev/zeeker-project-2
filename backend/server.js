@@ -6,11 +6,14 @@ const auth = require('./routes/authRoutes');
 const doc = require('./routes/documentRoutes');
 const contact = require('./routes/contactRoutes');
 const vehicle = require('./routes/vehicleRoutes');
+const path = require('path');
 
 const server = express();
 
 server.use(express.json());
 server.use(cors());
+
+server.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 mongoose.connect(process.env.MONGODB_URI) 
     .then(() => console.log('mongodb connected successfully'))

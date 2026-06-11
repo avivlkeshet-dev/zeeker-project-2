@@ -3,13 +3,15 @@ const express = require('express');
 const pdfParse = require('pdf-parse');
 const mammoth = require('mammoth');
 const Document = require('../models/Document');
+const fs = require('fs');
+const path = require('path');
 
 const router = express.Router();
 
 router.post('/api/documents', upload.single('document'), async (req, res) => {
     try {
         if(!req.file) {
-            return res.status(400).json({ message: 'No file uploaded' });
+            return res.status(400).json({ message: 'נדרש להעלות לפחות קובץ אחד' });
         }
 
         let scannedText = '';
@@ -25,9 +27,23 @@ router.post('/api/documents', upload.single('document'), async (req, res) => {
             scannedText = result.value;
         }
 
+        const uplouadDir = path.join(__dirname, '../uploads');
+
+        if(!fs.existsSync(uplouadDir)) {
+            fs.mkdirSync(uplouadDir, { recursive: true });
+        }
+
+        const uniqueFileName = `${Date.now()}-${req.file.originalname}`;
+        const filePath = path.join(uplouadDir, uniqueFileName);
+
+        fs.writeFileSync(filePath, req.file.buffer);
+
+        const generateFileUrl = `/uploads/${uniqueFileName}`;
+
         const newDoc = new Document({
             userId: req.body.userId,
             fileName: req.file.originalname,
+            fileUrl: generateFileUrl,
             fileType: mimeType,
             extractedText: scannedText
         });
@@ -35,23 +51,21 @@ router.post('/api/documents', upload.single('document'), async (req, res) => {
         await newDoc.save();
 
         res.status(200).json({
-            message: 'Document uploaded and scanned successfuly',
+            message: 'קבצים הועלו ונבדקו בהצלחה!',
             document: newDoc
         });
     } catch (error) {
-        res.status(500).json({ message: 'Processing error', error: error.message });
+        res.status(500).json({ message: 'שגיאה בזמן תהליך', error: error.message });
     }
 });
 
 router.get("/api/documents/:userId", async (req,res) => {
     try {
         const { userId } = req.params;
-
         const userDocuments = await Document.find({ userId: userId });
-
         res.status(200).json(userDocuments);
     } catch(error) {
-        res.status(500).json({ message: 'Server error', error: error.message })
+        res.status(500).json({ message: 'שגיאת שרת', error: error.message })
     }
 })
 
