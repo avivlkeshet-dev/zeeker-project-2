@@ -1,78 +1,81 @@
 ﻿.payment-page{
-    align-items: center;
-    min-height: 100vh;
-    height: 100vh !important;
-    background-color: black;
+    height: 100vh;
+    background-color: #000000;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .carName{
     font-size: 18px !important;
+    font-weight: 500;
 }
 
 .requestText{
-    font-size: 18px !important;
-}
-
-.Line-1{
-    border-left: 1px solid white;
-    height: 150px;
-}
-
-.Line-2{
-    border-left: 1px solid white;
-    height: 120px;
-
-}
-
-.Line-3{
-    border-left: 1px solid white;
-    height: 220px;
-
-}
-
-.bottom-elipse{
-    width: 20px;
-    height: 20px;
+    font-size: 16px !important;
+    font-weight: 400;
 }
 
 .smallLine{
     width: 90%;
+    opacity: 0.3;
 }
 
 .BubbleText{
     width: 90%;
+    font-size: 14px;
+    color: #E0E0E0;
+    line-height: 1.5;
 }
 
 .BubbleTitle{
-    font-size: 20px;
-}
-
-.textbox{
-    direction: rtl;
+    font-size: 16px;
+    font-weight: 600;
 }
 
 .textbubble{
-    border: 1px solid black;
+    border: none;
     border-radius: 12px;
     background-color: #24292B;
+    padding: 16px;
+    flex: 1;
+    direction: rtl;
+}
+
+.textbubble:first-child {
+    margin-top: 0;
 }
 
 .downloadButton{
     border: 1px solid #FF5800;
     border-radius: 33px;
+    background-color: #FF5800;
     color: white;
     width: 248px;
-    height: 35px;
+    height: 40px;
     align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.downloadButton:hover{
+    background-color: #E65000;
 }
 
 .finishButton{
     border: 1px solid #919495;
     border-radius: 33px;
+    background-color: transparent;
     color: #919495;
     width: 248px;
-    height: 35px;
-    align-self: center;
+    height: 40px;
+    font-size: 14px;
+    cursor: pointer;
+    margin: 16px auto 24px;
 }
 
 #file-upload{
@@ -80,20 +83,201 @@
 }
 
 .uploadLabel{
-    border: 1px dashed white;
+    border: 2px dashed #FFFFFF;
     border-radius: 10px;
     color: white;
     width: 248px;
-    height: 65px;
+    height: 70px;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
     align-self: center;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: transparent;
 }
 
-form{
+.uploadLabel:hover{
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.payment-page__form{
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     align-self: center;
+    width: 100%;
+}
+
+/* Additional styling for better layout */
+.payment-page .cross,
+.payment-page .back {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.payment-page .d-flex.text-white.justify-content-between {
+    padding: 16px 16px 8px;
+}
+
+.payment-page > .mt-2.text-center img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+/* Progress indicator styling */
+.payment-page .mt-2.text-center {
+    position: relative;
+    padding: 8px 0;
+}
+
+.payment-page .mt-2.text-center img {
+    max-width: 120px;
+    height: auto;
+}
+
+/* Timeline container styling */
+.payment-page > .d-flex {
+    position: relative;
+}
+
+/* Timeline container layout */
+.payment-page__timeline-container {
+    padding: 0 20px 40px;
+    width: 100%;
+    direction: rtl;
+    position: relative;
+    overflow-y: auto;
+    overflow-x: clip;
+    flex: 1;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Scrollbar styling - hidden but functional */
+.payment-page__timeline-container::-webkit-scrollbar {
+    width: 0;
+    display: none;
+}
+
+/* Timeline item - each bubble with its circle */
+.timeline-item {
+    position: relative;
+    margin-bottom: 16px;
+    flex-direction: row;
+    gap: 12px;
+    overflow: visible;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+/* Timeline side - contains circle and connector line */
+.timeline-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: stretch;
+    flex-shrink: 0;
+    padding-top: 16px;
+    overflow: visible;
+    position: relative;
+}
+
+.timeline-circle {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+}
+
+/* Connector line - flex:1 fills height, negative margin bridges the 16px gap between items */
+.timeline-connector {
+    width: 2px;
+    background-color: #4A4A4A;
+    flex: 1;
+    margin-top: 6px;
+    margin-bottom: -32px; /* 16px item gap + 16px padding-top of next side */
+    min-height: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Timeline track column */
+.timeline-track {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.timeline-track > div {
+    display: flex;
+    justify-content: center;
+}
+
+.timeline-track img {
+    width: 20px;
+    height: 20px;
+}
+
+/* Timeline connecting lines */
+.timeline-line {
+    border-left: 2px solid #4A4A4A;
+    height: 150px;
+    margin-left: 0;
+}
+
+.timeline-circle {
+    width: 20px;
+    height: 20px;
+}
+
+/* Textbox column */
+.textbox {
+    direction: rtl;
+    width: 100%;
+    max-width: 340px;
+    flex: 1;
+}
+
+/* Header fixed positioning */
+.payment-page .d-flex.text-white.justify-content-between {
+    background-color: #000000;
+    z-index: 10;
+    padding: 12px 16px;
+    flex-shrink: 0;
+}
+
+/* Progress indicator */
+.payment-page__progress {
+    background-color: #000000;
+    z-index: 9;
+    padding: 16px 0 8px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+/* Content area styling */
+.payment-page .requestText {
+    margin-bottom: 16px;
+}
+
+.payment-page__subtitle {
+    padding: 12px 0 20px;
+    background-color: #000000;
+    flex-shrink: 0;
+}
+
+/* Finish button container */
+.payment-page > .text-center {
+    flex-shrink: 0;
+    padding: 0;
+    background-color: #000000;
 }

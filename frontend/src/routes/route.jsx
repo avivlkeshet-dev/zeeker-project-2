@@ -10,6 +10,7 @@ import Dashboard from '../pages/dashboard';
 import Deals from '../pages/Deals';
 import Payment from '../pages/Payment';
 import Personal from '../pages/register/Personal';
+import BonusOrder from '../pages/BonusOrder';
 import React from 'react';
 
 const router = createBrowserRouter([
@@ -18,6 +19,11 @@ const router = createBrowserRouter([
     element: <LoginPage />
   },
   {
+    path: "/BonusOrder",
+    element: <BonusOrder />
+  },
+  {
+
     path: "/contact",
     element: <Contact />
   },

@@ -63,7 +63,7 @@ function CarAgency() {
     }
   ];
     return(
-        <div className="container-fluid payment-page d-flex flex-column position-relative p-0">
+        <div className="container-fluid payment-page d-flex flex-column position-relative p-0 text-white">
             <div className="TitleContainer">
         <div className="d-flex align-items-center justify-content-between">
           <p className="ms-2"></p>

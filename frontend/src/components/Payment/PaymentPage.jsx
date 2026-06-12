@@ -2,77 +2,75 @@ import './PaymentPage.css'
 
 function PaymentPage() {
     return (
-        <div className="container-fluid min-vh-100 payment-page d-flex flex-column position-relative">
-            <div className="d-flex text-white justify-content-between">
-            <div className='cross m-3'>
-        <img src="../src/assets/X.png" />
-      </div>
-      <div>
-        <h2 className='m-4 carName'>ביצוע תשלום</h2>
-      </div>
-      <div className='back m-3'>
-        <img src="../src/assets/Back.png" />
-      </div>
+        <div className="container-fluid payment-page d-flex flex-column position-relative">
+        <div className="TitleContainer">
+            <div className="d-flex align-items-center justify-content-between">
+                <img className="cross ms-2" src="../src/assets/X.png" />
+                <h2 className="carName text-white mt-3">ביצוע תשלום</h2>
+                <img className="back me-2" src="../src/assets/Back.png" />
+            </div>
         </div>
-        <div className="mt-2 text-center">
-            <img src="../src/assets/3.png" alt="" />
+        <div className="payment-page__progress">
+            <img src="../src/assets/3.png" alt="Step 3 of 3" />
         </div>
-        <div className='mt-5 text-white text-center'>
+        <div className='payment-page__subtitle text-white text-center'>
             <h2 className='requestText'>מעקב אחרי בקשת המימון</h2>
         </div>
-        <div className='d-flex text-white'>
-            <div className='d-flex flex-column textbox d-flex mt-3'>
-            <div className='textbubble d-flex flex-column align-items-start me-2'>
-                <h1 className='BubbleTitle text-white mt-3 me-3'>פניה לסוכן</h1>
-                <img className='smallLine mt-3 me-3' src="./src/assets/smallLine.png" alt="" />
-                <p className='BubbleText mt-3 me-3'>העברנו את הבקשה לנציג/ת המכירות. בקרוב נעדכן אותך לגבי התקדמות הטיפול</p>
+        <div className='payment-page__timeline-container'>
+            <div className="d-flex flex-column w-100">
+                <div className='timeline-item d-flex'>
+                    <div className='timeline-side'>
+                        <img className='timeline-circle' src="../src/assets/ElipseEmpty.png" alt="" />
+                        <div className="timeline-connector"></div>
+                    </div>
+                    <div className='textbubble d-flex flex-column align-items-start ms-2'>
+                        <h1 className='BubbleTitle text-white mt-3 ms-3'>פניה לסוכן</h1>
+                        <img className='smallLine mt-3 ms-3' src="./src/assets/smallLine.png" alt="" />
+                        <p className='BubbleText mt-3 ms-3'>העברנו את הבקשה לנציג/ת המכירות. בקרוב נעדכן אותך לגבי התקדמות הטיפול</p>
+                    </div>
+                </div>
+                <div className='timeline-item d-flex'>
+                    <div className='timeline-side'>
+                        <img className='timeline-circle' src="../src/assets/ElipseEmpty.png" alt="" />
+                        <div className="timeline-connector"></div>
+                    </div>
+                    <div className='textbubble d-flex flex-column align-items-start ms-2'>
+                        <h1 className='BubbleTitle text-white mt-3 ms-3'>הגשת בקשה</h1>
+                        <img className='smallLine mt-3 ms-3' src="./src/assets/smallLine.png" alt="" />
+                        <p className='BubbleText mt-3 ms-3'>בקשתך התקבלה והיא בטיפול סוכנ/ת המכירות</p>
+                    </div>
+                </div>
+                <div className='timeline-item d-flex'>
+                    <div className='timeline-side'>
+                        <img className='timeline-circle' src="../src/assets/ElipseEmpty.png" alt="" />
+                        <div className="timeline-connector"></div>
+                    </div>
+                    <div className='textbubble d-flex flex-column align-items-start ms-2'>
+                        <h1 className='BubbleTitle text-white mt-3 ms-3'>החתמת מסמכים</h1>
+                        <img className='smallLine mt-3 ms-3' src="./src/assets/smallLine.png" alt="" />
+                        <p className='BubbleText mt-3 ms-3'>לאחר הורכת המסמך, נבקש להחתים אותו בבנק או אצל הגוף המממן. בבקשה לשים לב שכל הפרטים נכונים</p>
+                        <button className='downloadButton mb-4'><img className='ms-2' src="./src/assets/Download.png" alt="" />מסמך להורדה</button>
+                    </div>
+                </div>
+                <div className='timeline-item d-flex'>
+                    <div className='timeline-side'>
+                        <img className='timeline-circle' src="../src/assets/ElipseFull.png" alt="" />
+                    </div>
+                    <div className='textbubble d-flex flex-column align-items-start ms-2'>
+                        <h1 className='BubbleTitle text-white mt-3 ms-3'>העלאת המסמך</h1>
+                        <img className='smallLine mt-3 ms-3' src="./src/assets/smallLine.png" alt="" />
+                        <p className='BubbleText mt-3 ms-3'>העברנו את הבקשה לנציג/ת המכירות. בקרוב נעדכן אותך לגבי התקדמות הטיפול</p>
+                        <form className='payment-page__form' action="/upload-destination" method="POST" enctype="multipart/form-data">
+                            <label htmlFor="file-upload" className='uploadLabel mb-4'><img className='ms-2' src="./src/assets/Upload.png" alt="" />מסמך אישור מימון</label>
+                            <input type='file' id='file-upload'></input>
+                        </form>
+                    </div>
+                </div>
             </div>
-                <div className='textbubble d-flex flex-column align-items-start me-2 mt-3'>
-                <h1 className='BubbleTitle text-white mt-3 me-3'>הגשת בקשה</h1>
-                <img className='smallLine mt-3 me-3' src="./src/assets/smallLine.png" alt="" />
-                <p className='BubbleText mt-3 me-3'>בקשתך התקבלה והיא בטיפול סוכנ/ת המכירות</p>
-            </div>
-                <div className='textbubble d-flex flex-column align-items-start me-2 mt-3'>
-                <h1 className='BubbleTitle text-white mt-3 me-3'>החתמת מסמכים</h1>
-                <img className='smallLine mt-3 me-3' src="./src/assets/smallLine.png" alt="" />
-                <p className='BubbleText mt-3 me-3'>לאחר הורכת המסמך, נבקש להחתים אותו בבנק או אצל הגוף המממן. בבקשה לשים לב שכל הפרטים נכונים</p>
-                <button className='downloadButton mb-4'><img className='ms-2' src="./src/assets/Download.png" alt="" />מסמך להורדה</button>
-            </div>
-                <div className='textbubble d-flex flex-column align-items-start me-2 mt-3'>
-                <h1 className='BubbleTitle text-white mt-3 me-3'>פניה לסוכן</h1>
-                <img className='smallLine mt-3 me-3' src="./src/assets/smallLine.png" alt="" />
-                <p className='BubbleText mt-3 me-3'>העברנו את הבקשה לנציג/ת המכירות. בקרוב נעדכן אותך לגבי התקדמות הטיפול</p>
-                <form action="/upload-destination" method="POST" enctype="multipart/form-data">
-                <label htmlFor="file-upload" className='uploadLabel mb-4'><img className='ms-2' src="./src/assets/Upload.png" alt="" />מסמך אישור מימון</label>
-                <input type='file' id='file-upload'></input>
-            </form>
-            </div>
-            </div>
-            <div>
-        <div>
-            <img src="../src/assets/ElipseEmpty.png" />
         </div>
-        <div>
-            <div className="Line-1 ms-2"></div>
+        <div className='text-center'>
+            <button className='finishButton'>סיום תהליך</button>
         </div>
-        <div className='bottom-elipse'>
-            <img className='mb-2' src="../src/assets/ElipseEmpty.png" />
-        </div>
-        <div>
-            <div className="Line-2 ms-2"></div>
-        </div>
-        <div className='bottom-elipse'>
-            <img className='mb-2' src="../src/assets/ElipseEmpty.png" />
-        </div>
-        <div>
-            <div className="Line-3 ms-2"></div>
-        </div>
-        <div>
-            <img className='mb-2' src="../src/assets/ElipseFull.png" />
-        </div>
-        </div>
-        </div>
-        <button className='finishButton mb-5 mt-3 me-3'>סיום תהליך</button>
         </div>
     )
 }

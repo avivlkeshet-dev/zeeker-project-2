@@ -4,7 +4,7 @@ import { useState } from 'react';
 function FullLogin() {
   const [checked, setChecked] = useState(false);
   return (
-    <div className="img-container d-flex flex-column">
+    <div className="img-container flex-column d-flex position-relative">
         <div className="topImage">
         <img src="../src/assets/Frontpage.png" alt="login" className="login-image" />
         </div>
@@ -20,7 +20,7 @@ function FullLogin() {
         </div>
             <div className="custom-checkbox">
               <p>אישור <a className='text-white' href="/terms" target="_blank" rel="noopener noreferrer">תנאי השימוש</a> באפליקציה</p>
-              <button className='mb-2'
+              <button className='login-page__checkbox-button mb-2'
               onClick={() => setChecked(!checked)}
               style={{
                 width: "30px",

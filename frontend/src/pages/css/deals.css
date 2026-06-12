@@ -1,20 +1,20 @@
-.container-fluid {
+.deals-container {
     background-color: black;
 }
 
-.top-container button {
+.deals-container__top-button {
     border: none;
     background-color: transparent;
     color: white;
 }
 
-.top-container h1 {
+.deals-container__title {
     font-weight: 500;
     font-size: 20px;
     color: white
 }
 
-.bottom-container button {
+.deals-container__bottom-button {
     background-color: #FF5800;
     border: none;
     border-radius: 20px;
