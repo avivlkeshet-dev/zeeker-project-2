@@ -50,7 +50,7 @@ const userSchema = new mongoose.Schema(
             required: true
         },
         house_number: {
-            type: Number,
+            type: String,
             required: true
         }
     },
