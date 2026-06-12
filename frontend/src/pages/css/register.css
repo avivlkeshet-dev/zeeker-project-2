@@ -3,3 +3,28 @@ input {
     border-radius: 10px;
     background-image: radial-gradient(#3A3E40, #24292B);
 }
+
+.top-bar h1 {
+    color: white;
+    font-size: 18px;
+}
+
+.top-bar .close-btn {
+    color: white;
+}
+
+.top-bar .back-btn {
+    color: white;
+}
+
+/* Target the button directly under .file-section */
+.file-section .upload-file {
+    border: 2px dashed white !important; /* Changed 'border-style' to 'border' */
+    border-radius: 15px;
+    background: transparent; /* Optional: ensures Bootstrap default button styles don't conflict */
+    color: white !important;
+}
+
+.file-section .upload-file .icon {
+    color: #E65C00;
+}
