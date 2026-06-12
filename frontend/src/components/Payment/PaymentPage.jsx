@@ -2,7 +2,7 @@ import './PaymentPage.css'
 
 function PaymentPage() {
     return (
-        <div className="container-fluid payment-page d-flex flex-column position-relative">
+        <div className="container-fluid min-vh-100 payment-page d-flex flex-column position-relative">
             <div className="d-flex text-white justify-content-between">
             <div className='cross m-3'>
         <img src="../src/assets/X.png" />

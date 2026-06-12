@@ -1,6 +1,7 @@
 ﻿.payment-page{
     align-items: center;
     min-height: 100vh;
+    height: 100vh !important;
     background-color: black;
 }
 
