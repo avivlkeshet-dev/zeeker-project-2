@@ -12,7 +12,6 @@ function ZeekrBottomNavigation() {
             <div className="zeekr-navbar-container">
                 {/* The Curved Dark Background Bar */}
                 <div className="zeekr-navbar-bg"></div>
-
                 {/* The Interactive Elements Layer */}
                 <div className="zeekr-navbar-content w-100 h-100 d-flex align-items-center justify-content-between px-3">
                     

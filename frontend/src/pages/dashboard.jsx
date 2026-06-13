@@ -4,83 +4,86 @@ import { CgProfile } from "react-icons/cg";
 import './css/dashboard.css';
 import ButtomNavbar from '../components/ButtomNavbar';
 
+// TODO: replace with API call — load from /api/user/profile
+const mockUser = {
+    firstName: 'עמית',
+    notificationCount: 3,
+};
+
+// TODO: replace with API call — load from /api/car/:id
+const mockCar = {
+    model: 'ZEEKR X',
+    plate: '51-985-74',
+};
+
 function Dashboard() {
     return (
-        <div className="main container-fluid min-vh-100 p-0 overflow-hidden">
-            <div className="top-container w-100">
-                <div className='nav w-100 d-flex align-items-center justify-content-around p-1'>
-                    <button className='btn notification-btn'>
-                        <FaBell size={20} color='white' />
-                    </button>
-                    <img src="../src/assets/logo.png" alt="logo" />
-                    <div className='profile w-25 d-flex align-items-center justify-content-center p-0'>
-                        <span className='profile-name'>בוקר טוב, עמית</span>
-                        <button className='btn profile-btn bg-dark'>
-                            <CgProfile size={20} color='white' />
-                        </button>
+        <div className="dashboard d-flex flex-column">
+
+            {/* ── Top nav ── */}
+            <div className="db-nav d-flex align-items-center justify-content-between px-3 pt-3 pb-2">
+                <button className="db-nav__profile d-flex align-items-center gap-2">
+                    <div className="db-nav__profile-icon mb-1">
+                        <img src="../src/assets/personal.png" alt="personal" className="db-nav__profile-img" />
                     </div>
-                </div>
-                <div className='content w-100'>
-                    <div className="content-slider d-flex flex-column align-items-center w-100">
-                        <div className='details d-flex flex-column align-items-center justify-content-center'>
-                            <div className='image d-flex align-items-end justify-content-center'>
-                                <img src="../src/assets/car.png" alt="car" />
-                            </div>
-                            <h1>ZEEKER X</h1>
-                            <p>מספר רכב 5198574</p>
-                            <button className='bg-transparent'>
-                                <span>המסמכים שלך</span>
-                            </button>
-                        </div>
+                    <div className="db-nav__greeting text-end">
+                        <p className="db-nav__greeting-line mb-0">בוקר טוב,</p>
+                        <p className="db-nav__greeting-name mb-0">{mockUser.firstName}</p>
                     </div>
-                </div>
-                <div className="s h-100 p-3">
-                        <div className="slideshow-dots d-flex align-items-center justify-content-center p-2">
-                            <span className="dot active"></span>
-                            <span className="dot"></span>
-                        </div>
+                </button>
+                <img className="db-nav__logo" src="../src/assets/logo.png" alt="ZEEKR" />
+                <button className="db-nav__bell">
+                    <FaBell size={20} color="white" />
+                    {mockUser.notificationCount > 0 && (
+                        <span className="db-nav__badge">{mockUser.notificationCount}</span>
+                    )}
+                </button>
+            </div>
+
+            {/* ── Car card ── */}
+            <div className="db-card-wrap px-3">
+                <div className="db-car-card d-flex flex-column align-items-center">
+                    <div className="db-car-card__img-wrap">
+                        <img src="../src/assets/car.png" alt="ZEEKR X" className="db-car-card__img" />
+                    </div>
+                    <h2 className="db-car-card__name">{mockCar.model}</h2>
+                    <p className="db-car-card__plate">מס' רכב {mockCar.plate}</p>
+                    <button className="db-car-card__docs-btn">המסמכים שלך</button>
                 </div>
             </div>
-            <div className="bottom-container w-100 d-flex flex-column align-items-center justify-content-center">
-                <h1>לשירותך</h1>
-                <div className='viewport w-100'>
-                    <ul className='links d-flex list-unstyled'>
-                        <li>
-                            <a className='link d-flex flex-column align-items-center justify-content-center text-decoration-none p-2' href="">
-                                <div className="image">
-                                    <img src="../src/assets/icons_add_car.png" alt="ac" />
-                                </div>
-                                <span>הוספת רכב חדש</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a className='link d-flex flex-column align-items-center justify-content-center text-decoration-none p-2' href="">
-                                <div className='image'>
-                                    <img src="../src/assets/near.png" alt="near" />
-                                </div>
-                                <span>ניווט לחניון</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a className='link d-flex flex-column align-items-center justify-content-center text-decoration-none p-2' href="">
-                                <div className="image">
-                                    <img src="../src/assets/icons_charge.png" alt="charge" />
-                                </div>
-                                <span>נקודות טעינה</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a className='link d-flex flex-column align-items-center justify-content-center text-decoration-none p-2' href="">
-                                <div className="image">
-                                    <img src="../src/assets/logo_orange.png" alt="ol" />
-                                </div>
-                                <span>MY ZEEKR</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <ButtomNavbar />
+
+            {/* ── Dots ── */}
+            <div className="db-dots d-flex justify-content-center gap-2 mt-3">
+                <span className="db-dot db-dot--active"></span>
+                <span className="db-dot"></span>
             </div>
+
+            {/* ── Services ── */}
+            <div className="db-services px-3 mt-4">
+                <h2 className="db-services__title text-center">לשירותך</h2>
+                <div className="db-services__grid">
+                    <a className="db-tile d-flex flex-column align-items-center justify-content-center text-decoration-none" href="">
+                        <div className="db-tile__icon">
+                            <img src="../src/assets/MiniLogo.png" alt="MY ZEEKR" />
+                        </div>
+                        <span className="db-tile__label">MY ZEEKR</span>
+                    </a>
+                    <a className="db-tile d-flex flex-column align-items-center justify-content-center text-decoration-none" href="">
+                        <div className="db-tile__icon">
+                            <img src="../src/assets/icons_charge.png" alt="charge" />
+                        </div>
+                        <span className="db-tile__label">נקודות טעינה</span>
+                    </a>
+                    <a className="db-tile d-flex flex-column align-items-center justify-content-center text-decoration-none" href="">
+                        <div className="db-tile__icon">
+                            <img src="../src/assets/Parking.png" alt="charge" />
+                        </div>
+                        <span className="db-tile__label">ניווט לחניון<br/>קרוב</span>
+                    </a>
+                </div>
+            </div>
+
+            <ButtomNavbar />
         </div>
     );
 };
