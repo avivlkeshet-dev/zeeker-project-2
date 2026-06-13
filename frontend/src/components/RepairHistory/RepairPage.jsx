@@ -2,6 +2,39 @@ import "./RepairPage.css";
 import { useRef } from "react";
 import { useEffect } from "react";
 
+// TODO: replace with API call — load from /api/car/:id/repairs
+const repairHistory = [
+  {
+    id: 1,
+    date: '08/08/2021',
+    isLast: true,
+    description: 'הילוך שישי מרכז',
+    garage: 'בכור כהן מוטורס ההגנה 18, אור יהודה',
+    odometer: '58,123',
+    circleIcon: 'ElipseEmpty',
+  },
+  {
+    id: 2,
+    date: '06/01/2021',
+    isLast: false,
+    description: 'הילוך שישי מרכז',
+    garage: 'בכור כהן מוטורס ההגנה 18, אור יהודה',
+    odometer: '58,123',
+    serviceType: 'טיפול 30,000',
+    circleIcon: 'ElipseGray',
+  },
+  {
+    id: 3,
+    date: '01/08/2020',
+    isLast: false,
+    description: 'הילוך שישי מרכז',
+    garage: 'בכור כהן מוטורס ההגנה 18, אור יהודה',
+    odometer: '58,123',
+    serviceType: 'טיפול 30,000',
+    circleIcon: 'ElipseGray',
+  },
+];
+
 function Repair() {
   const containerRef = useRef(null);
   useEffect(() => {
@@ -43,68 +76,38 @@ function Repair() {
       </div>
       <div className="repair-page__content">
         <div className="d-flex flex-column w-100">
-          <div className="repair-timeline-item d-flex">
-            <div className="repair-timeline-side">
-              <img className="repair-timeline-circle" src="../src/assets/ElipseEmpty.png" alt="" />
-              <div className="repair-timeline-connector"></div>
-            </div>
-            <div className="repairtextbubble d-flex flex-column align-items-start ms-2">
-              <div className="repairFirstTitle d-flex align-items-center justify-content-between">
-                <h1 className="RepairBubbleTitle text-white mt-3 me-3">08/08/2021</h1>
-                <div className="lastTreatment">
-                  <img className="SmallElipse" src="../src/assets/SmallElipse.png" alt="" />
-                  <p className="mt-3 ms-2">הטיפול האחרון</p>
+          {repairHistory.map((item, index) => (
+            <div key={item.id} className="repair-timeline-item d-flex">
+              <div className="repair-timeline-side">
+                <img className="repair-timeline-circle" src={`../src/assets/${item.circleIcon}.png`} alt="" />
+                {index < repairHistory.length - 1 && <div className="repair-timeline-connector"></div>}
+              </div>
+              <div className="repairtextbubble d-flex flex-column align-items-start ms-2">
+                <div className="repairFirstTitle d-flex align-items-center justify-content-between">
+                  <h1 className="RepairBubbleTitle text-white mt-3 me-3">{item.date}</h1>
+                  {item.isLast && (
+                    <div className="lastTreatment">
+                      <img className="SmallElipse" src="../src/assets/SmallElipse.png" alt="" />
+                      <p className="mt-3 ms-2">הטיפול האחרון</p>
+                    </div>
+                  )}
                 </div>
-              </div>
-              <img className="smallLine mt-1 me-3" src="./src/assets/smallLine.png" alt="" />
-              <p className="BubbleTextTitle mt-3 me-3">הילוך שישי מרכז</p>
-              <p className="BubbleText me-3">בכור כהן מוטורס ההגנה 18, אור יהודה</p>
-              <div className="d-flex mb-2">
-                <img className="KMicon me-3 mt-1" src="../src/assets/KMicon.png" alt="" />
-                <p>58,123</p>
-                <p>ק"מ</p>
-              </div>
-            </div>
-          </div>
-          <div className="repair-timeline-item d-flex">
-            <div className="repair-timeline-side">
-              <img className="repair-timeline-circle" src="../src/assets/ElipseGray.png" alt="" />
-              <div className="repair-timeline-connector"></div>
-            </div>
-            <div className="repairtextbubble d-flex flex-column align-items-start ms-2">
-              <h1 className="RepairBubbleTitle text-white mt-3 me-3">06/01/2021</h1>
-              <img className="smallLine mt-1 me-3" src="./src/assets/smallLine.png" alt="" />
-              <p className="BubbleTextTitle mt-3 me-3">הילוך שישי מרכז</p>
-              <p className="BubbleText me-3">בכור כהן מוטורס ההגנה 18, אור יהודה</p>
-              <div className="d-flex">
-                <img className="KMicon me-3 mt-1" src="../src/assets/KMicon.png" alt="" />
-                <p>58,123</p>
-                <p>ק"מ</p>
-              </div>
-              <div className="RepairTextboxInfo me-4 mb-3">
-                <p>טיפול 30,000</p>
+                <img className="smallLine mt-1 me-3" src="./src/assets/smallLine.png" alt="" />
+                <p className="BubbleTextTitle mt-3 me-3">{item.description}</p>
+                <p className="BubbleText me-3">{item.garage}</p>
+                <div className={`d-flex ${item.isLast ? 'mb-2' : ''}`}>
+                  <img className="KMicon me-3 mt-1" src="../src/assets/KMicon.png" alt="" />
+                  <p>{item.odometer}</p>
+                  <p>ק"מ</p>
+                </div>
+                {item.serviceType && (
+                  <div className="RepairTextboxInfo me-4 mb-3">
+                    <p>{item.serviceType}</p>
+                  </div>
+                )}
               </div>
             </div>
-          </div>
-          <div className="repair-timeline-item d-flex">
-            <div className="repair-timeline-side">
-              <img className="repair-timeline-circle" src="../src/assets/ElipseGray.png" alt="" />
-            </div>
-            <div className="repairtextbubble d-flex flex-column align-items-start ms-2">
-              <h1 className="RepairBubbleTitle text-white mt-3 me-3">01/08/2020</h1>
-              <img className="smallLine mt-1 me-3" src="./src/assets/smallLine.png" alt="" />
-              <p className="BubbleTextTitle mt-3 me-3">הילוך שישי מרכז</p>
-              <p className="BubbleText me-3">בכור כהן מוטורס ההגנה 18, אור יהודה</p>
-              <div className="d-flex">
-                <img className="KMicon me-3 mt-1" src="../src/assets/KMicon.png" alt="" />
-                <p>58,123</p>
-                <p>ק"מ</p>
-              </div>
-              <div className="RepairTextboxInfo me-4 mb-3">
-                <p>טיפול 30,000</p>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
       <div className="d-flex justify-content-end">

@@ -1,10 +1,10 @@
 import React from 'react'
-import ServicePage from '../components/Services/OrderService.jsx'
+import ServicesFunction from '../components/Services/OrderService.jsx'
 
-export default function Service() {
+export default function Services() {
   return (
     <div>
-      <OrderService />
+      <ServicesFunction />
     </div>
   )
 }

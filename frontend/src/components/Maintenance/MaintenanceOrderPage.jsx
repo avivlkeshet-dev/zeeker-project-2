@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './OrderService.css';
+import './MaintenanceOrderPage.css';
 
 // TODO: replace with API call to load garage data from DB
 const garage = {
@@ -18,7 +18,7 @@ const services = [
     { id: 'accident',    label: 'טיפול לאחר תאונה',   icon: '../src/assets/Accident.png' },
 ];
 
-function Services() {
+function MaintenancePage() {
     const [selected, setSelected] = useState(null);
 
     return (
@@ -90,4 +90,4 @@ function Services() {
     );
 }
 
-export default Services;
+export default MaintenancePage;

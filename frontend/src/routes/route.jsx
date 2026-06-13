@@ -1,17 +1,17 @@
 import { createBrowserRouter } from 'react-router-dom'
-import LoginPage from '../pages/login.jsx'
-import Contact from '../pages/contact.jsx'
-import Pages from '../pages/Pages.jsx'
-import PaymentFinalize from '../pages/MainPaymentPage.jsx'
-import Message from '../pages/MessagePage.jsx'
-import Repair from '../pages/Repair.jsx'
-import AgencyPage from '../pages/AgencyPage.jsx'
+import LoginPage from '../pages/login'
+import Contact from '../pages/contact'
+import Pages from '../pages/Pages'
+import PaymentFinalize from '../pages/MainPaymentPage'
+import Message from '../pages/MessagePage'
+import Repair from '../pages/Repair'
+import AgencyPage from '../pages/AgencyPage'
 import Dashboard from '../pages/dashboard';
 import Deals from '../pages/Deals';
 import Payment from '../pages/Payment';
 import Personal from '../pages/register/Personal';
-import BonusOrder from '../pages/BonusOrder';
-import React from 'react';
+import Services from '../pages/Services';
+import CarSettings from '../pages/CarSettings';
 
 const router = createBrowserRouter([
   {
@@ -19,8 +19,12 @@ const router = createBrowserRouter([
     element: <LoginPage />
   },
   {
-    path: "/BonusOrder",
-    element: <BonusOrder />
+    path: "/services",
+    element: <Services />
+  },
+  {
+    path: "/carsettings",
+    element: <CarSettings />
   },
   {
 
@@ -28,23 +32,23 @@ const router = createBrowserRouter([
     element: <Contact />
   },
   {
-    path: "/Pages",
+    path: "/pages",
     element: <Pages />
   },
     {
-    path: "/PaymentFinalize",
+    path: "/paymentfinalize",
     element: <PaymentFinalize />
   },
     {
-    path: "/Message",
+    path: "/message",
     element: <Message />
   },
   {
-    path: "/Repair",
+    path: "/repair",
     element: <Repair />
   },
   {
-    path: "/Agency",
+    path: "/agency",
     element: <AgencyPage />
   },
   {

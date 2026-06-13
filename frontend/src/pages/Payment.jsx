@@ -95,52 +95,56 @@ function QontoStepIcon(props) {
 function Method({formData, updateForm}) {
     return (
         <div className='w-100 d-flex flex-column'>
-            <div className="image w-100 h-100 d-flex flex-column align-items-center justify-content-center p-5">
-                <img src="../src/assets/car3d.png" alt="car3d"  className='w-100 h-100'/>
+            <div className="image payment-car-image w-100">
+                <img src="../src/assets/car3d.png" alt="car3d" />
             </div>
             <div>
                 <div className="summary bg-dark">
                     <div className="sumarry-card-container w-100 d-flex flex-column p-3">
-                        <h3 className='text-white text-end p-2'>סיכום ההזמנה שלך</h3>
+                        <h3 className='your-total-sum text-white text-end'>סיכום ההזמנה שלך</h3>
                         <hr />
-                        <div className="summary-data-row w-100 text-white d-flex align-items-center justify-content-between p-2">
+                        <div className="summary-data-row w-100 text-white d-flex align-items-center justify-content-between">
                             <span className='price-value'>{CurrencyFormat(153000)}</span>
-                            <span className='label-text'>עלות ההזמנה</span>
+                            <div className='d-flex flex-row align-items-baseline gap-1'>
+                                <span className='label-subtext'>(*כולל אגרת רישוי)</span>
+                                <span className='label-text'>עלות הזמנה</span>
+                            </div>
                         </div>
-                        <div className="summary-data-row w-100 text-white d-flex align-items-center justify-content-between p-2">
-                            <span className='price-value'>{CurrencyFormat(500)}</span>
+                        <div className="summary-data-row w-100 text-white d-flex align-items-center justify-content-between mt-2">
+                            <span className='price-value discount-value'>{CurrencyFormat(-500)}</span>
                             <span className='label-text'>הנחת מבצע</span>
                         </div>
                         <hr  className='my-3'/>
-                        <div className="summary-data-row w-100 text-white d-flex align-items-center justify-content-between p-2">
-                            <span className='price-value'>{CurrencyFormat(59000)}</span>
-                            <span className='label-text'>סה"כ תשלום</span>
+                        <div className="summary-data-row summary-total-row w-100 text-white d-flex align-items-center justify-content-between mb-2">
+                            <span className='price-value price-total'>{CurrencyFormat(59000)}</span>
+                            <span className='label-text label-total'>סה"כ שולם</span>
                         </div>
-                        <div className="alert-banner text-white w-100 text-white d-flex align-items-center justify-content-between p-2">
+                        <div className="alert-banner text-white w-100 text-white d-flex align-items-center justify-content-between">
+                            <img src="../src/assets/i_icon.png" alt="info" />
                             <div className=''>
                             <span className='banner-text'>עד 4 ימי עסקים לורם איפסון ליאוון איפסום</span>
                             </div>
-                            <InfoOutlinedIcon />
+                            
                         </div>
                     </div>
                 </div>
             </div>
             <div className="customer-service d-flex mt-4 justify-content-between">
+                <img src="../src/assets/Headphones.png" alt="agent" />
                 <p className='text-end text-white'>
                     דניאל אביב, נציג/ת המכירות שלך מקבל עדכונים על כל מה שנעשה כאן, כמובן שתוכל לפנות אליו בכל עת.
                 </p>
-                <SupportAgentOutlinedIcon className='support-icon' />
             </div>
-            <div className='w-100 bg-dark'>
-                <div className="total d-flex w-100 align-items-center justify-content-between p-2">
-                    <h1>{CurrencyFormat(96000)}</h1>
-                    <h1>יתרה לתשלום</h1>
+            <div className='w-100 payment-bottom-bar'>
+                <div className="total d-flex w-100 align-items-center justify-content-between p-3">
+                    <h2 className='total-sum text-white mb-0'>יתרה לתשלום</h2>
+                    <h2 className='total-sum text-white mb-0'>{CurrencyFormat(96000)}</h2>
                 </div>
                 <div className="method-section">
+                    <button className='select-default-btn'>העברה בנקאית</button>
                     <button className='select-opt-btn'>
                         אפשרויות מימון
                     </button>
-                    <button className='select-default-btn'>העברה בנקאית</button>
                 </div>
             </div>
         </div>
@@ -182,6 +186,7 @@ function Review({formData, updateForm}) {
 }
 
 const steps = ['תשלום', 'דיווח העברה', 'ביקורת'];
+// const steps = ['','','תשלום'];
 
 export default function CustomizedSteppers() {
 
@@ -224,33 +229,23 @@ export default function CustomizedSteppers() {
     }
 
     return (
-        <div className="container-fluid w-100 min-vh-100 d-flex flex-column align-items-center justify-centent-between">
+        <div className="container-fluid w-100 d-flex flex-column payment-page-wrapper">
             <div className='top-bar w-100 text-white d-flex align-items-center justify-content-between p-3'>
-                <CloseOutlinedIcon/>
-                <h1>ביצוע תשלום</h1>
                 <ArrowForwardOutlinedIcon />
+                <h1>ביצוע תשלום</h1>
+                <CloseOutlinedIcon/>
             </div>
-            <div className="top-container d-flex flex-column p-4">
-                <Stack sx={{
-                    width: '100%',
-                    mb: 4
-                }}>
-                    <Stepper alternativeLabel activeStep={activeStep} connector={<QontoConnector />}>
-                        {steps.map((label) => (
-                            <Step key={label}>
-                                <StepLabel slots={{ stepIcon: QontoStepIcon}}
-                                    sx={{
-                                        '& .MuiStepLabel-label': {color: '#8A8D91', fontSize: '15px' },
-                                        '& .MuiStepLabel-label.Mui-active': {color: '#E65C00', fontWeight: 'bold' },
-                                        '& .MuiStepLabel-label.Mui-completed': {color: '#FFFFF', fontSize: '15px' },
-                                    }}
-                                >
-                                    {label}
-                                </StepLabel>
-                            </Step>
-                        ))}
-                    </Stepper>
-                </Stack>
+            <div className="top-container d-flex flex-column">
+                <div className="payment-tab-row">
+                    {steps.map((label, i) => (
+                        <span
+                            key={i}
+                            className={`payment-tab${activeStep === i ? ' payment-tab--active' : ' payment-tab--inactive'}`}
+                        >
+                            {activeStep === i ? label : ''}
+                        </span>
+                    ))}
+                </div>
                 <div className='w-100 px-2'>
                     {renderFormStep(activeStep)}
                 </div>
