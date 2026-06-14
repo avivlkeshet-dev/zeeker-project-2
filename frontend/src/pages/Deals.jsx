@@ -8,7 +8,7 @@ import CouponCard from '../components/cards/Coupon';
 function CouponList() {
     const [activeCard, setActiveCard] = useState(0);
     return (
-        <div className="d-flex flex-column gap-3 p-3 min-vh-100 align-items-center">
+        <div className="d-flex flex-column gap-3 p-4 align-items-center deals-list">
             <CouponCard 
                 id="52231-89571" 
                 title="40% הנחה על אמבטיה לתא מטען"
@@ -33,11 +33,12 @@ function CouponList() {
             <CouponCard 
                 id="52231-89571" 
                 title="40% הנחה על אמבטיה לתא מטען"
-discount={[
+                discount={[
     "הנחת רכב ₪300",
     "מימון על xxx עד ₪70,000",
     "קנה ב-₪1,000, וקבל הנחה על סך ₪1,000 לקניית אביזרים"
-]}                condition="*המבצע בתוקף עד לתאריך 30/10/23, ובתנאי שהשלמת את כל תהליך התשלום והמסמכים"
+]}
+                condition="*המבצע בתוקף עד לתאריך 30/10/23, ובתנאי שהשלמת את כל תהליך התשלום והמסמכים"
                 isActive={activeCard === 2}
     onClick={() => setActiveCard(2)}
             />
@@ -47,21 +48,19 @@ discount={[
 
 export default function Deals() {
     return (
-        <div className="deals-container d-flex flex-column align-items-center justify-content-between">
-            <div className="top-container w-100">
-                <div className="title-bar w-100 d-flex align-items-center justify-content-between p-2">
-                    <button className='close-btn deals-container__top-button'>
-                        <IoMdClose />
-                    </button>
-                    <h1 className='deals-container__title'>הטבות החודש</h1>
-                    <button className='continue-btn deals-container__top-button'>
-                        <FaArrowRight />
-                    </button>
-                </div>
-                <CouponList />
+        <div className="deals-container">
+            <div className="title-bar w-100 d-flex align-items-center justify-content-between p-2">
+                <button className='close-btn deals-container__top-button'>
+                    <IoMdClose />
+                </button>
+                <h1 className='deals-container__title'>הטבות החודש</h1>
+                <button className='continue-btn deals-container__top-button'>
+                    <FaArrowRight />
+                </button>
             </div>
-            <div className="bottom-container w-100 d-flex flex-column align-items-center justify-content-center p-4">
-                <button className='go-btn deals-container__bottom-button w-50 '>
+            <CouponList />
+            <div className="deals-bottom-fixed">
+                <button className='go-btn deals-container__bottom-button w-50'>
                     קדימה
                 </button>
             </div>
