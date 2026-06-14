@@ -82,7 +82,6 @@ function Dashboard() {
                     </a>
                 </div>
             </div>
-
             <ButtomNavbar />
         </div>
     );

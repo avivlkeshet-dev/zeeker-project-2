@@ -1,13 +1,25 @@
 import './css/Coupon.css';
 
-function CouponCard({ id, title, discount, condition, isActive }) {
+function CouponCard({
+    id,
+    title,
+    discount,
+    condition,
+    isActive,
+    onClick
+}) {
     return (
-        <div className={`coupon-card-container ${isActive ? 'active-theme' : ''}`}>
+        <div className={`coupon-card-container ${isActive ? 'active-theme' : ''}`}
+        onClick={onClick}>
             
             <div className="coupon-right-panel d-flex flex-column justify-content-center text-end px-3">
                 <ul className="coupon-details-list m-0 p-0 list-unstyled">
                     <li className="coupon-bullet-item">{title}</li>
-                    <li className="coupon-bullet-item">{discount}</li>
+                    {discount.map((item, index) => (
+    <li key={index} className="coupon-bullet-item">
+        {item}
+    </li>
+                    ))}
                 </ul>
                 <p className="coupon-condition-text mt-2 mb-0">
                     {condition}

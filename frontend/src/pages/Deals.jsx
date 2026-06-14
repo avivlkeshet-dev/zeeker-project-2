@@ -6,21 +6,40 @@ import { useState } from 'react';
 import CouponCard from '../components/cards/Coupon';
 
 function CouponList() {
+    const [activeCard, setActiveCard] = useState(0);
     return (
-        <div className="d-flex flex-column gap-3 p-3 bg-dark min-vh-100 align-items-center">
+        <div className="d-flex flex-column gap-3 p-3 min-vh-100 align-items-center">
             <CouponCard 
                 id="52231-89571" 
                 title="40% הנחה על אמבטיה לתא מטען"
-                discount="הנחת רכב ₪300"
+                discount={[
+    "הנחת רכב ₪300"
+]}
                 condition="*המבצע בתוקף עד לתאריך 30/10/23, ובתנאי שהשלמת את כל תהליך התשלום והמסמכים"
-                isActive={true} 
+                isActive={activeCard === 0}
+    onClick={() => setActiveCard(0)}
             />
             <CouponCard 
                 id="52231-89571" 
                 title="40% הנחה על אמבטיה לתא מטען"
-                discount="הנחת רכב ₪300"
+                discount={[
+    "הנחת רכב ₪300",
+    "מימון על xxx עד ₪70,000",
+]}
                 condition="*המבצע בתוקף עד לתאריך 30/10/23, ובתנאי שהשלמת את כל תהליך התשלום והמסמכים"
-                isActive={false} 
+                isActive={activeCard === 1}
+    onClick={() => setActiveCard(1)}
+            />
+            <CouponCard 
+                id="52231-89571" 
+                title="40% הנחה על אמבטיה לתא מטען"
+discount={[
+    "הנחת רכב ₪300",
+    "מימון על xxx עד ₪70,000",
+    "קנה ב-₪1,000, וקבל הנחה על סך ₪1,000 לקניית אביזרים"
+]}                condition="*המבצע בתוקף עד לתאריך 30/10/23, ובתנאי שהשלמת את כל תהליך התשלום והמסמכים"
+                isActive={activeCard === 2}
+    onClick={() => setActiveCard(2)}
             />
         </div>
     );
@@ -28,7 +47,7 @@ function CouponList() {
 
 export default function Deals() {
     return (
-        <div className="deals-container min-vh-100 d-flex flex-column h-100 align-items-center justify-content-between">
+        <div className="deals-container d-flex flex-column align-items-center justify-content-between">
             <div className="top-container w-100">
                 <div className="title-bar w-100 d-flex align-items-center justify-content-between p-2">
                     <button className='close-btn deals-container__top-button'>
@@ -42,7 +61,7 @@ export default function Deals() {
                 <CouponList />
             </div>
             <div className="bottom-container w-100 d-flex flex-column align-items-center justify-content-center p-4">
-                <button className='btn go-btn deals-container__bottom-button w-75 '>
+                <button className='go-btn deals-container__bottom-button w-50 '>
                     קדימה
                 </button>
             </div>

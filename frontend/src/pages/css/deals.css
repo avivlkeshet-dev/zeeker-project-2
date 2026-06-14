@@ -16,9 +16,9 @@
 
 .deals-container__bottom-button {
     background-color: #FF5800;
-    border: none;
     border-radius: 20px;
-    color: white;
+    border: none;color: white;
+    height: 35px;
 }
 
 /* --- Base Card Container Configuration --- */
