@@ -10,8 +10,8 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import VideoLabelIcon from '@mui/icons-material/VideoLabel';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
-import { useState } from 'react';
-import { Button } from '@mui/material';
+import { useState, useRef } from 'react';
+import { Button, Paper, Box, StepContent, Typography } from '@mui/material';
 import { Label } from '@mui/icons-material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import CurrencyFormat from '../utils/Currency';
@@ -19,9 +19,12 @@ import SupportAgentOutlinedIcon from '@mui/icons-material/SupportAgentOutlined';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
 import UploadFileOutlinedIcon from '@mui/icons-material/UploadFileOutlined';
+import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
+import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import './css/Method.css';
 import './css/payment.css';
 import './css/Transfer.css';
+import axios from 'axios';
 
 const QontoConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -31,12 +34,12 @@ const QontoConnector = styled(StepConnector)(({ theme }) => ({
   },
   [`&.${stepConnectorClasses.active}`]: {
     [`& .${stepConnectorClasses.line}`]: {
-      borderColor: '#784af4',
+      borderColor: '#E65C00',
     },
   },
   [`&.${stepConnectorClasses.completed}`]: {
     [`& .${stepConnectorClasses.line}`]: {
-      borderColor: '#784af4',
+      borderColor: '#E65C00',
     },
   },
   [`& .${stepConnectorClasses.line}`]: {
@@ -151,36 +154,311 @@ function Method({formData, updateForm}) {
     );
 }
 
-function TransferReport({formData, updateForm}) {
-    return (
-        <div className='transfer-docs'>
-            <div className="top-container">
-                <div className='d-flex flex-column'>
-                    <h1 className='text-end'>
-                        צירוף אישור תשלום
-                    </h1>
-                    <p className='text-white text-end'>
-                        ניתן להעלות את המסמך העברה בנקאית שביצעת מול הבנק
-                    </p>
-                    <p className='text-white text-end'>
-                        *כאן אפשר להעלות את אישור ההעברה הבנקאית. קובץ אחד בכל ההעלאה בבקשה.
-                    </p>
-                </div>
-                <div className='w-100'>
-                    <button className='upload-file w-100 d-flex align-items-center justify-content-end p-4'>
-                        צרף מסמך
-                        <UploadFileOutlinedIcon className='icon'/>
-                    </button>
-                </div>
-            </div>
-        </div>
-    );
-}
+
+
+const reviews = [
+  {
+    label: 'Select campaign settings',
+    description: `For each ad campaign that you create, you can control how much
+                  you're willing to spend on clicks and conversions, which networks
+                  and geographical locations you want your ads to show on, and more.`,
+  },
+  {
+    label: 'Create an ad group',
+    description:
+      'An ad group contains one or more ads which target a shared set of keywords.',
+  },
+  {
+    label: 'Create an ad',
+    description: `Try out different ad text to see what brings in the most customers,
+                  and learn how to enhance your ads using features like ad extensions.
+                  If you run into any problems with your ads, find out how to tell if
+                  they're running and how to resolve approval issues.`,
+  },
+];
 
 function Review({formData, updateForm}) {
-    return(
-        <div>
-            <h1>qwert</h1>
+  return (
+    <Box sx={{ maxWidth: 450 }}>
+      <Stepper orientation="vertical" alternativeLabel>
+        {reviews.map((review, index) => (
+          <Step key={review.label} active={true}>
+            <StepLabel
+            icon={<CircleOutlinedIcon sx={{ color: '#FF5800', fontSize: '24px' }} />}
+              optional={
+                index === reviews.length - 1 ? (
+                  <Typography variant="caption">Last step</Typography>
+                ) : null
+              }
+            >
+              {review.label}
+            </StepLabel>
+            <StepContent active={true}
+                sx={{
+                    backgroundColor: "green"
+                }}
+            >
+              <Typography sx={{ color: 'white' }}>
+                {review.description}
+              </Typography>
+            </StepContent>
+          </Step>
+        ))}
+      </Stepper>
+    </Box>
+  );
+}
+
+const parseBankDetails = (text) => {
+
+    if(!text) {
+        return {};
+    }
+
+    const beneficiaryMatch = text.match(/([^\n\r]+)\s*[\n\r]+\s*למוטב/);
+    const bankMatch        = text.match(/([^\n\r]+)\s*[\n\r]+\s*בנק/);
+    const branchMatch      = text.match(/([^\n\r]+)\s*[\n\r]+\s*סניף/);
+    const accountMatch     = text.match(/([^\n\r]+)\s*[\n\r]+\s*מספר חשבון/);
+
+    return {
+        beneficiary: beneficiaryMatch ? beneficiaryMatch[1].trim() : 'לא נמצא',
+        bank: bankMatch ? bankMatch[1].trim() : 'לא נמצא',
+        branch: branchMatch ? branchMatch[1].trim() : 'לא נמצא',
+        accountNumber: accountMatch ? accountMatch[1].trim() : 'לא נמצא'
+    };
+};
+
+function TransferReport({ formData, updateForm }) {
+    const fileInputRef = useRef(null);
+    const [loading, setLoading] = useState(false);
+
+    const handleClick = () => {
+        fileInputRef.current.click();
+    }
+
+    const handleFileUpload = async (e) => {
+        const file = e.target.files[0];
+
+        if(!file) {
+            return;
+        }
+
+        // using this local storage to grab the userId dynamically from the cache
+        const userId = localStorage.getItem('userId');
+
+        if(!userId) {
+            alert('משתמש לא מחובר, נא להתחבר');
+            return;
+        }
+
+        setLoading(true);
+
+        const data = new FormData();
+
+        data.append('document', file);
+        data.append('userId', userId);
+
+        try {
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/documents`, data);
+
+            const result = response.data;
+
+            if(result.document) {
+                const rawText = result.document.extractedText;
+                const parsedData = parseBankDetails(rawText);
+
+                updateForm('beneficiary', parsedData.beneficiary);
+                updateForm('bank', parsedData.bank);
+                updateForm('branch', parsedData.branch); 
+                updateForm('accountNumber', parsedData.accountNumber);
+                updateForm('uploadedFile', {
+                    name: file.name,
+                    size: (file.size / (1024 * 1024)).toFixed(1) + 'MB'
+                });
+            }
+        } catch (error) {
+            console.log('שגיאת בעת העלאת קובץ ', error);
+
+            const errorMsg = error.response?.data?.message;
+            alert(error.message);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    const handleRemoveFile = () => {
+        updateForm('beneficiary', '');
+        updateForm('bank', '');
+        updateForm('accountnUmber', '');
+        updateForm('uploadFile', '');
+        if(fileInputRef.current) {
+            fileInputRef.current.value = '';
+        }
+    };
+
+    return (
+        <div className="transfer-docs"
+            style={{
+                direction: 'rtl', color: '#ffffff'
+            }}
+        >
+            <div className="top-container">
+                <div className='d-flex flex-column mb-3' 
+                    style={{ color: '#E65C00',
+                    fontSize: '20px' }}>
+                    <h2 className='text-end'>
+                        צירוף אישור תשלום
+                    </h2>
+                    <p className='text-muted small'>
+                        כאן אפשר להעלות את אישור העברה הבנקאית. קובץ אחד בכל העלאה בבקשה*
+                    </p>
+                </div>
+                <input 
+                    type="file"
+                    ref={fileInputRef}
+                    onChange={handleFileUpload}
+                    accept='.pdf,.doc,.docx'
+                    style={{
+                        display: 'none'
+                    }}
+                />
+                {!formData.uploadedFile ? (
+                    <div className='w-100'>
+                        <button className='upload-file w-100 d-flex align-items-center justify-content p-4'
+                            onClick={handleClick}
+                            disabled={loading}
+                            style={{
+                                border: '2px dashed #555',
+                                background: 'transparent',
+                                color: '#ffffff',
+                                borderRadius: '8px'
+                            }}
+                        >
+                            {
+                             loading ? 'להעלות מסמך' : 'מעבד ומחלץ נתונים'
+                            }
+                            {
+                                !loading && <UploadFileOutlinedIcon className='ms-2' />
+                            }
+                        </button>
+                    </div>
+                ) : (
+                    <div className='d-flex align-items-center justify-content-between p-3 mb-4'
+                        style={{
+                            border: '1px solid #e65c00',
+                            borderRadius: '8px',
+                            background: '#111'
+                        }}>
+                            <button onClick={handleRemoveFile}
+                                style={{
+                                    background: 'transparent',
+                                    border: 'none',
+                                    color: '#ffffff'
+                                }}>
+                                <CloseOutlinedIcon />
+                            </button>
+                            <div className='d-flex align-items-center'>
+                                <div
+                                    style={{
+                                        fontWeight: 'bold',
+                                        fontSize: '14px',
+                                    }}>
+                                    {formData.uploadedFile.name}
+                                </div>
+                                <div
+                                    style={{
+                                        color: '#8a8d91',
+                                        fontSize: '12px'
+                                    }}
+                                >
+                                    {formData.uploadedFile.size}
+                                </div>
+                                <InsertDriveFileIcon
+                                    style={{
+                                        color: '#e65c00',
+                                        fontSize: '32px'
+                                    }} />
+                            </div>
+                    </div>
+                )}
+            </div>
+            {formData.uploadedFile && (
+                <div className='mt-4 p-4' style={{
+                    background: '#1c1c1e',
+                    borderRadius: '12px'
+                }}>
+                    <h3 className='text-center mb-4' style={{
+                        fontSize: '16px',
+                        color: '#ffffff'
+                    }}>
+                        ריכזנו עבורך את פרטי המוטב
+                    </h3>
+                    <div className='d-flex align-items-center justify-content-between mb-3'
+                        style={{
+                            borderBottom: '1px solid #2c2c2e',
+                            paddingBottom: '8px',
+                        }}>
+                        <span style={{
+                            color: '#8a8d91',
+                        }}>
+                            למוטב
+                        </span>
+                        <span style={{
+                            fontWeight: 'bold'
+                        }}>
+                            {formData.beneficiary}
+                        </span>
+                    </div>
+                    <div className='d-flex align-items-center justify-content-between mb-3'
+                        style={{
+                            borderBottom: '1px solid #2c2c2e',
+                            paddingBottom: '8px',
+                        }}>
+                        <span style={{
+                            color: '#8a8d91',
+                        }}>
+                            בנק
+                        </span>
+                        <span style={{
+                            fontWeight: 'bold'
+                        }}>
+                            {formData.bank}
+                        </span>
+                    </div>
+                    <div className='d-flex align-items-center justify-content-between mb-3'
+                        style={{
+                            borderBottom: '1px solid #2c2c2e',
+                            paddingBottom: '8px',
+                        }}>
+                        <span style={{
+                            color: '#8a8d91',
+                        }}>
+                            סניף
+                        </span>
+                        <span style={{
+                            fontWeight: 'bold'
+                        }}>
+                            {formData.branch}
+                        </span>
+                    </div>
+                    <div className='d-flex align-items-center justify-content-between mb-3'
+                        style={{
+                            borderBottom: '1px solid #2c2c2e',
+                            paddingBottom: '8px',
+                        }}>
+                        <span style={{
+                            color: '#8a8d91',
+                        }}>
+                            מספר חשבון
+                        </span>
+                        <span style={{
+                            fontWeight: 'bold'
+                        }}>
+                            {formData.accountNumber}
+                        </span>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
@@ -193,9 +471,15 @@ export default function CustomizedSteppers() {
     const [activeStep, setActiveStep] = useState(0);
 
     const [formData, setFormData] = useState({
-        fullName: '',
-        phoneNumber: ''
-    });
+    fullName: '',
+    phoneNumber: '',
+    // Add these fields for the file data
+    beneficiary: '',
+    bank: '',
+    branch: '',
+    accountNumber: '',
+    uploadedFile: null // Stores file metadata like name and size
+});
 
     const updateForm = (key, value) => {
         setFormData(prev => ({...prev, [key]: value}));

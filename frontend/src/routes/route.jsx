@@ -60,7 +60,7 @@ const router = createBrowserRouter([
       element: <Deals />
     },
     {
-      path: '/payment',
+      path: '/Goodpayment',
       element: <Payment />
     },
     {

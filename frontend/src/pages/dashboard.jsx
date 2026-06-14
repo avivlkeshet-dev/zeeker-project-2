@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { FaBell } from "react-icons/fa";
-import { CgProfile } from "react-icons/cg";
-import './css/dashboard.css';
+import { useState, useEffect, use } from 'react';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import PersonIcon from '@mui/icons-material/Person';import './css/dashboard.css';
 import ButtomNavbar from '../components/ButtomNavbar';
+import axios from 'axios';
 
 // TODO: replace with API call — load from /api/user/profile
 const mockUser = {
@@ -17,6 +17,26 @@ const mockCar = {
 };
 
 function Dashboard() {
+
+    const [firstName, setFirstName] = useState('אורח');
+    const [plateNumber, setPlateNumber] = useState('');
+
+    function fetchUserData() {
+        axios.get('http://localhost:3000/api/users/me', {
+            withCredentials: true
+        }).then(response => {
+            setFirstName(response.data.firstName);
+            setPlateNumber(response.data.plateNumber);
+        }).catch(error => {
+            console.log('לא מחובר:', error.response?.data?.message);
+            setFirstName('אורח');
+        });
+    }
+
+    useEffect(() => {
+        fetchUserData();
+    }, []);
+
     return (
         <div className="dashboard d-flex flex-column">
 
