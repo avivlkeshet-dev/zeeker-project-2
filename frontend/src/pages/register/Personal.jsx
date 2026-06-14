@@ -4,123 +4,104 @@ import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
 import UploadFileOutlinedIcon from '@mui/icons-material/UploadFileOutlined';
 import axios from 'axios';
+import registerFields from '../../constants/registerFields';
 
 export default function Personal() {
 
     const [formData, setFromData] = useState({
-        first_name: '',
-        last_name: '',
-        personal_id: '',
-        birth_date: '',
-        phone_number: '',
+        firstName: '',
+        lastName: '',
+        personalId: '',
+        birthDate: '',
+        phone: '',
         email: '',
         city: '',
         street: '',
-        house_number: ''
+        houseNumber: '',
+        plateNumber: ''
     });
 
-    const [status, setStatus] = useStatus({
+    const [status, setStatus] = useState({
         type: '', text: ''
     });
 
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFromData((prevData) => ({
+            ...prevData,
+            [name]: value
+        }));
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setStatus({ type: '', text: '' });
+
+        try {
+            const response = await axios.post('http://localhost:3000/api/users', formData,
+                {
+                    withCredentials: true
+                }
+            );
+
+            setStatus({
+                type: 'success',
+                text: response.data.message
+            });
+
+            setFromData({
+                firstName: '',
+                lastName: '',
+                personalId: '',
+                birthDate: '',
+                phone: '',
+                email: '',
+                city: '',
+                street: '',
+                houseNumber: '',
+                plateNumber:''
+            });
+        } catch(error) {
+            setStatus({
+                type: 'error',
+                text: error.respose?.data?.message || 'שגיאה בהתחברות לשרת'
+            });
+        }
+    }
+
   return (
-    <div className='container-fluid min-vh-100 w-100'>
-        <div className='top-bar d-flex align align-items-center justify-content-between w-100 p-2'>
+    <div className='register container-fluid min-vh-100 w-100'>
+        <div className='top-bar d-flex align-items-center justify-content-between w-100 p-3'>
             <CloseOutlinedIcon className='close-btn' />
-            <h1>
+            <h1 className='text-center m-0'>
                 הרשמה לשירות
             </h1>
             <ArrowForwardOutlinedIcon className='back-btn'/>
         </div>
-        <form action="" className='w-100 d-flex flex-column w-100 align-items-center justify-content-center p-4'>
-            <div className='w-100 d-flex flex-column text-white text-end'>
-                <label htmlFor="username">שם פרטי</label>
-                <input
-                    className='w-100 text-end p-2 '
-                    type="text"
-                    id="username"
-                    name="username"
-                />
-            </div>
-            <div className='w-100 d-flex flex-column text-white text-end'>
-                <label htmlFor="username">:שם משפחה</label>
-                <input
-                    className='w-100 text-end p-2 '
-                    type="text"
-                    id="username"
-                    name="username"
-                />
-            </div>
-            <div  className='w-100 d-flex flex-column text-white text-end'>
-                <label htmlFor="username">:תעודת זהות</label>
-                <input
-                    className='w-100 text-end p-2 '
-                    type="text"
-                    id="username"
-                    name="username"
-                />
-            </div>
-            <div  className='w-100 d-flex flex-column text-white text-end'>
-                <label htmlFor="username">תאריך לידה</label>
-                <input
-                    className='w-100 text-end p-2'
-                    type="text"
-                    id="username"
-                    name="username"
-                />
-            </div>
-            <div  className='w-100 d-flex flex-column text-white text-end'>
-                <label htmlFor="username">:מספר טלפון</label>
-                <input
-                    className='w-100 text-end p-2 '
-                    type="text"
-                    id="username"
-                    name="username"
-                />
-            </div>
-            <div  className='w-100 d-flex flex-column text-white text-end'>
-                <label htmlFor="username">כתובת מייל</label>
-                <input
-                    className='w-100 text-end p-2 '
-                    type="text"
-                    id="username"
-                    name="username"
-                />
-            </div>
-            <div  className='w-100 d-flex flex-column text-white text-end'>
-                <label htmlFor="username">:עיר מגורים</label>
-                <input
-                    className='w-100 text-end p-2 '
-                    type="text"
-                    id="username"
-                    name="username"
-                />
-            </div>
-            <div  className='w-100 d-flex flex-column text-white text-end'>
-                <label htmlFor="username">:רחוב</label>
-                <input
-                    className='w-100 text-end p-2 '
-                    type="text"
-                    id="username"
-                    name="username"
-                />
-            </div>
-            <div  className=' w-100 d-flex flex-column text-white text-end'>
-                <label htmlFor="username">:מספר בית</label>
-                <input
-                    className='w-100 text-end p-2 '
-                    type="text"
-                    id="username"
-                    name="username"
-                />
-            </div>
-
-            <div className='w-100 file-section'>
+        <form onSubmit={handleSubmit} className='w-100 h-100 d-flex flex-column w-100 align-items-center justify-content-center p-4'>
+            { registerFields.map((field) => (
+                <div key={field.id} className='w-100 d-flex flex-column text-white text-end p-1'>
+                    <label htmlFor={field.id}>{field.label}</label>
+                    <input
+                        className='w-100 text-end p-2 '
+                        type={field.type}
+                        id={field.id}
+                        name={field.name}
+                        value={formData[field.name]}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+            ))}
+            <div className='w-100 file-section my-4'>
                 <button className='upload-file w-100 d-flex align-items-center justify-content-end p-4'>
                     <span>צירוף רישיון נהיגה</span>
                     <UploadFileOutlinedIcon className='icon'/>
                 </button>
             </div>
+            <button type='submit' className='submit-btn w-100 p-2 text-white my-2'>
+                קדימה
+            </button>
         </form>
     </div>
   )

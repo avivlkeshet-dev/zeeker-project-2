@@ -26,6 +26,38 @@
     justify-self: center !important;
 }
 
+.top-container .navbar .nav-left button {
+    padding: 15px !important;
+    border-radius: 10px;
+    border: none;
+    background-color: #24292b;
+    transition: ease-in-out 0.2s;
+}
+
+.top-container .navbar .nav-left button:hover {
+    background-color: #171a1d !important;
+    color: white;
+}
+
+.top-container .navbar .nav-center {
+    margin-left: 80px !important;
+}
+
+.top-container .navbar .nav-right button {
+    padding: 15px !important;
+    border-radius: 10px;
+    border: none;
+    background-color: #24292b !important;
+    transition: ease-in-out 0.2s;
+}
+
+.top-container .navbar .nav-right button:hover {
+    background-color: #171a1d !important;
+    color: white;
+}
+
+.top-container .navbar .nav-right button
+
 .top-container .content {
     height: 350px;
     display: flex;
