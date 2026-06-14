@@ -32,6 +32,12 @@ function FullLogin() {
       );
 
       if (response.status === 200) {
+        const loggedInUserId = response.data.user.id;
+      
+        if (loggedInUserId) {
+          localStorage.setItem('userId', loggedInUserId);
+        }
+
         window.location.href = "/dashboard";
       }
     } catch (error) {

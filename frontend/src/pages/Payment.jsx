@@ -252,7 +252,7 @@ function TransferReport({ formData, updateForm }) {
         const data = new FormData();
 
         data.append('document', file);
-        data.append('useId', userId);
+        data.append('userId', userId);
 
         try {
             const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/documents`, data);
@@ -265,7 +265,8 @@ function TransferReport({ formData, updateForm }) {
 
                 updateForm('beneficiary', parsedData.beneficiary);
                 updateForm('bank', parsedData.bank);
-                updateForm('brnach', parsedData.branch);
+                updateForm('branch', parsedData.branch); 
+                updateForm('accountNumber', parsedData.accountNumber);
                 updateForm('uploadedFile', {
                     name: file.name,
                     size: (file.size / (1024 * 1024)).toFixed(1) + 'MB'
@@ -366,7 +367,7 @@ function TransferReport({ formData, updateForm }) {
                                         fontSize: '12px'
                                     }}
                                 >
-                                    {formData.updateForm.size}
+                                    {formData.uploadedFile.size}
                                 </div>
                                 <InsertDriveFileIcon
                                     style={{
