@@ -1,5 +1,304 @@
+/* ============================================================
+   Personal registration page
+   ============================================================ */
+
+.personal-page {
+    background-color: #000000;
+    color: #ffffff;
+    min-height: 100vh;
+    /* Allow vertical scrolling while keeping the scrollbar hidden */
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;          /* Firefox */
+    -ms-overflow-style: none;       /* IE / legacy Edge */
+}
+
+.personal-page::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;                  /* Chrome / Safari / new Edge */
+}
+
+/* ---------- Header (#bad-header) ---------- */
+.personal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.personal-header .header-title {
+    flex: 1;
+    margin: 0;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.personal-header .header-icon-btn {
+    background: transparent;
+    border: none;
+    padding: 4px;
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+#bad-header .bad-close-icon {
+    height: 12px;
+    width: 12px;
+    padding: 4px;
+    box-sizing: content-box;
+    border-radius: 50%;
+    background-color: #505455;
+}
+
+.personal-header .header-icon-btn:hover {
+    opacity: 0.8;
+}
+
+/* ---------- Stepper under the header ---------- */
+.personal-stepper {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 8px;
+    padding: 0 16px;
+    margin-top: 4px;
+}
+
+.personal-stepper .stepper-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+}
+
+.personal-stepper .step-label {
+    min-height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.personal-stepper .step-bar {
+    width: 100%;
+    height: 2px;
+    border-radius: 2px;
+    background-color: #3a3e40;
+}
+
+/* Done step: orange checkmark + orange underline */
+.stepper-item--done .step-label,
+.stepper-item--done .step-check {
+    color: #FF5800;
+}
+
+.stepper-item--done .step-check {
+    font-size: 18px !important;
+}
+
+.stepper-item--done .step-bar {
+    background-color: #FF5800;
+}
+
+/* Current step: white text + white underline */
+.stepper-item--current .step-label {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.stepper-item--current .step-bar {
+    background-color: #ffffff;
+}
+
+/* Future step: empty label, gray underline (default bar color) */
+.stepper-item--future .step-label {
+    color: transparent;
+}
+
+/* ---------- Form ---------- */
+.personal-form {
+    padding: 16px;
+    gap: 14px;
+}
+
+.personal-form .form-group label {
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: #e0e0e0;
+}
+
+.personal-subtitle {
+    margin: 16px 0 0;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Input + trailing icon */
+.input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.input-wrapper input,
+.input-wrapper .form-select-field {
+    width: 100%;
+    padding-inline-start: 40px; /* room for the icon on the LEFT in RTL */
+}
+
+.input-icon {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    color: #ffffff;
+    font-size: 18px !important;
+    pointer-events: none;
+}
+
+.input-icon--chevron {
+    color: #919495;
+}
+
+/* Native select reset so the custom chevron is visible */
+.form-select-field {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: 1px solid #434242;
+    border-radius: 10px;
+    background-image: radial-gradient(#3A3E40, #24292B);
+    color: #ffffff;
+    direction: rtl;
+}
+
+.form-select-field:focus {
+    outline: none;
+    border-color: #FF5800;
+}
+
+.form-select-field option {
+    background-color: #24292B;
+    color: #ffffff;
+}
+
 input {
     border: 1px solid #434242;
     border-radius: 10px;
     background-image: radial-gradient(#3A3E40, #24292B);
+    color: #ffffff;
+}
+
+input::placeholder {
+    color: #919495;
+}
+
+input:focus {
+    outline: none;
+    border-color: #FF5800;
+}
+
+.input--readonly {
+    padding-inline-start: 12px !important; /* no icon, no reserved space */
+    cursor: default;
+    caret-color: transparent;
+    color: #6A6B70;
+}
+
+.input--readonly:focus {
+    border-color: #434242;
+}
+
+.input--error,
+.input--error:focus {
+    border-color: #ff4d4f;
+}
+
+.field-error {
+    margin-top: 4px;
+    color: #ff6b6b;
+    font-size: 12px;
+}
+
+/* ---------- Upload section ---------- */
+.personal-upload-section {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.upload-title {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.upload-description {
+    color: #c8c8c8;
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 0 0 8px;
+}
+
+.upload-hidden-input {
+    display: none;
+}
+
+.upload-button {
+    background-color: transparent;
+    border: 1.5px dashed #6b6e70;
+    border-radius: 10px;
+    color: #ffffff;
+    padding: 14px 16px;
+    cursor: pointer;
+    direction: rtl;
+}
+
+.upload-button:hover {
+    border-color: #FF5800;
+}
+
+.upload-button-text {
+    flex: 1;
+    text-align: right;
+    font-size: 14px;
+}
+
+.upload-icon-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    color: #FF5800;
+}
+
+/* ---------- Primary submit button ---------- */
+.primary-submit-btn {
+    margin: 20px auto 32px;
+    width: 90%;
+    max-width: 320px;
+    height: 48px;
+    border: none;
+    border-radius: 28px;
+    background-color: #FF5800;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.primary-submit-btn:hover {
+    background-color: #e65000;
 }
