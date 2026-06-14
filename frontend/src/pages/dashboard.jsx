@@ -3,6 +3,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import PersonIcon from '@mui/icons-material/Person';import './css/dashboard.css';
 import ButtomNavbar from '../components/ButtomNavbar';
 import axios from 'axios';
+import { FaBell } from 'react-icons/fa';
 
 // TODO: replace with API call — load from /api/user/profile
 const mockUser = {
