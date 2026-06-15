@@ -1,7 +1,9 @@
 import { useState, useEffect, use } from 'react';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import PersonIcon from '@mui/icons-material/Person';import './css/dashboard.css';
-import ButtomNavbar from '../components/ButtomNavbar';
+import PersonIcon from '@mui/icons-material/Person';
+import './css/dashboard.css';
+import ButtomNavbar from '../components/shared/ButtomNavbar';
+import CarCard from '../components/shared/CarCard/CarCard';
 import axios from 'axios';
 import { FaBell } from 'react-icons/fa';
 
@@ -54,7 +56,7 @@ function Dashboard() {
                 </button>
                 <img className="db-nav__logo" src="../src/assets/logo.png" alt="ZEEKR" />
                 <button className="db-nav__bell">
-                    <FaBell size={20} color="white" />
+                    <FaBell size={20} color="#A7A9AA" />
                     {mockUser.notificationCount > 0 && (
                         <span className="db-nav__badge">{mockUser.notificationCount}</span>
                     )}
@@ -62,16 +64,9 @@ function Dashboard() {
             </div>
 
             {/* ── Car card ── */}
-            <div className="db-card-wrap px-3">
-                <div className="db-car-card d-flex flex-column align-items-center">
-                    <div className="db-car-card__img-wrap">
-                        <img src="../src/assets/car.png" alt="ZEEKR X" className="db-car-card__img" />
-                    </div>
-                    <h2 className="db-car-card__name">{mockCar.model}</h2>
-                    <p className="db-car-card__plate">מס' רכב {mockCar.plate}</p>
-                    <button className="db-car-card__docs-btn">המסמכים שלך</button>
-                </div>
-            </div>
+            <CarCard model={mockCar.model} plate={mockCar.plate}>
+                <button className="db-car-card__docs-btn">המסמכים שלך</button>
+            </CarCard>
 
             {/* ── Dots ── */}
             <div className="db-dots d-flex justify-content-center gap-2 mt-3">

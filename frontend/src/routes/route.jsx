@@ -12,6 +12,9 @@ import Payment from '../pages/Payment';
 import Personal from '../pages/register/Personal';
 import Services from '../pages/Services';
 import CarSettings from '../pages/CarSettings';
+import Transfer from '../pages/Transfer';
+import RepairNotificationPage from '../pages/RepairNotification';
+import CarPurchasePage from '../pages/CarPurchase';
 
 const router = createBrowserRouter([
   {
@@ -66,8 +69,19 @@ const router = createBrowserRouter([
     {
       path: '/register',
       element: <Personal />
+    },
+    {
+      path: '/transfer',
+      element: <Transfer />
+    },
+    {
+      path: '/repairnotification',
+      element: <RepairNotificationPage />
+    },
+    {
+      path: '/carpurchase',
+      element: <CarPurchasePage />
     }
-
 ])
 
 export default router;

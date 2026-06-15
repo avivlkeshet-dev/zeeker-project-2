@@ -96,6 +96,9 @@ function QontoStepIcon(props) {
 }
 
 function Method({formData, updateForm}) {
+    function handleNavigate(){
+        window.location.href='/Transfer';
+    }
     return (
         <div className='w-100 d-flex flex-column'>
             <div className="image payment-car-image w-100">
@@ -144,7 +147,7 @@ function Method({formData, updateForm}) {
                     <h2 className='total-sum text-white mb-0'>{CurrencyFormat(96000)}</h2>
                 </div>
                 <div className="method-section">
-                    <button className='select-default-btn'>העברה בנקאית</button>
+                    <button onClick={handleNavigate} className='select-default-btn'>העברה בנקאית</button>
                     <button className='select-opt-btn'>
                         אפשרויות מימון
                     </button>
@@ -153,7 +156,6 @@ function Method({formData, updateForm}) {
         </div>
     );
 }
-
 
 
 const reviews = [
