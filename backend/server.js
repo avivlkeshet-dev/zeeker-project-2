@@ -6,12 +6,19 @@ const auth = require('./routes/authRoutes');
 const doc = require('./routes/documentRoutes');
 const contact = require('./routes/contactRoutes');
 const vehicle = require('./routes/vehicleRoutes');
+const coupon = require('./routes/couponRoutes');
 const path = require('path');
-
+const cookieParser = require('cookie-parser')
 const server = express();
 
 server.use(express.json());
-server.use(cors());
+
+server.use(cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true
+}));
+
+server.use(cookieParser());
 
 server.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
@@ -21,6 +28,7 @@ mongoose.connect(process.env.MONGODB_URI)
 
 // mount routes
 server.use(auth);
+server.use(coupon);
 server.use(doc);
 server.use(contact);
 server.use(vehicle);

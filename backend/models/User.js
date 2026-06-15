@@ -3,17 +3,17 @@ const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema(
     {
-        first_name: {
+        firstName: {
             type: String,
             required: true,
             trim: true
         },
-        last_name: {
+        lastName: {
             type: String,
             required: true,
             trim: true
         },
-        personal_id: {
+        personalId: {
             type: String,
             required: true,
             validate: {
@@ -23,13 +23,12 @@ const userSchema = new mongoose.Schema(
                 message: props => `${props.value} is not a valid personal id!`
             }
         },
-        birth_date: {
+        birthDate: {
             type: Date,
             required: true
         },
-        phone_number: {
+        phone: {
             type: String,
-            required: true,
             validate: {
                 validator: function(n) {
                     return /^\d+$/.test(n)
@@ -49,7 +48,11 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: true
         },
-        house_number: {
+        houseNumber: {
+            type: String,
+            required: true
+        },
+        plateNumber: {
             type: String,
             required: true
         }
