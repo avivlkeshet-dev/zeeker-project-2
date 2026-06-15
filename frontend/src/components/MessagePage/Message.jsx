@@ -9,7 +9,7 @@ function Messages() {
         <h2 className='title text-white'>ההודעות שלי</h2>
         <img className='back me-3' src="../src/assets/Back.png" />
       </div>
-      <div className='Frontpage-image'>
+      <div className='Frontpage-image d-flex justify-content-center'>
         <img src="../src/assets/Frontpage.png" alt="" />
       </div>
       <div className='bubble d-flex flex-column align-items-center'>

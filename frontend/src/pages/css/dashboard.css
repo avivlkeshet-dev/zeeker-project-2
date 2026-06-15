@@ -5,6 +5,7 @@
     color: #fff;
     direction: rtl;
     padding-bottom: 100px;
+    width: 100%;
 }
 
 /* ── Navbar ───────────────────────────────────────── */
@@ -303,4 +304,47 @@
 
 .pill-text {
     font-size: 13px;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .dashboard {
+        padding-inline: 20px;
+    }
+
+    .dashboard > :not(.fixed-bottom) {
+        width: min(100%, 820px);
+        margin-inline: auto;
+    }
+
+    .db-services__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .db-tile {
+        min-height: 112px;
+    }
+
+    .db-services__title {
+        font-size: 22px;
+    }
+}
+
+@media (min-width: 992px) {
+    .dashboard {
+        padding-inline: 24px;
+    }
+
+    .dashboard > :not(.fixed-bottom) {
+        width: min(100%, 980px);
+        margin-inline: auto;
+    }
+
+    .db-services__grid {
+        gap: 14px;
+    }
+
+    .db-tile {
+        min-height: 120px;
+    }
 }

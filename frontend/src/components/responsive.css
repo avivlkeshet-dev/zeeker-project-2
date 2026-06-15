@@ -1,0 +1,213 @@
+/* Shared responsive overrides for component-level layouts */
+
+/* Fluid controls that were fixed-width in mobile mocks */
+.login-button,
+.downloadButton,
+.finishButton,
+.uploadLabel,
+.maintenance-order__continue-btn,
+.SendToMail,
+.uploadLabel,
+.OrderService,
+.ChangePreference,
+.FinishProcessButton {
+  width: min(248px, 100%);
+  max-width: 100%;
+}
+
+.bubble {
+  width: min(560px, 100%);
+}
+
+/* Keep viewport wrappers scroll-safe and centered on large screens */
+:is(.car-settings, .maintenance-order, .repair-page, .payment-page, .message-page, .cp-page, .rn-page) {
+  width: 100%;
+}
+
+/* Login stack should not stay narrow or edge-locked on desktop */
+.login-container {
+  width: min(520px, 100%);
+  margin-inline: auto;
+  padding-inline: 16px;
+}
+
+.login-footer {
+  width: min(420px, 100%);
+}
+
+.business-details {
+  width: min(760px, 100%);
+  margin-inline: auto;
+}
+
+@media (min-width: 768px) {
+  .contact-page {
+    padding: 24px;
+  }
+
+  :is(.car-settings, .maintenance-order, .repair-page, .payment-page, .message-page, .cp-page, .rn-page) {
+    padding-inline: 20px;
+  }
+
+  :is(.car-settings, .maintenance-order, .repair-page, .payment-page, .message-page, .cp-page, .rn-page) > :not(.fixed-bottom):not(.payment-bottom-bar) {
+    width: min(100%, 920px);
+    margin-inline: auto;
+  }
+
+  .car-settings__action-row {
+    justify-content: center;
+  }
+
+  .car-settings__action-btn {
+    max-width: 220px;
+  }
+
+  :is(.cp-services__grid, .rn-services__grid, .maintenance-order__grid) {
+    gap: 14px;
+  }
+
+  :is(.cp-tile, .rn-tile, .maintenance-order__service-btn) {
+    min-height: 120px;
+  }
+
+  .payment-page__timeline-container,
+  .repair-page__content {
+    padding-inline: 0;
+  }
+
+  .textbox,
+  .repairtextbox {
+    max-width: none;
+  }
+
+  .message-title {
+    max-width: 920px;
+    margin-inline: auto;
+  }
+
+  .Frontpage-image {
+    width: min(560px, 100%);
+  }
+
+  .OrderAndChangeButtons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+}
+
+@media (min-width: 1200px) {
+  :is(.car-settings, .maintenance-order, .repair-page, .payment-page, .message-page, .cp-page, .rn-page) > :not(.fixed-bottom):not(.payment-bottom-bar) {
+    width: min(100%, 1040px);
+  }
+
+  .car-settings__car-img,
+  .db-car-card__img {
+    max-width: 360px;
+  }
+
+  .cp-page,
+  .rn-page {
+    background-size: 580px 620px;
+  }
+}
+
+/* Tablet support layer (768px-1199px) */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .img-container,
+  .message-page,
+  .payment-page,
+  .repair-page,
+  .maintenance-order,
+  .car-settings,
+  .cp-page,
+  .rn-page {
+    min-height: 100dvh;
+  }
+
+  .login-container {
+    width: min(560px, 100%);
+  }
+
+  .login-container input {
+    font-size: 18px;
+  }
+
+  .login-footer {
+    width: min(500px, 100%);
+  }
+
+  .Frontpage-image {
+    width: min(620px, 100%);
+  }
+
+  .bubble {
+    width: min(620px, 100%);
+  }
+
+  .message-title {
+    width: 100%;
+  }
+
+  .payment-page__timeline-container,
+  .repair-page__content,
+  .maintenance-order__content,
+  .car-settings__content,
+  .business-details {
+    width: min(100%, 760px);
+    margin-inline: auto;
+  }
+
+  .downloadButton,
+  .finishButton,
+  .uploadLabel,
+  .maintenance-order__continue-btn,
+  .SendToMail,
+  .OrderService,
+  .ChangePreference,
+  .FinishProcessButton,
+  .login-button {
+    width: min(320px, 100%);
+  }
+
+  .cp-services__grid,
+  .rn-services__grid,
+  .maintenance-order__grid,
+  .db-services__grid,
+  .car-settings__specs-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cp-services__title,
+  .rn-services__title,
+  .db-services__title,
+  .maintenance-order__title,
+  .car-settings__section-title {
+    font-size: 22px;
+  }
+
+  .cp-tile,
+  .rn-tile,
+  .db-tile,
+  .maintenance-order__service-btn,
+  .car-settings__spec-card {
+    min-height: 112px;
+  }
+
+  .OrderAndChangeButtons {
+    display: flex;
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .deals-list {
+    max-width: 760px;
+  }
+
+  .coupon-card-container {
+    width: min(620px, 100%);
+  }
+}

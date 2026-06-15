@@ -1,5 +1,5 @@
 import "./FullLogin.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 function FullLogin() {
@@ -9,6 +9,18 @@ function FullLogin() {
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const previousBodyBackground = document.body.style.backgroundColor;
+    const previousHtmlBackground = document.documentElement.style.backgroundColor;
+    document.body.style.backgroundColor = "#000";
+    document.documentElement.style.backgroundColor = "#000";
+
+    return () => {
+      document.body.style.backgroundColor = previousBodyBackground;
+      document.documentElement.style.backgroundColor = previousHtmlBackground;
+    };
+  }, []);
 
   const handleLogin = async () => {
     if (!checked) {
@@ -49,7 +61,7 @@ function FullLogin() {
   };
 
   return (
-    <div className="img-container d-flex flex-column">
+    <div className="img-container d-flex flex-column min-vh-100">
       <div className="topImage">
         <img
           src="../src/assets/Frontpage.png"
@@ -111,6 +123,7 @@ function FullLogin() {
             height: "30px",
             border: "1px solid white",
             borderRadius: "8px",
+            backgroundColor: "#000",
           }}
         >
           {checked && (

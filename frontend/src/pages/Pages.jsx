@@ -11,13 +11,19 @@ import { useEffect } from 'react'
 function Pages() {
         useEffect(() => {
       document.body.classList.add('pages-page');
-    
+      const previousBodyBackground = document.body.style.backgroundColor;
+      const previousHtmlBackground = document.documentElement.style.backgroundColor;
+      document.body.style.backgroundColor = '#000';
+      document.documentElement.style.backgroundColor = '#000';
+
       return () => {
         document.body.classList.remove('pages-page');
+        document.body.style.backgroundColor = previousBodyBackground;
+        document.documentElement.style.backgroundColor = previousHtmlBackground;
       };
     }, []);
     return (
-        <div>
+        <div className="min-vh-100 w-100" style={{ backgroundColor: '#000' }}>
           <Header />
           <MyDocs />
           <Document />

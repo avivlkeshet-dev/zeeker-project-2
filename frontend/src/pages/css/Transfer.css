@@ -7,3 +7,25 @@
     color: #E65C00;
     margin-left: 25px;
 }
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .transfer-docs {
+        width: 100%;
+    }
+
+    .transfer-docs .top-container {
+        max-width: 760px;
+        margin-inline: auto;
+    }
+}
+
+@media (min-width: 992px) {
+    .transfer-docs {
+        width: 100%;
+    }
+
+    .transfer-docs .top-container {
+        max-width: 820px;
+        margin-inline: auto;
+    }
+}

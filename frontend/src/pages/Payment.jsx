@@ -10,7 +10,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import VideoLabelIcon from '@mui/icons-material/VideoLabel';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Button, Paper, Box, StepContent, Typography } from '@mui/material';
 import { Label } from '@mui/icons-material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
@@ -469,6 +469,15 @@ const steps = ['תשלום', 'דיווח העברה', 'ביקורת'];
 // const steps = ['','','תשלום'];
 
 export default function CustomizedSteppers() {
+
+    useEffect(() => {
+        const previousBodyBackground = document.body.style.backgroundColor;
+        document.body.style.backgroundColor = '#000';
+
+        return () => {
+            document.body.style.backgroundColor = previousBodyBackground;
+        };
+    }, []);
 
     const [activeStep, setActiveStep] = useState(0);
 

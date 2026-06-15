@@ -608,7 +608,7 @@ export default function CustomizedSteppers() {
 
 
    return (
-       <div className="container-fluid w-100 min-vh-100 d-flex flex-column align-items-center justify-centent-between">
+       <div className="container-fluid transfer-page-wrapper w-100 min-vh-100 d-flex flex-column align-items-center justify-centent-between">
            <div className='top-bar w-100 text-white d-flex align-items-center justify-content-between p-3'>
                <CloseOutlinedIcon/>
                <h1>ביצוע תשלום</h1>

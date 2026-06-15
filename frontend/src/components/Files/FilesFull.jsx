@@ -1,11 +1,29 @@
+import { useEffect } from "react";
 import "./header.css";
+import "./FilesFull.css";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 function Header() {
+  useEffect(() => {
+    const previousBodyBackground = document.body.style.backgroundColor;
+    const previousHtmlBackground = document.documentElement.style.backgroundColor;
+
+    document.body.style.backgroundColor = "#000";
+    document.documentElement.style.backgroundColor = "#000";
+
+    return () => {
+      document.body.style.backgroundColor = previousBodyBackground;
+      document.documentElement.style.backgroundColor = previousHtmlBackground;
+    };
+  }, []);
+
   return (
-    <div className="container-fluid d-flex flex-column w-100">
+    <div
+      className="container-fluid d-flex flex-column w-100 min-vh-100"
+      style={{ backgroundColor: "#000" }}
+    >
       <div className="header text-white d-flex justify-content-between">
         <div className="cross m-3">
           <img src="../src/assets/X.png" />
@@ -18,7 +36,7 @@ function Header() {
         </div>
       </div>
 
-      <div className="bg-dark text-white d-flex justify-content-end w-100 position-relative mt-4">
+      <div className="text-white d-flex justify-content-end w-100 position-relative mt-4" style={{ backgroundColor: "#000" }}>
         <div>
           <img className="Border mt-3" src="../src/assets/Orange.png" />
         </div>

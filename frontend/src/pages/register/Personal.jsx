@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../css/register.css';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
@@ -76,6 +76,15 @@ const savePersonalDetails = (payload) => {
 };
 
 export default function Personal() {
+    useEffect(() => {
+        const previousBodyBackground = document.body.style.backgroundColor;
+        document.body.style.backgroundColor = '#000';
+
+        return () => {
+            document.body.style.backgroundColor = previousBodyBackground;
+        };
+    }, []);
+
     const fileInputRef = useRef(null);
     const [uploadedFile, setUploadedFile] = useState(null);
     const [formValues, setFormValues] = useState(() =>

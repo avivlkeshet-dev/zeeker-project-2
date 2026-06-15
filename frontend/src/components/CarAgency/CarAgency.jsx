@@ -64,7 +64,7 @@ function CarAgency() {
   ];
     return(
         <div className="container-fluid payment-page d-flex flex-column position-relative p-0 text-white">
-            <div className="TitleContainer">
+            <div className="TitleContainer car-agency-title">
         <div className="d-flex align-items-center justify-content-between">
           <p className="ms-2"></p>
           <h2 className="RepairTitle text-white mt-3">ZEEKR X</h2>
@@ -83,6 +83,7 @@ function CarAgency() {
         <div className="scroll-item gray-out">ביוב</div>
       </div>
     <MapContainer
+      className="car-agency-map"
       center={[32.1149329, 34.820848]}
       zoom={13}
       style={{ height: "300px", width: "100%" }}

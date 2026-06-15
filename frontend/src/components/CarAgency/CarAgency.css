@@ -55,3 +55,16 @@
 .OrderAndChangeButtons{
     margin-top: 30px;
 }
+
+.car-agency-title,
+.car-agency-map {
+    width: 100%;
+}
+
+@media (min-width: 992px) {
+    .car-agency-title,
+    .car-agency-map {
+        width: min(100%, 920px);
+        margin-inline: auto;
+    }
+}
