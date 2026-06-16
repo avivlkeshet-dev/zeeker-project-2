@@ -1,18 +1,14 @@
 import './PaymentPage.css'
+import PaymentHeader from '../shared/PaymentHeader';
+import Steps, { defaultSteps } from './Steps';
 
 function PaymentPage() {
+    const activeStep = defaultSteps.indexOf('סיום תהליך');
+
     return (
         <div className="container-fluid payment-page d-flex flex-column position-relative">
-        <div className="TitleContainer">
-            <div className="d-flex align-items-center justify-content-between">
-                <img className="cross ms-2" src="../src/assets/X.png" />
-                <h2 className="carName text-white mt-3">ביצוע תשלום</h2>
-                <img className="back me-2" src="../src/assets/Back.png" />
-            </div>
-        </div>
-        <div className="payment-page__progress">
-            <img src="../src/assets/3.png" alt="Step 3 of 3" />
-        </div>
+        <PaymentHeader title = 'ביצוע תשלום' stepIndex={activeStep} />
+        <Steps activeStep={activeStep} className="payment-page__progress" showCompleted />
         <div className='payment-page__subtitle text-white text-center'>
             <h2 className='requestText'>מעקב אחרי בקשת המימון</h2>
         </div>

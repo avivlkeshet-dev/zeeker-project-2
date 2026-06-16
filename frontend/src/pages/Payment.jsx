@@ -17,10 +17,11 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import CurrencyFormat from '../utils/Currency';
 import SupportAgentOutlinedIcon from '@mui/icons-material/SupportAgentOutlined';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
 import UploadFileOutlinedIcon from '@mui/icons-material/UploadFileOutlined';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
+import PaymentHeader from '../components/shared/PaymentHeader';
+import Steps, { defaultSteps } from '../components/Payment/Steps';
 import './css/Method.css';
 import './css/payment.css';
 import './css/Transfer.css';
@@ -97,7 +98,7 @@ function QontoStepIcon(props) {
 
 function Method({formData, updateForm}) {
     function handleNavigate(){
-        window.location.href='/Transfer';
+        window.location.href='/transferdetails';
     }
     return (
         <div className='w-100 d-flex flex-column'>
@@ -465,9 +466,6 @@ function TransferReport({ formData, updateForm }) {
     );
 }
 
-const steps = ['תשלום', 'דיווח העברה', 'ביקורת'];
-// const steps = ['','','תשלום'];
-
 export default function CustomizedSteppers() {
 
     useEffect(() => {
@@ -497,7 +495,7 @@ export default function CustomizedSteppers() {
     }
 
     const handleNext = () => {
-        if(activeStep < steps.length - 1) {
+        if(activeStep < defaultSteps.length - 1) {
             setActiveStep((prev) => prev + 1);
         }
         else {
@@ -525,22 +523,9 @@ export default function CustomizedSteppers() {
 
     return (
         <div className="container-fluid w-100 d-flex flex-column payment-page-wrapper">
-            <div className='top-bar w-100 text-white d-flex align-items-center justify-content-between p-3'>
-                <ArrowForwardOutlinedIcon />
-                <h1>ביצוע תשלום</h1>
-                <CloseOutlinedIcon/>
-            </div>
+            <PaymentHeader title = 'ביצוע תשלום' stepIndex={activeStep} />
             <div className="top-container d-flex flex-column">
-                <div className="payment-tab-row">
-                    {steps.map((label, i) => (
-                        <span
-                            key={i}
-                            className={`payment-tab${activeStep === i ? ' payment-tab--active' : ' payment-tab--inactive'}`}
-                        >
-                            {activeStep === i ? label : ''}
-                        </span>
-                    ))}
-                </div>
+                <Steps activeStep={activeStep} showCompleted={false} />
                 <div className='w-100 px-2'>
                     {renderFormStep(activeStep)}
                 </div>
@@ -557,7 +542,7 @@ export default function CustomizedSteppers() {
                             אפשרויות מימון
                     </button>
                     <button className='orange-btn' onClick={handleNext}>
-                        {activeStep === steps.length - 1 ? 'שלח טופס' : 'הבא'}
+                        {activeStep === defaultSteps.length - 1 ? 'שלח טופס' : 'הבא'}
                     </button>
                 </div>
             </div>

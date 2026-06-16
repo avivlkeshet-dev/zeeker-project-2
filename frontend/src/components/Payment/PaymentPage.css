@@ -49,6 +49,21 @@
     margin-top: 0;
 }
 
+.payment-page__progress .payment-tab--completed {
+    border-bottom: 2px solid #ff5800;
+    color: #ff5800;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.payment-page__progress .payment-tab--completed img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
 .downloadButton{
     border: 1px solid #FF5800;
     border-radius: 33px;

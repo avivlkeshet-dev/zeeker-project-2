@@ -4,9 +4,30 @@ import { useEffect } from "react";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { useState } from 'react';
+import axios from 'axios';
+
 
 function CarAgency() {
     const containerRef = useRef(null);
+  const [businesses, setBusinesses] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedBusiness, setSelectedBusiness] = useState(null);
+
+  useEffect(() => {
+    const fetchMaps = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/api/maps');
+        setBusinesses(response.data);
+      } catch (error) {
+        console.error('Error fetching map businesses:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMaps();
+  }, []);
+
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -25,43 +46,9 @@ function CarAgency() {
       container.removeEventListener("wheel", handleWheel);
     };
   }, []);
-      const [selectedBusiness, setSelectedBusiness] = useState(null);
 
-  const businesses = [
-    {
-      id: 1,
-      address: "Quick Fix Garage",
-      lat: 32.0853,
-      lng: 34.7818,
-      name: "123 Main St",
-      time: "ימים א'-ה' 07:30 - 16:00, יום ו' 07:30 - 12:00",
-      email: "info@",
-      services: [
-        "טרייד-אין",
-        "רכבי יד שניה",
-        "מכונאות",
-        "חלפים ואביזרים",
-        "הצעות לביטוח"
-      ]
-    },
-    {
-      id: 2,
-      address: "מוסך רון",
-      lat: 32.0662057,
-      lng: 34.7931176,
-      name: "תושיה 24, תל אביב-יפו",
-      time: "ימים א'-ה' 07:30 - 16:00, יום ו' 07:30 - 12:00",
-      email: "info@ron.co.il",
-        services: [
-        "רכבי יד שניה",
-        "חלפים ואביזרים",
-        "הצעות לביטוח",
-        "מגוון מסלולי",
-        "דיאגנוסטיקה",
-        "אולם מכירות"
-      ]
-    }
-  ];
+  if (loading) return <p style={{ textAlign: 'center' }}>טוען מפה...</p>;
+
     return(
         <div className="container-fluid payment-page d-flex flex-column position-relative p-0 text-white">
             <div className="TitleContainer car-agency-title">
@@ -94,7 +81,7 @@ function CarAgency() {
 />
       {businesses.map((business) => (
           <Marker
-            key={business.id}
+            key={business._id}
             position={[business.lat, business.lng]}
             eventHandlers={{
               click: () => setSelectedBusiness(business),
@@ -113,11 +100,11 @@ function CarAgency() {
           </div>
           <div className='d-flex'>
             <img className='MailIcon mt-1' src="../src/assets/OrangeMail.png" alt="" />
-          <p>דוא"ל <a className='emailLink' href="">{selectedBusiness.email}</a></p>
+          <p>דוא"ל <a className='emailLink' href={`mailto:${selectedBusiness.email}`}>{selectedBusiness.email}</a></p>
           </div>
           <h6>שירותי הסוכנות</h6>
           <div className="services-container">
-      {selectedBusiness.services.map((service, index) => (
+      {selectedBusiness.services?.map((service, index) => (
         <div key={index} className="service-card">
           {service}
         </div>

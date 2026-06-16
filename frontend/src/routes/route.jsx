@@ -13,6 +13,7 @@ import Personal from '../pages/register/Personal';
 import Services from '../pages/Services';
 import CarSettings from '../pages/CarSettings';
 import Transfer from '../pages/Transfer';
+import TransferDetailsPage from '../pages/TransferDetails';
 import RepairNotificationPage from '../pages/RepairNotification';
 import CarPurchasePage from '../pages/CarPurchase';
 
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
     {
       path: '/transfer',
       element: <Transfer />
+    },
+    {
+      path: '/transferdetails',
+      element: <TransferDetailsPage />
     },
     {
       path: '/repairnotification',
