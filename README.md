@@ -1,16 +1,16 @@
 # zeeker-project-2
 
-A robust backend server handling core business logic, API orchestration, and data processing.
+Server-side functionality and logic that controls the data of this zeekr project
 
-## 👥 Contributors
+## Contributors
 * **Amit Frank** — Backend Lead & Author
 * **Aviv Keshet** — Project Contributor
 
 ---
 
-## 📝 Overview
+## Overview
 
-This repository houses the server-side architecture for **Zeeker Project 2**. Serving as the backbone of the application, it securely processes client requests, orchestrates database interactions, handles file transformations, and ensures seamless data validation.
+This repository houses the server-side architecture for **Zeeker Project 2**. Serving as the backbone of the application, it securely processes client requests, orchestrates database interactions, handles file storage, and ensures seamless data validation.
 
 ---
 
@@ -20,10 +20,18 @@ The core runtime environment is built on **Node.js**. Below are the primary libr
 
 | Library | Purpose |
 | :--- | :--- |
-| **Express.js** | Fast, minimalist web framework for handling API routing and CRUD operations. |
-| **Joi** | Object schema description language and validator to guarantee data integrity. |
-| **Mongoose** | Elegant MongoDB object modeling to manage database schemas and fluid queries. |
-| **Multer** | Specialized middleware for handling `multipart/form-data` during file uploads. |
-| **Nodemailer** | Secure and flexible module for handling transactional email transfers. |
-| **pdf-parse** | Pure JavaScript library for parsing and extracting text from PDF files. |
-| **Mammoth** | Focused `.docx` to HTML converter, optimized for clean semantic rendering. |
+| **NodeJS** | Allowing the javscript to oparate in the backend |
+| **Express.js** | Handling HTTP request to perform the CRUD functionality. |
+| **Joi** | Object schema for validation. |
+| **Mongoose** | Elegant MongoDB object modeling to manage database schemas. |
+| **Multer** | Specialized middleware for handling form-data during file uploads. |
+| **Nodemailer** | Used for handling transactional email transfers. |
+| **pdf-parse** | Library for parsing and extracting text from PDF files. |
+| **Mammoth** | Converts Google Docs/Microsoft Word/LibreOffice Writer text to html |
+| **Cors** | Enables controlled access to resources located outside of a given domain |
+| **Cookie-parser** | Parse the attached cookies to the request made by the client to the server.|
+| **JWT** |  secure method for transmitting information between parties as a JSON object. |
+
+
+
+
