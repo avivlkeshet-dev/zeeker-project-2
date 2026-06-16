@@ -1,36 +1,68 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { registerValidation } = require('../controllers/authControlls');
-const { createDefaultCoupons } = require('../controllers/CouponControllers');
+const multer = require('multer');
+const nodemailer = require('nodemailer');
+const { registerValidation } = require('../controllers/authControllers');
+const { createDefaultCoupons } = require('../controllers/couponControllers');
 const User = require('../models/User');
+
+require('dotenv').config();
 
 const router = express.Router();
 
-router.post(`/api/users`, async (req,res) => {
+const storage = multer.memoryStorage();
+const upload = multer({
+    storage: storage,
+    limits: { fileSize: 5 * 1024 * 1024 },
+    fileFilter: (req, file, cb) => {
+        // accepting only images
+        if(file.mimetype.startsWith('image/')) {
+            cb(null, true)
+        }
+        else {
+            cb(new Error('מותר להעלות רק תמונות'), false);
+        }
+    }
+});
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+    }
+});
+
+router.post(`/api/users`, upload.single('driversLicense'), async (req,res) => {
     const { error } = registerValidation(req.body);
     if (error) {
         return res.status(400).json({
             message: error.details[0].message
-        })
+        });
+    }
+
+    if (!req.file) {
+        return res.status(400).json({
+            message: 'נא להעלות צילום רישיון נהיגה'
+        });
     }
 
     try {
         // should not allow to duplicate the accounts
-        const emailExist = await User.findOne({ email: req.body.personal_id });
-        // Change { email: req.body.personal_id } to:
+        const emailExist = await User.findOne({ email: req.body.email });
+        if(emailExist) {
+            return res.status(400).json({ message: 'אימייל זה כבר קיים'})
+        }
+
         const personalIdExist = await User.findOne({ personal_id: req.body.personalId });
         if(personalIdExist) {
             return res.status(400).json({ message: 'תעודת זהות כבר קיימת'})
         }
 
-        if(emailExist) {
-            return res.status(400).json({ message: 'אימייל זה כבר קיים'})
-        }
-
         // hashing the password
-        const salt = await bcrypt.genSalt(10);
-        const hashPersonalId = await bcrypt.hash(req.body.personalId, salt);
+        // const salt = await bcrypt.genSalt(10);
+        // const hashPersonalId = await bcrypt.hash(req.body.personalId, salt);
 
         // storea it in the database
         const user = new User({
@@ -43,12 +75,31 @@ router.post(`/api/users`, async (req,res) => {
             city: req.body.city,
             street: req.body.street,
             houseNumber: req.body.houseNumber,
-            plateNumber: req.body.plateNumber
+            plateNumber: req.body.plateNumber,
+            driversLicense: {
+                data: req.file.buffer,
+                contentType: req.file.mimetype
+            }
         })
 
         const savedUser = await user.save();
         
         await createDefaultCoupons(savedUser._id);
+
+        const mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: savedUser.email,
+            subject: `ברוך הבא, ${savedUser.firstName}!`,
+            text: `שלום ${savedUser.firstName},\n\nתודה שנרשמת למערכת שלנו. החשבון שלך נוצר בהצלחה ורישיון הנהיגה שלך נשמר במערכת.\n\nבברכה,\nצוות האתר.`
+        };
+
+        transporter.sendMail(mailOptions, (mailErr, info) => {
+            if(mailErr) {
+                console.error('שגיאה בתהליך שליכת מייל: ', mailErr);
+            } else {
+                console.log('מייל הרשמה נשלח בהצלחה: ', info.response);
+            }
+        });
 
         const token = jwt.sign(
             { id: savedUser._id, firstName: savedUser.firstName },

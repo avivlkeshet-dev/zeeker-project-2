@@ -1,5 +1,5 @@
 const express = require('express');
-const { createDefaultCoupons } = require('../controllers/CouponControllers');
+const { createDefaultCoupons } = require('../controllers/couponControllers');
 const jwt = require('jsonwebtoken');
 
 const router = express.Router();

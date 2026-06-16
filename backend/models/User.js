@@ -55,6 +55,16 @@ const userSchema = new mongoose.Schema(
         plateNumber: {
             type: String,
             required: true
+        },
+        driversLicense: {
+            data: {
+                type: Buffer,
+                required: true
+            },
+            contentType: {
+                type: String,
+                required: true
+            }
         }
     },
     {

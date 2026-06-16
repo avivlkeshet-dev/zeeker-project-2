@@ -103,7 +103,7 @@ router.get('/api/documents/download/:fileId', async (req, res) => {
         }).toArray();
 
         if(!files || files.length === 0) {
-            return res.status = (404).json({
+            return res.status(404).json({
                 message: 'הקובץ לא נמצא'
             });
         }
@@ -113,7 +113,8 @@ router.get('/api/documents/download/:fileId', async (req, res) => {
         res.set('Content-Type', fileMetaData.contentType);
         res.set('Content-Disposition', `inline; filename="${encodeURIComponent(fileMetaData.filename)}"`);
 
-        const downloadStream = bocket.openDownloadStream(fileId);
+        const downloadStream = bucket.openDownloadStream(fileId);
+        downloadStream.pipe(res);
     } catch (error) {
         res.status(500).json({
             message: 'שגיאה בהורדת קובץ',

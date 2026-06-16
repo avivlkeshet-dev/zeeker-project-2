@@ -8,7 +8,7 @@
     "dev": "nodemon server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Amit Frank",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
