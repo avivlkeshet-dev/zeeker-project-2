@@ -1,6 +1,4 @@
-
 const Joi = require('joi');
-
 
 const contactValidation = (data) => {
     const schema = Joi.object({
