@@ -32,6 +32,14 @@ The core runtime environment is built on **Node.js**. Below are the primary libr
 | **Cookie-parser** | Parse the attached cookies to the request made by the client to the server.|
 | **JWT** |  secure method for transmitting information between parties as a JSON object. |
 
+## Main Features
+- User registration and login
+- Vehicles / services display
+- Vehicle / service details page
+- File upload
+- Contact form
+- Email sending
+- Google Maps integration
 
 ## Environment Variables
 Create .env files based on the .env.example files.
