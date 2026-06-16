@@ -58,7 +58,7 @@ router.post('/api/documents', upload.single('document'), async (req, res) => {
 
         const fileId = uploadStream.id;
 
-        const generateFileUrl = `api/docs/download/${fileId}`;
+        const generateFileUrl = `api/documents/download/${fileId}`;
 
         const newDoc = new Document({
             userId: req.body.userId,
