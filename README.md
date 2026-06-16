@@ -14,7 +14,7 @@ This repository houses the server-side architecture for **Zeeker Project 2**. Se
 
 ---
 
-## 🛠️ Tech Stack & Dependencies
+## Tech Stack & Dependencies
 
 The core runtime environment is built on **Node.js**. Below are the primary libraries powering the backend server:
 
@@ -32,6 +32,18 @@ The core runtime environment is built on **Node.js**. Below are the primary libr
 | **Cookie-parser** | Parse the attached cookies to the request made by the client to the server.|
 | **JWT** |  secure method for transmitting information between parties as a JSON object. |
 
+
+## Environment Variables
+Create .env files based on the .env.example files.
+
+```
+PORT=3000
+MONGODB_URI=your_mongodb_connection_string
+EMAIL_USER=your_email
+EMAIL_PASS=your_google_app_password
+JWT_SECRET=your_jwt secret
+FRONTEND_URL=you_frontend_url
+```
 
 
 
