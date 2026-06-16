@@ -39,7 +39,7 @@ The core runtime environment is built on **Node.js**. Below are the primary libr
 - File upload
 - Contact form
 - Email sending
-- Google Maps integration
+- Leaflet Maps integration
 
 ## Environment Variables
 Create .env files based on the .env.example files.
@@ -53,5 +53,9 @@ JWT_SECRET=your_jwt secret
 FRONTEND_URL=you_frontend_url
 ```
 
+### how to run the server
+cd backend
+npm install
+npm run dev
 
 
