@@ -54,8 +54,10 @@ FRONTEND_URL=you_frontend_url
 ```
 
 ### how to run the server
+```
 cd backend
 npm install
 npm run dev
+```
 
 
