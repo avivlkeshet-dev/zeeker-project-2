@@ -65,22 +65,55 @@ function CarAgency() {
     fetchUserPlate();
   }, []);
 
-  useEffect(() => {
-    const fetchMaps = async () => {
-      try {
-        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/maps`);
-        const data = Array.isArray(response.data) && response.data.length > 0
-          ? response.data
-          : fallbackMapData;
-        setBusinesses(data);
-      } catch {
-        setBusinesses(fallbackMapData);
-      } finally {
-        setLoading(false);
+  // useEffect(() => {
+  //   const fetchMaps = async () => {
+  //     try {
+  //       const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/maps`);
+  //       const data = Array.isArray(response.data) && response.data.length > 0
+  //         ? response.data
+  //         : fallbackMapData;
+  //       setBusinesses(data);
+  //     } catch {
+  //       setBusinesses(fallbackMapData);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   fetchMaps();
+  // }, []);
+
+  const fetchVehicles = async () =>{
+    try{
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/vehicles`);
+      if (Array.isArray(response.data) && response.data.length > 0){
+        const formattedData = response.data.map((vehicle) => ({
+          _id: vehicle._id,
+          name: vehicle.location.name,
+          address: vehicle.location.address,
+          lat: vehicle.location.lat,
+          lng: vehicle.location.lng,
+          services: vehicle.features,
+          time: "ימים א'-ה' 07:30 - 16:00, יום ו' 07:30 - 12:00",
+          email: 'info@zeekr.co.il'
+        }));
+        setBusinesses(formattedData);
       }
-    };
-    fetchMaps();
-  }, []);
+      else {
+        setBusinesses([]);
+      }
+    }
+    catch(err){
+      console.error(err);
+      setBusinesses([]);
+    }
+    finally{
+      setLoading(false);
+    }
+  }
+  
+  useEffect(() => {
+    fetchVehicles();
+  },[]);
 
   useEffect(() => {
     const container = containerRef.current;

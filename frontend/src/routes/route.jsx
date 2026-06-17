@@ -1,6 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom'
 import LoginPage from '../pages/login'
-import Contact from '../pages/contact'
 import Pages from '../pages/Pages'
 import PaymentFinalize from '../pages/MainPaymentPage'
 import Message from '../pages/MessagePage'
@@ -12,7 +11,6 @@ import Payment from '../pages/Payment';
 import Personal from '../pages/register/Personal';
 import Services from '../pages/Services';
 import CarSettings from '../pages/CarSettings';
-import Transfer from '../pages/Transfer';
 import TransferDetailsPage from '../pages/TransferDetails';
 import RepairNotificationPage from '../pages/RepairNotification';
 import CarPurchasePage from '../pages/CarPurchase';
@@ -29,11 +27,6 @@ const router = createBrowserRouter([
   {
     path: "/carsettings",
     element: <CarSettings />
-  },
-  {
-
-    path: "/contact",
-    element: <Contact />
   },
   {
     path: "/pages",
@@ -70,10 +63,6 @@ const router = createBrowserRouter([
     {
       path: '/register',
       element: <Personal />
-    },
-    {
-      path: '/transfer',
-      element: <Transfer />
     },
     {
       path: '/transferdetails',
