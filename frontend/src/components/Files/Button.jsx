@@ -2,7 +2,7 @@ import './button.css'
 
 function Button() {
   return ( 
-            <button className="login-button" onClick={() => window.location.href = "/"}>
+            <button className="files-button" onClick={() => window.location.href = "/"}>
                 תקפיצו אותי למסך הראשי
             </button>
    );

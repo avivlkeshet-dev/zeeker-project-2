@@ -2,11 +2,12 @@ import { useState, useEffect } from 'react';
 import { FaBell, FaShareSquare, FaCalendarAlt } from 'react-icons/fa';
 import CarCard from '../shared/CarCard/CarCard';
 import ButtomNavbar from '../shared/ButtomNavbar';
+import { fallbackSeedUser } from '../../constants/fallbackSeedUser';
 import './CarPurchase.css';
 
 // TODO: replace with API call — load from /api/user/profile
 const mockUser = {
-    firstName: 'איתי',
+    firstName: fallbackSeedUser.firstName,
     notificationCount: 0,
     pencilnotificationcount: 1,
 };
@@ -18,7 +19,7 @@ const mockCar = {
 
 // TODO: replace with API call — load from /api/order/:id
 const mockOrder = {
-    ownerName: 'איתי',
+    ownerName: fallbackSeedUser.firstName,
     orderNumber: '714553',
     estimatedDelivery: 'XX/XXXX',
 };

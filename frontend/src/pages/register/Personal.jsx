@@ -6,20 +6,39 @@ import CheckIcon from '@mui/icons-material/Check';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
+import { fallbackSeedUser } from '../../constants/fallbackSeedUser';
 
 const cities = ['תל אביב', 'ירושלים', 'חיפה', 'באר שבע', 'אשדוד', 'רמת גן', 'פתח תקווה', 'ראשון לציון', 'חולון', 'בת ים', 'רעננה'];
 
+const formatBirthDate = (dateValue) => {
+    if (!dateValue) return '';
+    const parsedDate = new Date(dateValue);
+    if (Number.isNaN(parsedDate.getTime())) return '';
+
+    const day = String(parsedDate.getDate()).padStart(2, '0');
+    const month = String(parsedDate.getMonth() + 1).padStart(2, '0');
+    const year = String(parsedDate.getFullYear()).slice(-2);
+    return `${day}/${month}/${year}`;
+};
+
+const normalizePhone = (phoneValue) => {
+    if (!phoneValue) return '';
+    const digits = phoneValue.replace(/\D/g, '');
+    if (digits.length !== 10) return phoneValue;
+    return `${digits.slice(0, 3)} ${digits.slice(3, 6)} ${digits.slice(6)}`;
+};
+
 // Mock data — values for each field keyed by field id
 const MOCK_USER = {
-    firstName: 'עיינה',
-    lastName: 'קובלסקי',
-    idNumber: '207253623',
-    birthDate: '23/04/89',
-    phone: '054 343 8453',
-    email: 'ayana@gmail.com',
-    city: 'רעננה',
-    street: 'אחוזה',
-    houseNumber: '139',
+    firstName: fallbackSeedUser.firstName,
+    lastName: fallbackSeedUser.lastName,
+    idNumber: fallbackSeedUser.personalId,
+    birthDate: formatBirthDate(fallbackSeedUser.birthDate),
+    phone: normalizePhone(fallbackSeedUser.phone),
+    email: fallbackSeedUser.email,
+    city: fallbackSeedUser.city,
+    street: fallbackSeedUser.street,
+    houseNumber: fallbackSeedUser.houseNumber,
 };
 
 const FIELDS = [

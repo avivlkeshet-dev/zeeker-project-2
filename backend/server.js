@@ -8,6 +8,7 @@ const contact = require('./routes/contactRoutes');
 const vehicle = require('./routes/vehicleRoutes');
 const coupon = require('./routes/couponRoutes');
 const map = require('./routes/mapRoutes');
+const fileUpload = require('./routes/fileUploadRoutes');
 const path = require('path');
 const cookieParser = require('cookie-parser')
 const server = express();
@@ -45,6 +46,7 @@ server.use(doc);
 server.use(contact);
 server.use(vehicle);
 server.use(map);
+server.use(fileUpload);
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => console.log(`Server is running on port: ${PORT}`));

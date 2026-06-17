@@ -124,6 +124,10 @@
   background-color: transparent;
 }
 
+.transfer-details-file-info {
+  flex: 1;
+}
+
 .transfer-details-file-close {
   background: transparent;
   color: #fff;
@@ -191,8 +195,8 @@
 }
 
 .transfer-details-beneficiary-doc-icon {
-  width: 18px;
-  height: 18px;
+  width: 24px;
+  height: 24px;
   object-fit: contain;
 }
 
@@ -211,18 +215,28 @@
 
 .transfer-details-cta {
   width: min(420px, 100%);
-  border: none;
   border-radius: 20px;
-  background: #ff5800;
   color: #fff;
   font-size: 16px;
   font-weight: 400;
   height: 35px;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.transfer-details-cta--enabled {
+  border: none;
+  background: #ff5800;
   cursor: pointer;
 }
 
-.transfer-details-cta:hover {
+.transfer-details-cta--enabled:hover {
   background: #e65c00;
+}
+
+.transfer-details-cta--disabled {
+  border: 1px solid #ff5800;
+  background: #000;
+  cursor: not-allowed;
 }
 
 @media (min-width: 768px) {

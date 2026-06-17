@@ -29,7 +29,7 @@ function FullLogin() {
     }
 
     if (!phone || !plateNumber) {
-      setError("נא למאלות את כל השורות");
+      setError("נא למלא את כל השורות");
       return;
     }
 
@@ -53,7 +53,7 @@ function FullLogin() {
         window.location.href = "/dashboard";
       }
     } catch (error) {
-      const erorMsg = error.response.data.message;
+      const erorMsg = error.response?.data?.message || 'שגיאה בהתחברות, נסה שנית';
       setError(erorMsg);
     } finally {
       setLoading(false);
@@ -61,7 +61,7 @@ function FullLogin() {
   };
 
   return (
-    <div className="img-container d-flex flex-column min-vh-100">
+    <div className="img-container min-vh-100">
       <div className="topImage">
         <img
           src="../src/assets/Frontpage.png"
@@ -73,22 +73,20 @@ function FullLogin() {
         <p className="login-text">מספר טלפון נייד</p>
         <input 
           type="text"
-          placeholder="0541234567"
+          placeholder="מספר טלפון נייד"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
           />
         <p className="login-text mt-2">מספר רישוי של הרכב</p>
         <input
-          type="text" 
-          placeholder="1234567"
+          type="text"
+          placeholder="מספר רישוי של הרכב"
           value={plateNumber}
           onChange={(e) => setPlateNumber(e.target.value)}
           />
       </div>
       { error && (
-        <div className="text-danger text-center mt-2 fw-bold" style={{
-          direction: 'rtl'
-        }}>
+        <div className="login-error text-danger mt-2 fw-bold">
           {error}
         </div>
       )}
@@ -139,7 +137,7 @@ function FullLogin() {
         <button
           className="login-button"
           onClick={handleLogin}
-          disabled={loading}
+          disabled={loading || !phone || !plateNumber || !checked}
         >
           {loading ? 'מתחבר...' : 'המשך'}
         </button>

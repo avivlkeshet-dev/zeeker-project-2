@@ -1,6 +1,8 @@
 const { required } = require('joi');
 const mongoose = require('mongoose');
 
+const DOCUMENT_FILE_TYPES = ['myDocs', 'zeekrDocs', 'orderDocs'];
+
 const DocumentSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.ObjectId,
@@ -21,6 +23,7 @@ const DocumentSchema = new mongoose.Schema({
     },
     fileType: {
         type: String,
+        enum: DOCUMENT_FILE_TYPES,
         required: true
     },
     extractedText: {
@@ -31,5 +34,7 @@ const DocumentSchema = new mongoose.Schema({
 {
     timestamps: true
 });
+
+DocumentSchema.statics.FILE_TYPES = DOCUMENT_FILE_TYPES;
 
 module.exports = mongoose.model('Document', DocumentSchema);

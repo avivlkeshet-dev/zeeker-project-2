@@ -56,7 +56,7 @@ function PaymentPage() {
                         <h1 className='BubbleTitle text-white mt-3 ms-3'>העלאת המסמך</h1>
                         <img className='smallLine mt-3 ms-3' src="./src/assets/smallLine.png" alt="" />
                         <p className='BubbleText mt-3 ms-3'>העברנו את הבקשה לנציג/ת המכירות. בקרוב נעדכן אותך לגבי התקדמות הטיפול</p>
-                        <form className='payment-page__form' action="/upload-destination" method="POST" enctype="multipart/form-data">
+                        <form className='payment-page__form' action="/upload-destination" method="POST" encType="multipart/form-data">
                             <label htmlFor="file-upload" className='uploadLabel mb-4'><img className='ms-2' src="./src/assets/Upload.png" alt="" />מסמך אישור מימון</label>
                             <input type='file' id='file-upload'></input>
                         </form>

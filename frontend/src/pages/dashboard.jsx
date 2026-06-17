@@ -1,4 +1,5 @@
 import { useState, useEffect, use } from 'react';
+import { useNavigate } from 'react-router-dom';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import PersonIcon from '@mui/icons-material/Person';
 import './css/dashboard.css';
@@ -6,10 +7,11 @@ import ButtomNavbar from '../components/shared/ButtomNavbar';
 import CarCard from '../components/shared/CarCard/CarCard';
 import axios from 'axios';
 import { FaBell } from 'react-icons/fa';
+import { fallbackSeedUser } from '../constants/fallbackSeedUser';
 
 // TODO: replace with API call — load from /api/user/profile
 const mockUser = {
-    firstName: 'עמית',
+    firstName: fallbackSeedUser.firstName,
     notificationCount: 3,
 };
 
@@ -20,7 +22,7 @@ const mockCar = {
 };
 
 function Dashboard() {
-
+    const navigate = useNavigate();
     const [firstName, setFirstName] = useState('אורח');
     const [plateNumber, setPlateNumber] = useState('');
 
@@ -65,7 +67,7 @@ function Dashboard() {
 
             {/* ── Car card ── */}
             <CarCard model={mockCar.model} plate={mockCar.plate}>
-                <button className="db-car-card__docs-btn">המסמכים שלך</button>
+                <button className="db-car-card__docs-btn" onClick={() => navigate('/pages')}>המסמכים שלך</button>
             </CarCard>
 
             {/* ── Dots ── */}

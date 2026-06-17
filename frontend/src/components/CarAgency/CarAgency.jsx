@@ -1,30 +1,84 @@
 import './CarAgency.css'
-import { useRef } from "react";
-import { useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import { useState } from 'react';
 import axios from 'axios';
+import { fallbackSeedUser } from '../../constants/fallbackSeedUser';
 
+const fallbackMapData = [
+  {
+    _id: 'mock-map-1',
+    name: 'Zeeker Tel Aviv',
+    address: 'Tel Aviv, Israel',
+    lat: 32.0853,
+    lng: 34.7818,
+    time: "ימים א'-ה' 07:30 - 16:00, יום ו' 07:30 - 12:00",
+    email: 'info@',
+    services: ['טרייד-אין', 'רכבי יד שניה', 'מכונאות', 'חלפים ואביזרים', 'הצעות לביטוח'],
+  },
+  {
+    _id: 'mock-map-2',
+    name: 'Zeeker Jerusalem',
+    address: 'Jerusalem, Israel',
+    lat: 31.7683,
+    lng: 35.2137,
+    time: "ימים א'-ה' 07:30 - 16:00, יום ו' 07:30 - 12:00",
+    email: 'info@ron.co.il',
+    services: ['רכבי יד שניה', 'חלפים ואביזרים', 'הצעות לביטוח', 'מגוון מסלולי', 'דיאגנוסטיקה', 'אולם מכירות'],
+  },
+  {
+    _id: 'mock-map-3',
+    name: 'Zeeker Haifa',
+    address: 'Haifa, Israel',
+    lat: 32.7940,
+    lng: 34.9896,
+    time: "ימים א'-ה' 07:30 - 16:00, יום ו' 07:30 - 12:00",
+    email: 'info@zeeker-haifa.co.il',
+    services: ['רכבי יד שניה', 'חלפים ואביזרים', 'דיאגנוסטיקה', 'אולם מכירות'],
+  },
+];
 
 function CarAgency() {
+    const navigate = useNavigate();
+    const location = useLocation();
     const containerRef = useRef(null);
   const [businesses, setBusinesses] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedBusiness, setSelectedBusiness] = useState(null);
+  const [selectedBusiness, setSelectedBusiness] = useState(location.state?.selectedBusiness || null);
+  const [plateNumber, setPlateNumber] = useState(location.state?.plateNumber || fallbackSeedUser.plateNumber);
+
+  useEffect(() => {
+    const fetchUserPlate = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/users/me`,
+          { withCredentials: true }
+        );
+        if (response.data?.plateNumber) {
+          setPlateNumber(response.data.plateNumber);
+        }
+      } catch {
+        // keep fallback plate
+      }
+    };
+    fetchUserPlate();
+  }, []);
 
   useEffect(() => {
     const fetchMaps = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/maps');
-        setBusinesses(response.data);
-      } catch (error) {
-        console.error('Error fetching map businesses:', error);
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/maps`);
+        const data = Array.isArray(response.data) && response.data.length > 0
+          ? response.data
+          : fallbackMapData;
+        setBusinesses(data);
+      } catch {
+        setBusinesses(fallbackMapData);
       } finally {
         setLoading(false);
       }
     };
-
     fetchMaps();
   }, []);
 
@@ -55,10 +109,10 @@ function CarAgency() {
         <div className="d-flex align-items-center justify-content-between">
           <p className="ms-2"></p>
           <h2 className="RepairTitle text-white mt-3">ZEEKR X</h2>
-          <img className="back me-2" src="../src/assets/Back.png" />
+          <img className="back me-2" src="../src/assets/Back.png" onClick={() => navigate('/dashboard')} style={{ cursor: 'pointer' }} />
         </div>
         <div className="d-flex justify-content-center">
-          <p>מס' רכב 62-855-10</p>
+          <p>מס' רכב {plateNumber}</p>
         </div>
       </div>
       <div ref={containerRef} className="scroll-container d-flex">
@@ -84,7 +138,10 @@ function CarAgency() {
             key={business._id}
             position={[business.lat, business.lng]}
             eventHandlers={{
-              click: () => setSelectedBusiness(business),
+              click: () => {
+                console.log('Selected business:', business);
+                setSelectedBusiness(business);
+              },
             }}
           >
             <Popup>{business.name}</Popup>
@@ -113,7 +170,7 @@ function CarAgency() {
         </div>
     )}
     <div className='OrderAndChangeButtons d-flex flex-column'>
-      <button className="OrderService mb-4">
+      <button className="OrderService mb-4" onClick={() => selectedBusiness && navigate('/services', { state: { business: selectedBusiness, plateNumber } })}>
        הזמנת שירות
       </button>
       <button className="ChangePreference mb-4">

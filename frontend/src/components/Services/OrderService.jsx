@@ -1,8 +1,9 @@
 import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './OrderService.css';
 
 // TODO: replace with API call to load garage data from DB
-const garage = {
+const defaultGarage = {
     name: 'בכור כהן מוטורס',
     address: 'ההגנה 18, אור יהודה',
 };
@@ -20,6 +21,13 @@ const services = [
 
 function Services() {
     const [selected, setSelected] = useState(null);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { business, plateNumber } = location.state || {};
+    const garage = {
+        name: business?.name || defaultGarage.name,
+        address: business?.address || defaultGarage.address,
+    };
 
     return (
         <div className="container-fluid maintenance-order d-flex flex-column p-0 text-white">
@@ -27,10 +35,15 @@ function Services() {
                 <div className="d-flex align-items-center justify-content-between">
                     <div className="maintenance-order__header-side ms-2"></div>
                     <h2 className="maintenance-order__title text-white mt-3">הזמנת טיפול</h2>
-                    <button className="maintenance-order__back-btn bg-dark me-2">
+                    <button className="maintenance-order__back-btn bg-dark me-2" onClick={() => navigate('/agency', { state: { selectedBusiness: business, plateNumber } })}>
                         <img className="maintenance-order__header-side" src="../src/assets/Back.png" alt="back" />
                     </button>
                 </div>
+                {plateNumber && (
+                    <div className="d-flex justify-content-center">
+                        <p className="text-white mb-0" style={{ fontSize: '14px', color: '#a7a9aa' }}>מס' רכב {plateNumber}</p>
+                    </div>
+                )}
             </div>
 
             <div className="maintenance-order__garage-card d-flex align-items-center justify-content-between">

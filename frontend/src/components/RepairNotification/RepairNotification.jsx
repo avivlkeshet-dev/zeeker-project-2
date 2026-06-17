@@ -2,11 +2,12 @@ import { useState, useEffect } from 'react';
 import { FaBell } from 'react-icons/fa';
 import CarCard from '../shared/CarCard/CarCard';
 import ButtomNavbar from '../shared/ButtomNavbar';
+import { fallbackSeedUser } from '../../constants/fallbackSeedUser';
 import './RepairNotification.css';
 
 // TODO: replace with API call — load from /api/user/profile
 const mockUser = {
-    firstName: 'עיינה',
+    firstName: fallbackSeedUser.firstName,
     notificationCount: 3,
 };
 

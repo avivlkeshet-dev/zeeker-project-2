@@ -1,7 +1,9 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import uploadIcon from '../../assets/upload.png';
+import logoIcon from '../../assets/logo.png';
 import letterIcon from '../../assets/Letter.png';
 import PaymentHeader from '../shared/PaymentHeader';
 import Steps, { defaultSteps } from './Steps';
@@ -28,11 +30,56 @@ const beneficiaryMockData = [
   },
 ];
 
+const formatSizeMb = (bytes) => `${(bytes / (1024 * 1024)).toFixed(1)}MB`;
+
+const createMockUploadedFile = (file, index = 0) => ({
+  id: `mock-${Date.now()}-${index}-${file.name}`,
+  name: file.name,
+  sizeMb: formatSizeMb(file.size),
+  isMock: true,
+});
+
 function TransferDetails() {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
   const [uploadedFiles, setUploadedFiles] = useState([]);
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadError, setUploadError] = useState('');
   const activeStep = defaultSteps.indexOf('דיווח העברה');
+  const isContinueEnabled = uploadedFiles.length > 0;
+
+  useEffect(() => {
+    const loadDocuments = async () => {
+      const loggedInUserId = localStorage.getItem('userId');
+
+      if (!loggedInUserId) {
+        setUploadError('משתמש לא מחובר, מוצגים נתונים מקומיים בלבד');
+        return;
+      }
+
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/documents/${loggedInUserId}`
+        );
+
+        const documents = Array.isArray(response.data) ? response.data : [];
+        const normalized = documents.map((doc, index) => ({
+          id: doc._id || `server-${index}`,
+          name: doc.fileName || `document-${index + 1}`,
+          sizeMb: '0.0MB',
+          isMock: false,
+        }));
+
+        setUploadedFiles(normalized);
+        setUploadError('');
+      } catch (error) {
+        const errorMessage = error.response?.data?.message || 'שגיאה בטעינת מסמכים';
+        setUploadError(errorMessage);
+      }
+    };
+
+    loadDocuments();
+  }, []);
 
   const handleUploadClick = () => {
     if (fileInputRef.current) {
@@ -40,25 +87,107 @@ function TransferDetails() {
     }
   };
 
-  const handleFileChange = (event) => {
+  const handleFileChange = async (event) => {
     const files = Array.from(event.target.files || []);
 
     if (files.length === 0) {
       return;
     }
 
-    const normalizedFiles = files.map((file, index) => ({
-      id: `${file.name}-${file.size}-${Date.now()}-${index}`,
-      name: file.name,
-      sizeMb: `${(file.size / (1024 * 1024)).toFixed(1)}MB`,
-    }));
+    const loggedInUserId = localStorage.getItem('userId');
+    if (!loggedInUserId) {
+      const mockFiles = files.map((file, index) => createMockUploadedFile(file, index));
+      setUploadedFiles((prevFiles) => [...prevFiles, ...mockFiles]);
+      event.target.value = '';
+      return;
+    }
 
-    setUploadedFiles((prevFiles) => [...prevFiles, ...normalizedFiles]);
-    event.target.value = '';
+    setIsUploading(true);
+
+    try {
+      const uploadResults = await Promise.allSettled(
+        files.map(async (file) => {
+          const formData = new FormData();
+          formData.append('document', file);
+          formData.append('userId', loggedInUserId);
+          formData.append('fileType', 'orderDocs');
+
+          const response = await axios.post(
+            `${import.meta.env.VITE_BACKEND_URL}/api/documents`,
+            formData
+          );
+
+          const uploaded = response.data.document;
+
+          return {
+            id: uploaded._id,
+            name: uploaded.fileName,
+            sizeMb: formatSizeMb(file.size),
+            isMock: false,
+          };
+        })
+      );
+
+      const successFiles = [];
+      const fallbackFiles = [];
+      let lastErrorMessage = '';
+
+      uploadResults.forEach((result, index) => {
+        if (result.status === 'fulfilled') {
+          successFiles.push(result.value);
+          return;
+        }
+
+        const file = files[index];
+        fallbackFiles.push(createMockUploadedFile(file, index));
+        lastErrorMessage =
+          result.reason?.response?.data?.message ||
+          result.reason?.message ||
+          'שגיאה בהעלאת קובץ';
+      });
+
+      if (successFiles.length > 0 || fallbackFiles.length > 0) {
+        setUploadedFiles((prevFiles) => [...prevFiles, ...successFiles, ...fallbackFiles]);
+      }
+
+      if (fallbackFiles.length > 0) {
+        setUploadError(`${lastErrorMessage}. מוצגים נתוני דמו לפי שמות הקבצים שהועלו.`);
+      } else {
+        setUploadError('');
+      }
+    } finally {
+      setIsUploading(false);
+      event.target.value = '';
+    }
   };
 
-  const handleRemoveFile = (fileId) => {
-    setUploadedFiles((prevFiles) => prevFiles.filter((file) => file.id !== fileId));
+  const handleRemoveFile = async (fileId) => {
+    const loggedInUserId = localStorage.getItem('userId');
+
+    if (!loggedInUserId) {
+      alert('משתמש לא מחובר, נא להתחבר');
+      return;
+    }
+
+    const fileToRemove = uploadedFiles.find((file) => file.id === fileId);
+
+    if (fileToRemove?.isMock) {
+      setUploadedFiles((prevFiles) => prevFiles.filter((file) => file.id !== fileId));
+      return;
+    }
+
+    try {
+      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/documents/${fileId}`, {
+        data: {
+          userId: loggedInUserId,
+        },
+      });
+
+      setUploadedFiles((prevFiles) => prevFiles.filter((file) => file.id !== fileId));
+    } catch (error) {
+      const errorMessage = error.response?.data?.message || 'שגיאה במחיקת קובץ';
+      alert(errorMessage);
+    }
   };
 
   const handleContinue = () => {
@@ -93,15 +222,28 @@ function TransferDetails() {
               type="button"
               className="transfer-details-upload-btn"
               onClick={handleUploadClick}
+              disabled={isUploading}
             >
               <img src={uploadIcon} alt="העלאת מסמך" className="transfer-details-upload-icon" />
-              <span>להעלאת שם המסמך</span>
+              <span>{isUploading ? 'מעלה קבצים...' : 'להעלאת שם המסמך'}</span>
             </button>
+
+            {uploadError && (
+              <p className="text-danger text-end mt-2 mb-0">{uploadError}</p>
+            )}
 
             {uploadedFiles.length > 0 && (
               <div className="transfer-details-files-container mt-3">
                 {uploadedFiles.map((file) => (
                   <div key={file.id} className="transfer-details-file-box d-flex align-items-center justify-content-between">
+                    <div className="transfer-details-file-info d-flex align-items-center gap-2">
+                      <img src={letterIcon} alt="קובץ שהועלה" className="transfer-details-file-icon" />
+                      <div className="transfer-details-file-text text-end">
+                        <p className="mb-0 transfer-details-file-name">{file.name}</p>
+                        <p className="mb-0 transfer-details-file-size">{file.sizeMb}</p>
+                      </div>
+                    </div>
+
                     <button
                       type="button"
                       className="transfer-details-file-close"
@@ -110,14 +252,6 @@ function TransferDetails() {
                     >
                       <CloseOutlinedIcon fontSize="small" />
                     </button>
-
-                    <div className="transfer-details-file-info d-flex align-items-center gap-2">
-                      <div className="transfer-details-file-text text-end">
-                        <p className="mb-0 transfer-details-file-name">{file.name}</p>
-                        <p className="mb-0 transfer-details-file-size">{file.sizeMb}</p>
-                      </div>
-                      <img src={letterIcon} alt="קובץ שהועלה" className="transfer-details-file-icon" />
-                    </div>
                   </div>
                 ))}
               </div>
@@ -135,8 +269,8 @@ function TransferDetails() {
                   <span className="transfer-details-beneficiary-label">{item.label}</span>
                   {item.showIcon ? (
                     <div className="transfer-details-beneficiary-value d-flex align-items-center gap-2">
-                      <img src={letterIcon} alt="מסמך" className="transfer-details-beneficiary-doc-icon" />
                       <span>{item.value}</span>
+                      <img src={logoIcon} alt="מסמך" className="transfer-details-beneficiary-doc-icon" />
                     </div>
                   ) : (
                     <span className="transfer-details-beneficiary-value">{item.value}</span>
@@ -153,8 +287,9 @@ function TransferDetails() {
         <footer className="transfer-details-footer px-3 pb-4">
           <button
             type="button"
-            className="transfer-details-cta"
+            className={`transfer-details-cta ${isContinueEnabled ? 'transfer-details-cta--enabled' : 'transfer-details-cta--disabled'}`}
             onClick={handleContinue}
+            disabled={!isContinueEnabled}
           >
             קדימה
           </button>
