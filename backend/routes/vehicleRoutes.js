@@ -33,7 +33,7 @@ router.post('/api/vehicles', async (req, res) => {
                 name: location.name,
                 address: location.address,
                 lat: location.lat,
-                lng: location.long
+                lng: location.lng
             }
         });
 
