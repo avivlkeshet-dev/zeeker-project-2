@@ -121,6 +121,39 @@ router.get('/api/documents/download/:fileId', async (req, res) => {
             error: error.message
         });
     }
+});
+
+router.delete('/api/document/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const document = await Document.findById(id);
+        if(!document) {
+            return res.status(404).json({
+                message: 'המסמך לא נמצא במערכת'
+            });
+        }
+
+        const bucket = new mongoose.mongo.GridFSBucket(mongoose.connection.db, {
+            bucketName: 'user_docs'
+        });
+
+        if(document.fileId) {
+            const gridFsFileId = new mongoose.Types.ObjectId(document.fileId);
+            await bucket.delete(gridFsFileId);
+        }
+
+        await Document.findByIdAndDelete(id);
+
+        res.status(200).json({
+            message: 'מסמך נמחק בהצלחה'
+        });
+    } catch(error) {
+        res.status(200).json({
+            message: 'שגיאה בהליך מחיקת הקובץ',
+            error: message.error
+        });
+    }
 })
 
 
