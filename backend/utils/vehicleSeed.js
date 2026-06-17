@@ -4,48 +4,48 @@ const Vehicle = require('../models/Vehicle');
 
 const seedData = [
     {
-        "name": "זיקר 001 (Zeekr 001)",
+        "name": "זיקר תל אביב",
         "description": "רכב ספורטבק חשמלי יוקרתי ומנקר עיניים, טווח נסיעה ענק, שמור ברמת תצוגה, חווית נהיגה פרימיום יוצאת דופן.",
         "shortDescription": "זיקר 001 במצב מושלם, טווח ארוך",
         "imageUrl": "https://images.example.com/zeekr001.jpg",
         "price": 245000,
         "category": "Electric",
-        "features": ["מערכת שמע פרימיום Yamaha", "מתלי אוויר אדפטיביים", "גולף רוף פנורמי חכם"],
+        "features": ["דליברי" ,"טיפול ראשון חינם" ,"ביטוח מקיף" ,"הצעות לביטוח" ,"חליפים ואביזרים"],
         "location": {
             "name": "Zeekr Center Tel Aviv",
             "address": "Tel Aviv, Israel",
-            "lat": 32.0853,
-            "lng": 34.7818
+            "lat": 32.1436239,
+            "lng": 35.50698
         }
     },
     {
-        "name": "זיקר X (Zeekr X)",
+        "name": "אבי בניו",
         "description": "קרוסאובר עירוני קומפקטי ומעוצב להפליא, מאיץ מ-0 ל-100 קמ\"ש בתוך פחות מ-4 שניות, יד ראשונה מפרטי, נקי מתאונות.",
         "shortDescription": "זיקר X חזק, מהיר ומפואר",
         "imageUrl": "https://images.example.com/zeekrx.jpg",
         "price": 185000,
         "category": "Electric",
-        "features": ["עיצוב מינימליסטי יוקרתי", "מצלמות 360 היקפיות", "מושבים עם פונקציית עיסוי"],
+        "features": ["אולם מכירות" ,"דינאמיקה" ,"מגוון מסלולי" ,"הצעות לביטוח" ,"חליפים ואביזרים" ,"מכונאות", "רכב יד שנייה", "טרייד אין"],
         "location": {
-            "name": "Zeekr Jerusalem",
-            "address": "Jerusalem, Israel",
-            "lat": 31.7683,
-            "lng": 35.2137
+            "name": "Zeekr Haifa",
+            "address": "Haifa, Israel",
+            "lat": 32.8077112,
+            "lng": 35.075621
         }
     },
     {
-        "name": "זיקר 007 (Zeekr 007)",
+        "name": "freesbe",
         "description": "מכונית סדאן טכנולוגית מתקדמת, ארכיטקטורת טעינה אולטרה-מהירה 800V, מרווחת, מפנקת ועתידנית במיוחד.",
         "shortDescription": "זיקר 007 חדישה וטכנולוגית",
         "imageUrl": "https://images.example.com/zeekr007.jpg",
         "price": 210000,
         "category": "Electric",
-        "features": ["תצוגה עילית AR-HUD", "טעינה סופר מהירה 800V", "חבילת בטיחות אוטונומית מלאה"],
+        "features": ["דליברי" ,"טיפול ראשון חינם" ,"ביטוח מקיף", "ליסינג", "השכרת רכבים"],
         "location": {
-            "name": "Zeekr Haifa",
-            "address": "Haifa, Israel",
-            "lat": 32.7940,
-            "lng": 34.9896
+            "name": "Zeekr Petah Tikva",
+            "address": "Petah Tikva, Israel",
+            "lat": 32.2862314,
+            "lng": 35.5927515
         }
     }
 ];
