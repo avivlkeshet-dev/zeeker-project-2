@@ -151,10 +151,10 @@ router.delete('/api/document/:id', async (req, res) => {
     } catch(error) {
         res.status(200).json({
             message: 'שגיאה בהליך מחיקת הקובץ',
-            error: message.error
+            error: error.message
         });
     }
-})
+});
 
 
 module.exports = router;
