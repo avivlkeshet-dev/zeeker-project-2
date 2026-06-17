@@ -65,7 +65,7 @@ router.post('/api/documents', upload.single('document'), async (req, res) => {
             fileName: req.file.originalname,
             fileId: fileId,
             fileUrl: generateFileUrl,
-            fileType: mimeType,
+            fileType: req.body.fileType || mimeType,
             extractedText: scannedText
         });
 
