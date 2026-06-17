@@ -2,6 +2,9 @@
    Personal registration page
    ============================================================ */
 
+   .register{
+    background-color: #000000;
+   }
 .personal-page {
     background-color: #000000;
     color: #ffffff;
