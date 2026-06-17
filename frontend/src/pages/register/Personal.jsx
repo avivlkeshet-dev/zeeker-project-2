@@ -566,72 +566,93 @@ export default function Personal() {
         plateNumber: '12345678'  // Exactly 8 digits
     });
 
+
+    
+
+
+    // Kept this just in case, though fields are readOnly now
+
+
+
+    const [file, setFile] = useState(null);
+
     const [status, setStatus] = useState({
         type: '', text: ''
     });
 
-    // Kept this just in case, though fields are readOnly now
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFromData((prevData) => ({
+        setFormData((prevData) => ({
             ...prevData,
             [name]: value
         }));
-    }
+    };
 
-    const handleSubmit = async (e) => {
+    const handleFileChange = (e) => {
+        if (e.target.files && e.target.files[0]) {
+            setFile(e.target.files[0]);
+        }
+    };
+
+
+        const handleSubmit = async (e) => {
         e.preventDefault();
-        
-        // Optional safety: Runs validation checks on editable fields before submitting
-        if (!validateAll()) return;
-
         setStatus({ type: '', text: '' });
 
+        // Simple validation check before building FormData
+        if (!file) {
+            setStatus({ type: 'error', text: 'נא להעלות צילום רישיון נהיגה' });
+            return;
+        }
+
+        // 4. Construct FormData to support file upload
+        const data = new FormData();
+        
+        // Append all text fields
+        Object.keys(formData).forEach((key) => {
+            data.append(key, formData[key]);
+        });
+
+        // Append the file (Key must match upload.single('driversLicense') in backend)
+        data.append('driversLicense', file);
+
         try {
-            // 2. Use FormData to send both text fields and the mock file
-            const data = new FormData();
-            
-            // Append all text fields from state
-            Object.keys(formData).forEach((key) => {
-                data.append(key, formData[key]);
-            });
-
-            // 3. Create a tiny blank mock image to bypass the backend driversLicense requirement
-            const mockBlob = new Blob([""], { type: "image/png" });
-            const mockFile = new File([mockBlob], "mock_license.png", { type: "image/png" });
-            data.append('driversLicense', mockFile);
-
             const response = await axios.post('http://localhost:3000/api/users', data, {
-                withCredentials: true,
                 headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
+                    'Content-Type': 'multipart/form-data' // Tells Axios to send multipart data
+                },
+                withCredentials: true
             });
 
+            // Note: Watch out for the typo in your backend response key ('messsage')
             setStatus({
                 type: 'success',
-                text: response.data.messsage // Matches your backend typo 'messsage'
+                text: response.data.messsage || response.data.message || 'ההרשמה בוצעה בהצלחה!'
             });
+            window.location.href='/';
 
-        } catch(error) {
+            // Reset form and file state
+            setFormData({
+                firstName: '', lastName: '', personalId: '', birthDate: '',
+                phone: '', email: '', city: '', street: '', houseNumber: '', plateNumber: ''
+            });
+            setFile(null);
+
+        } catch (error) {
             setStatus({
                 type: 'error',
-                text: error.response?.data?.message || 'שגיאה בהתחברות לשרת'
+                text: error.response.data.message
             });
         }
-    }
+    };
+    
     // --- IMPLEMENTED PIECE OF CODE END ---
 
     const handleUploadClick = () => {
         fileInputRef.current?.click();
     };
 
-    const handleFileChange = (event) => {
-        const file = event.target.files?.[0];
-        if (file) {
-            setUploadedFile(file);
-        }
-    };
+
 
     const handleFieldChange = (field) => (event) => {
         const raw = event.target.value;
