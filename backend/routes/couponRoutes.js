@@ -1,6 +1,7 @@
 const express = require('express');
 const { createDefaultCoupons } = require('../controllers/couponControllers');
 const jwt = require('jsonwebtoken');
+const Coupon = require('../models/Coupon');
 
 const router = express.Router();
 
@@ -14,7 +15,7 @@ router.get('/api/coupons/me', async (req,res) => {
 
     try {
         const verify = jwt.verify(token, process.env.JWT_SECRET || 'randomsecret5241');
-        const coupons = await Coupons.find({ userId: verify.id });
+        const coupons = await Coupon.find({ userId: verify.id });
         return res.status(200).json(coupons)
     } catch (error) {
         return res.status(500).json({

@@ -1,4 +1,4 @@
-const Coupon = require('../models/Coupons');
+const Coupon = require('../models/Coupon');
 
 const currencyFormat = new Intl.NumberFormat('he-IL', {
     style: 'currency',
