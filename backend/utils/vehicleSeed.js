@@ -14,8 +14,8 @@ const seedData = [
         "location": {
             "name": "Zeekr Center Tel Aviv",
             "address": "Tel Aviv, Israel",
-            "lat": 32.1436239,
-            "lng": 35.50698
+            "lat": 32.1436284,
+            "lng": 34.8035426
         }
     },
     {
@@ -44,8 +44,8 @@ const seedData = [
         "location": {
             "name": "Zeekr Petah Tikva",
             "address": "Petah Tikva, Israel",
-            "lat": 32.2862314,
-            "lng": 35.5927515
+            "lat": 32.1072235,
+            "lng": 34.8903769
         }
     }
 ];
