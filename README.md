@@ -50,7 +50,6 @@ zeeker-project-2/
 | `GET` | `/api/documents/:userId` | List all documents for a user |
 | `GET` | `/api/documents/download/:fileId` | Redirect to signed mongoDB URL |
 | `DELETE` | `/api/documents/:id` | Delete from MongoDB |
-| `PUT` | `/api/documents/:id/replace` | Replace file in mongoDB update record |
 
 ### Vehicles, Coupons, Contact, File Upload
 Additional routes mounted under `/api/vehicles`, `/api/coupons`, `/api/contact`, `/api/files`.
