@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema(
         },
         phone: {
             type: String,
-            unique: true,
+            // unique: true,
             validate: {
                 validator: function(n) {
                     return /^\d+$/.test(n)
