@@ -1,0 +1,180 @@
+.rn-page {
+    background-color: #000;
+    min-height: 100vh;
+    color: #fff;
+    direction: rtl;
+    padding-bottom: 100px;
+    background-image: url('../src/assets/mapimage.png');
+    background-repeat: repeat-x;
+    background-position: center bottom;
+    background-size: 450px 500px;
+}
+
+.rn-nav {
+    background-color: #000;
+    position: relative;
+}
+
+.rn-nav__bell {
+    position: relative;
+    background-color: #24292B;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 11px;
+    cursor: pointer;
+}
+
+.rn-nav__badge {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background-color: #FF5800;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rn-nav__logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.rn-nav__profile {
+    background: black;
+    border: none;
+    border-radius: 10px;
+    padding: 6px 10px;
+    cursor: pointer;
+}
+
+.rn-nav__greeting-line,
+.rn-nav__greeting-name {
+    color: #fff;
+    font-size: 13px;
+    line-height: 1.3;
+}
+
+.rn-nav__greeting-name {
+    font-weight: 600;
+}
+
+.rn-nav__profile-icon {
+    color: #fff;
+    background-color: #24292B;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 11px;
+    cursor: pointer;
+}
+
+.rn-alert {
+    width: 100%;
+    background-color: black;
+    border-radius: 14px;
+    padding: 10px 14px;
+    border-right: 3px solid #FF5800;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.rn-alert__bell {
+    background-color: #1C2022;
+    border-radius: 90%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.rn-alert__text {
+    flex: 1;
+    text-align: right;
+}
+
+.rn-alert__title {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 2px;
+}
+
+.rn-alert__date {
+    font-size: 14px;
+    margin: 0;
+}
+
+.rn-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #555;
+    display: inline-block;
+}
+
+.rn-dot--active {
+    background-color: #fff;
+}
+
+.rn-services__title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+    text-align: right;
+    margin-bottom: 12px;
+}
+
+.rn-services__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    direction: rtl;
+}
+
+.rn-tile {
+    background: radial-gradient(#3A3E40, #24292B);
+    border-radius: 16px;
+    padding: 16px 8px 12px;
+    color: #fff;
+    gap: 10px;
+    min-height: 100px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.rn-tile__icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rn-tile__icon img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+.rn-tile__label {
+    font-size: 13px;
+    color: #fff;
+    text-align: center;
+}

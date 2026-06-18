@@ -1,0 +1,259 @@
+.repair-page{
+    height: 100vh;
+    background-color: #000000;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.carName{
+    font-size: 18px !important;
+}
+
+.requestText{
+    font-size: 18px !important;
+}
+
+.Line-1-repair{
+    border-left: 1px solid white;
+    height: 190px;
+}
+
+.Line-2-repair{
+    border-left: 1px solid white;
+    height: 220px;
+}
+
+.Line-3{
+    border-left: 1px solid white;
+    height: 220px;
+
+}
+
+.bottom-elipse{
+    width: 20px;
+    height: 20px;
+}
+
+.smallLine{
+    width: 90%;
+}
+
+.BubbleText{
+    width: 90%;
+}
+
+.BubbleTitle{
+    font-size: 20px;
+}
+
+.textbox{
+    direction: rtl;
+}
+
+.textbubble{
+    border: 1px solid black;
+    border-radius: 12px;
+    background-color: #24292B;
+}
+
+.SendToMail{
+    border: 1px solid #FF5800;
+    background-color: #FF5800;
+    border-radius: 33px;
+    color: white;
+    width: 153px;
+    height: 35px;
+    align-self: center;
+}
+
+.finishButton{
+    border: 1px solid #919495;
+    border-radius: 33px;
+    color: #919495;
+    width: 248px;
+    height: 35px;
+    align-self: center;
+}
+
+#file-upload{
+    display: none;
+}
+
+.uploadLabel{
+    border: 1px dashed white;
+    border-radius: 10px;
+    color: white;
+    width: 248px;
+    height: 65px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+}
+
+.repair-page__form{
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+}
+
+.TitleContainer{
+    width: 100%;
+    background-color: #24292B;
+    align-self: stretch;
+    flex-shrink: 0;
+}
+
+.RepairBubbleTitle{
+    font-size: 18px;
+}
+
+.scroll-container {
+    font-size: 18px;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 16px;
+    padding: 16px;
+    width: 100%;
+    flex-shrink: 0;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+}
+
+.scroll-item {
+  flex-shrink: 0;
+  color: white;
+  border-radius: 8px;
+  
+  scroll-snap-align: start; 
+}
+
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.gray-out{
+    color: #7C7F80;
+}
+
+
+.repairtextbubble{
+    border: 1px solid black;
+    border-radius: 12px;
+    background-color: #24292B;
+    flex: 1;
+    direction: rtl;
+}
+
+
+.repairtextbox{
+    width: 90%;
+    direction: rtl;
+}
+
+.RepairTitle{
+    font-size: 22px;
+}
+
+.SmallElipse{
+    height: 5px;
+    width: 5px;
+
+}
+
+.lastTreatment {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: 12px;
+}
+
+.repairFirstTitle {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.BubbleTextTitle{
+    font-size: 18px;
+    height: 20px;
+}
+
+.KMicon{
+    height: 17px;
+    width: 17px;
+}
+
+.MailButtonDiv{
+    direction: rtl;
+    bottom: 3%;
+    right: 5%;
+}
+
+.RepairTextboxInfo{
+    border: 1px solid #505455;
+    border-radius: 12px;
+    background-color: #505455;
+    height: 30px;
+    width: 105px;
+}
+
+.repair-page__content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: clip;
+    padding: 0 12px 16px;
+    direction: rtl;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.repair-page__content::-webkit-scrollbar {
+    display: none;
+}
+
+.repair-timeline-item {
+    position: relative;
+    margin-bottom: 16px;
+    flex-direction: row;
+    gap: 12px;
+    overflow: visible;
+}
+
+.repair-timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.repair-timeline-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: stretch;
+    flex-shrink: 0;
+    padding-top: 16px;
+    overflow: visible;
+    position: relative;
+}
+
+.repair-timeline-circle {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+}
+
+.repair-timeline-connector {
+    width: 2px;
+    background-color: #4A4A4A;
+    flex: 1;
+    margin-top: 6px;
+    margin-bottom: -32px;
+    min-height: 20px;
+    position: relative;
+    z-index: 1;
+}

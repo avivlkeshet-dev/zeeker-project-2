@@ -1,0 +1,34 @@
+.my-docs {
+  font-size: 20px !important;
+  color: #fff;
+}
+
+.Separator {
+  color: #919495 !important;
+  margin: 0 8px !important;
+}
+
+.NumOfFiles {
+  font-size: 14px;
+  color: #d1d1d1;
+}
+
+@media (min-width: 768px) {
+  .my-docs {
+    font-size: 22px !important;
+  }
+
+  .NumOfFiles {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 420px) {
+  .my-docs {
+    font-size: 16px !important;
+  }
+
+  .NumOfFiles {
+    font-size: 12px;
+  }
+}
