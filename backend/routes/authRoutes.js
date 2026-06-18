@@ -60,6 +60,16 @@ router.post(`/api/users`, upload.single('driversLicense'), async (req,res) => {
             return res.status(400).json({ message: 'תעודת זהות כבר קיימת'})
         }
 
+        const phoneExist = await User.findOne({ phone: req.body.phone });
+        if(phoneExist) {
+            return res.status(400).json({ message: 'טלפון כבר קיים'})
+        }
+
+        const plateNumberExist = await User.findOne({ plateNumber: req.body.plateNumber });
+        if(plateNumberExist) {
+            return res.status(400).json({ message: 'מספר רכב כבר קיים'})
+        }        
+
         // hashing the password
         // const salt = await bcrypt.genSalt(10);
         // const hashPersonalId = await bcrypt.hash(req.body.personalId, salt);

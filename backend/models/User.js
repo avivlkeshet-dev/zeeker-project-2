@@ -29,6 +29,7 @@ const userSchema = new mongoose.Schema(
         },
         phone: {
             type: String,
+            unique: true,
             validate: {
                 validator: function(n) {
                     return /^\d+$/.test(n)
@@ -38,7 +39,8 @@ const userSchema = new mongoose.Schema(
         },
         email: {
             type: String,
-            required: true
+            required: true,
+            unique: true
         },
         city: {
             type: String,
@@ -54,7 +56,8 @@ const userSchema = new mongoose.Schema(
         },
         plateNumber: {
             type: String,
-            required: true
+            required: true,
+            unique: true
         },
         driversLicense: {
             data: {
