@@ -61,5 +61,5 @@ JWT_SECRET=your_jwt secret
 FRONTEND_URL=you_frontend_url
 ```
 
-###**Some of the request are required to use tools in order to test the http requests**
-###**Recommandation: use postman in order to test the contact form**
+### **Some of the request are required to use tools in order to test the http requests**
+### **Recommandation: use postman in order to test the contact form**
