@@ -5,7 +5,7 @@ const mammoth = require('mammoth');
 const Document = require('../models/Document');
 const { Readable } = require('stream');
 const mongoose = require('mongoose');
-const requireAuth = require('../controllers/authControllers');
+const { requireAuth } = require('../controllers/authControllers');
 
 const router = express.Router();
 
