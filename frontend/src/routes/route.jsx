@@ -14,6 +14,7 @@ import CarSettings from '../pages/CarSettings';
 import TransferDetailsPage from '../pages/TransferDetails';
 import RepairNotificationPage from '../pages/RepairNotification';
 import CarPurchasePage from '../pages/CarPurchase';
+import ProtectedRoutes from './protectedRoutes'
 
 const router = createBrowserRouter([
   {
@@ -21,61 +22,66 @@ const router = createBrowserRouter([
     element: <LoginPage />
   },
   {
-    path: "/services",
-    element: <Services />
+    path: '/register',
+    element: <Personal />
   },
   {
-    path: "/carsettings",
-    element: <CarSettings />
-  },
-  {
-    path: "/pages",
-    element: <Pages />
-  },
-    {
-    path: "/paymentfinalize",
-    element: <PaymentFinalize />
-  },
-    {
-    path: "/message",
-    element: <Message />
-  },
-  {
-    path: "/repair",
-    element: <Repair />
-  },
-  {
-    path: "/agency",
-    element: <AgencyPage />
-  },
-  {
-      path: '/dashboard',
-      element: <Dashboard />
-    },
-    {
-      path: '/deals',
-      element: <Deals />
-    },
-    {
-      path: '/Goodpayment',
-      element: <Payment />
-    },
-    {
-      path: '/register',
-      element: <Personal />
-    },
-    {
-      path: '/transferdetails',
-      element: <TransferDetailsPage />
-    },
-    {
-      path: '/repairnotification',
-      element: <RepairNotificationPage />
-    },
-    {
-      path: '/carpurchase',
-      element: <CarPurchasePage />
-    }
-])
+    element: <ProtectedRoutes />, 
+    children: [
+      {
+        path: "/services",
+        element: <Services />
+      },
+      {
+        path: "/carsettings",
+        element: <CarSettings />
+      },
+      {
+        path: "/pages",
+        element: <Pages />
+      },
+      {
+        path: "/paymentfinalize",
+        element: <PaymentFinalize />
+      },
+      {
+        path: "/message",
+        element: <Message />
+      },
+      {
+        path: "/repair",
+        element: <Repair />
+      },
+      {
+        path: "/agency",
+        element: <AgencyPage />
+      },
+      {
+        path: '/dashboard',
+        element: <Dashboard />
+      },
+      {
+        path: '/deals',
+        element: <Deals />
+      },
+      {
+        path: '/goodpayment',
+        element: <Payment />
+      },
+      {
+        path: '/transferdetails',
+        element: <TransferDetailsPage />
+      },
+      {
+        path: '/repairnotification',
+        element: <RepairNotificationPage />
+      },
+      {
+        path: '/carpurchase',
+        element: <CarPurchasePage />
+      }
+    ]
+  }
+]);
 
 export default router;

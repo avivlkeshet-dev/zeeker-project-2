@@ -553,7 +553,7 @@ export default function Personal() {
     const [fieldErrors, setFieldErrors] = useState({});
 
     // --- IMPLEMENTED PIECE OF CODE START ---
-    const [formData, setFromData] = useState({
+    const [formData, setFormData] = useState({
         firstName: 'ישראל',
         lastName: 'ישראלי',
         personalId: '123456789', // Exactly 9 digits
@@ -657,7 +657,7 @@ export default function Personal() {
     const handleFieldChange = (field) => (event) => {
         const raw = event.target.value;
         const next = field.sanitize ? field.sanitize(raw) : raw;
-        setFromData((prev) => ({ ...prev, [field.id]: next }));
+        setFormData((prev) => ({ ...prev, [field.id]: next }));
         
         if (fieldErrors[field.id]) {
             setFieldErrors((prev) => ({ ...prev, [field.id]: '' }));

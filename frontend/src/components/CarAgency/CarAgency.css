@@ -68,3 +68,18 @@
         margin-inline: auto;
     }
 }
+
+.car-agency-map {
+    flex-shrink: 0 !important; 
+}
+
+.payment-page {
+    min-height: 100vh;
+    overflow-y: auto; 
+}
+
+.business-details {
+    direction: rtl;
+    color: white;
+    width: 90%;
+}

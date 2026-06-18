@@ -587,12 +587,6 @@ export default function CustomizedSteppers() {
        }
    }
 
-
-   const handleBack = () => {
-       setActiveStep((prev) => prev - 1);
-   }
-
-
    const renderFormStep = (step) => {
        switch(step) {
            case 0:
@@ -612,7 +606,7 @@ export default function CustomizedSteppers() {
            <div className='top-bar w-100 text-white d-flex align-items-center justify-content-between p-3'>
                <CloseOutlinedIcon/>
                <h1>ביצוע תשלום</h1>
-               <ArrowForwardOutlinedIcon />
+               <ArrowForwardOutlinedIcon/>
            </div>
            <div className="top-container d-flex flex-column p-4">
                <Stack sx={{
