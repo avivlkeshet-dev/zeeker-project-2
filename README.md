@@ -7,7 +7,7 @@
 ## System Architecture
 
 ```
-aviv-root/
+zeeker-project-2/
 ├── frontend/
 └── backend/
 ```
@@ -66,43 +66,25 @@ Additional routes mounted under `/api/vehicles`, `/api/coupons`, `/api/contact`,
 
 ### how to run the server
 ```
-cd backend
-npm install
-npm run seed
-npm run dev
-```
 
-### Health check
-`GET /api/ping` — returns `{ message: 'pong', timestamp }`.
 
 ### Authentication
 - Login by **phone number + vehicle plate number**
 - JWT stored as `httpOnly` cookie; `userId` stored in `localStorage`
-- **Offline fallback**: if MongoDB is unreachable, credentials are compared against the seed user array in `fallbackSeedUser.js`; matching users are authenticated with a mock token
 
 ### Document Management (`/pages`)
 - Three sections: **המסמכים שלי** (myDocs), **מסמכי ZEEKR** (zeekrDocs), **מסמכי הזמנה** (orderDocs)
-- Upload, replace, and delete documents (synced to Storage + MongoDB)
+- Upload and delete documents (synced to Storage + MongoDB)
 - If the API is unavailable, mock data is shown and uploads display the local filename/size
-- Backend: if MongoDB save fails after a successful upload, a `200` response with real file metadata is still returned so the UI reflects the upload correctly
 
 ### Payment Flow
-- Multi-step wizard: Payment → Transfer → TransferDetails → PaymentFinalize
+- Multi-step wizard: Payment → TransferDetails → PaymentFinalize
 - `TransferDetails`: upload bank transfer proof; **קדימה** button enabled only after at least one file is uploaded
 - Uploaded files displayed with real name and size regardless of DB availability
 
 ### Agency Map (`/agency`)
 - Interactive **Leaflet** map with dark tile layer (CartoDB)
-- Markers loaded from `/api/maps`; falls back to all 3 `seedMaps` entries when DB is offline
 - Clicking a marker stores the selection; **הזמנת שירות** navigates to `/services` passing `{ business, plateNumber }` as router state
-- Back navigation from `/services` restores the previously selected marker
-
-### Offline / Fallback Strategy
-All major features degrade gracefully when MongoDB or the backend is unavailable:
-- **Login**: seed user array comparison
-- **Documents**: mock document list; uploads display local metadata
-- **Maps**: full fallback map dataset from seed
-- **User plate**: falls back to `fallbackSeedUser.plateNumber`
 
 ---
 
@@ -128,22 +110,17 @@ cd frontend
 cp .env.example .env
 npm install
 npm run dev
+
+
+### Backend
+```
+cd backend
+npm install
+npm run seed
+npm run dev
 ```
 
----
-
-## Environment Variables
-
-### Frontend `.env`
-| Variable | Description |
-|---|---|
-| `VITE_BACKEND_URL` | Base URL of the backend API |
-
----
-
-## GitHub Contributions
-- Amit Frank: Backend focus and connection to frontend
-- Aviv Levi Keshet: Frontend focus and functionality of pages
+### Environment variables for Backend
 ```
 PORT=4_digits_port
 MONGODB_URI=your_mongodb_connection_string
@@ -152,6 +129,14 @@ EMAIL_PASS=your_google_app_password
 JWT_SECRET=your_jwt secret
 FRONTEND_URL=you_frontend_url
 ```
+
+
+---
+
+### Frontend `.env`
+| Variable | Description |
+|---|---|
+| `VITE_BACKEND_URL` | Base URL of the backend API |
 
 ### **Some of the request are required to use tools in order to test the http requests**
 ### **Recommandation: use postman in order to test the contact form**
@@ -170,7 +155,7 @@ FRONTEND_URL=you_frontend_url
 | POST | /api/documents | Upload document to MongoDB storage |
 | GET | /api/documents/:userId | List all documents for a user |
 | GET | /api/documents/download/:fileId | A request to downloads the file |
-| DELETE | /api/documents/:id | Delete from Firebase + MongoDB |
+| DELETE | /api/documents/:id | Delete from MongoDB |
 
 ### Vehicles - /api/vehicles
 | Method | Path | Description |
@@ -188,8 +173,14 @@ FRONTEND_URL=you_frontend_url
 ### Contacts - /api/contacts
 | Method | Path | Description |
 |---|---|---|
-| POST | /api/contacts | A endpoint thatsends an email to the stored email address in the .env |
+| POST | /api/contacts | A endpoint that sends an email to the stored email address in the .env |
 | GET | /api/contacts | Gets all the the emails that were sent from the clients |
 
 ### Vehicles, Coupons, Contact, File Upload
 Additional routes mounted under /api/vehicles, /api/coupons, /api/contact, /api/documents.
+
+---
+
+## GitHub Contributions
+- Amit Frank: Backend focus and connection to frontend
+- Aviv Levi Keshet: Frontend focus and functionality of pages
