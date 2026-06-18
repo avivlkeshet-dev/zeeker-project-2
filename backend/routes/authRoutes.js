@@ -126,6 +126,7 @@ router.post(`/api/users`, upload.single('driversLicense'), async (req,res) => {
         
         return res.status(200).json({ messsage: 'משתמש נרשם בהצלחה' });
     } catch (error) {
+        console.error("Registration Error:", error);
         res.status(500).json({ error: error.message });
     }
 });
