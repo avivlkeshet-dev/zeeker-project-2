@@ -80,5 +80,21 @@ FRONTEND_URL=you_frontend_url
 | GET | /api/documents/download/:fileId | A request to downloads the file |
 | DELETE | /api/documents/:id | Delete from Firebase + MongoDB |
 
+### Vehicles - /api/vehicles
+| Method | Path | Description |
+|---|---|---|
+| POST | /api/vehicles | Adds vehicle data and coordinates of where to buy the vehicle |
+| GET | /api/vehicles | Gets all the data of the vehicle from the database |
+| GET | /api/vehicles/:id | Gets a specific vehicle by his own id |
+| DELETE | /api/vehicle/:id | Deletes a specific vehicle from the database |
+
+### Coupons - /api/coupons
+|---|---|---|
+| GET | /api/coupons | gets all the coupons available after the users registers
+
+### Contacts - /api/contacts
+| POST | /api/contacts | A endpoint thatsends an email to the stored email address in the .env
+| GET | /api/contacts | Gets all the the emails that were sent from the clients
+
 ### Vehicles, Coupons, Contact, File Upload
 Additional routes mounted under /api/vehicles, /api/coupons, /api/contact, /api/documents.
