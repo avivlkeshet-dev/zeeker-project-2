@@ -90,7 +90,7 @@ FRONTEND_URL=you_frontend_url
 
 ### Coupons - /api/coupons
 |---|---|---|
-| GET | /api/coupons | gets all the coupons available after the users registers
+| GET | /api/coupons | gets all the coupons available after the users registers |
 
 ### Contacts - /api/contacts
 | POST | /api/contacts | A endpoint thatsends an email to the stored email address in the .env
