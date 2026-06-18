@@ -55,10 +55,10 @@ router.post(`/api/users`, upload.single('driversLicense'), async (req,res) => {
             return res.status(400).json({ message: 'אימייל זה כבר קיים'})
         }
 
-        const personalIdExist = await User.findOne({ personal_id: req.body.personalId });
-        if(personalIdExist) {
-            return res.status(400).json({ message: 'תעודת זהות כבר קיימת'})
-        }
+        // const personalIdExist = await User.findOne({ personal_id: req.body.personalId });
+        // if(personalIdExist) {
+        //     return res.status(400).json({ message: 'תעודת זהות כבר קיימת'})
+        // }
 
         // const phoneExist = await User.findOne({ phone: req.body.phone });
         // if(phoneExist) {
