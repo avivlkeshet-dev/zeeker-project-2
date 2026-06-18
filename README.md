@@ -93,8 +93,8 @@ FRONTEND_URL=you_frontend_url
 | GET | /api/coupons | gets all the coupons available after the users registers |
 
 ### Contacts - /api/contacts
-| POST | /api/contacts | A endpoint thatsends an email to the stored email address in the .env
-| GET | /api/contacts | Gets all the the emails that were sent from the clients
+| POST | /api/contacts | A endpoint thatsends an email to the stored email address in the .env |
+| GET | /api/contacts | Gets all the the emails that were sent from the clients |
 
 ### Vehicles, Coupons, Contact, File Upload
 Additional routes mounted under /api/vehicles, /api/coupons, /api/contact, /api/documents.
