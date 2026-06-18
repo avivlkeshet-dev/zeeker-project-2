@@ -22,7 +22,7 @@ function Header() {
       <div>
         <h2 className='m-4 carName'>ZEEKR X</h2>
       </div>
-       <div className='cross m-3'>
+       <div className='cross m-3' onClick={() => navigate('/dashboard')} role="button" tabIndex={0} onKeyDown={(event) => event.key === 'Enter' && navigate('/dashboard')}>
         <img src="../src/assets/X.png" alt="Close" />
       </div>
         </div>

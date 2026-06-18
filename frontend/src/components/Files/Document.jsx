@@ -38,7 +38,7 @@ function Document({
 
   return (
     <div className="container-fluid my-docs text-white border-bottom">
-      <div className="d-flex justify-content-between align-items-center w-100 mt-3 position-relative document-row-shell">
+      <div className="d-flex justify-content-between align-items-center w-100 position-relative document-row-shell">
 
          <div>
           <img className="file" src={fileIcon} alt="Document" />

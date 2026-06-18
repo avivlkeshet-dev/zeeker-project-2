@@ -1,9 +1,3 @@
-# ZEEKR Israel — Customer App
-
-A mobile-first React web application for ZEEKR electric vehicle owners in Israel. It allows customers to log in, manage their vehicle, upload documents, make bank-transfer payments, book service appointments, and browse agency locations on a live map.
-
----
-
 ## Students
 - Student 1 Amit Frank
 - Student 2 Aviv Levi Keshet
@@ -14,8 +8,8 @@ A mobile-first React web application for ZEEKR electric vehicle owners in Israel
 
 ```
 aviv-root/
-├── frontend/          # React 19 + Vite SPA
-└── backend/           # Express 5 REST API
+├── frontend/
+└── backend/
 ```
 
 ### Frontend (`frontend/`)
@@ -32,10 +26,9 @@ aviv-root/
 |---|---|
 | `server.js` | Express app entry point, route mounting, DB connection |
 | `routes/` | REST route handlers (auth, documents, maps, vehicles, coupons, contact, file upload) |
-| `controllers/` | Multer, validation, and Firebase helpers |
+| `controllers/` | Multer, validation, and mongoDB helpers |
 | `models/` | Mongoose schemas (User, Document, Vehicle, Map, Coupon, Contact) |
-| `config/firebase.js` | Firebase Admin SDK initialisation |
-| `config/fallbackSeedUser.js` | Shared offline-mode user data (all 3 seed users) |
+| `config/fallbackSeedUser.js` | Shared offline-mode user data |
 | `seed/` | One-time DB seed scripts for users and map locations |
 
 ---
@@ -45,21 +38,19 @@ aviv-root/
 | Route | Component | Description |
 |---|---|---|
 | `/` | `LoginPage` | Phone + plate-number login with terms checkbox |
-| `/dashboard` | `Dashboard` | User home with car card and service tiles |
-| `/pages` | `Pages` | Document management (My Docs / ZEEKR Docs / Order Docs) |
+| `/dashboard` | `Dashboard` | User home with service tiles |
+| `/pages` | `Pages` | Document management |
 | `/agency` | `AgencyPage → CarAgency` | Leaflet map of agency locations; select a branch |
 | `/services` | `Services → OrderService` | Book a service appointment for selected agency |
 | `/repair` | `Repair` | Repair history |
 | `/repairenotification` | `RepairNotificationPage` | Upcoming service alert |
 | `/payment` | `Payment` | Payment flow entry |
-| `/transfer` | `Transfer` | Bank transfer instructions |
 | `/transferdetails` | `TransferDetailsPage` | Upload bank transfer proof + beneficiary details |
 | `/paymentfinalize` | `MainPaymentPage` | Payment confirmation |
 | `/carsettings` | `CarSettings` | Vehicle settings |
 | `/carpurchase` | `CarPurchasePage` | Vehicle purchase order status |
 | `/deals` | `Deals` | Active deals / coupons |
 | `/message` | `MessagePage` | In-app messaging |
-| `/contact` | `Contact` | Contact form (sends email via Nodemailer) |
 | `/register` | `Personal` | Registration personal details form |
 
 ---
@@ -77,26 +68,17 @@ aviv-root/
 ### Documents — `/api/documents`
 | Method | Path | Description |
 |---|---|---|
-| `POST` | `/api/documents` | Upload document to Firebase Storage + save metadata |
+| `POST` | `/api/documents` | Upload document to mongoDB Storage + save metadata |
 | `GET` | `/api/documents/:userId` | List all documents for a user |
-| `GET` | `/api/documents/download/:fileId` | Redirect to signed Firebase URL |
-| `DELETE` | `/api/documents/:id` | Delete from Firebase + MongoDB |
-| `PUT` | `/api/documents/:id/replace` | Replace file in Firebase + update record |
-
-### Maps — `/api/maps`
-| Method | Path | Description |
-|---|---|---|
-| `GET` | `/api/maps` | Return all agency map entries |
+| `GET` | `/api/documents/download/:fileId` | Redirect to signed mongoDB URL |
+| `DELETE` | `/api/documents/:id` | Delete from MongoDB |
+| `PUT` | `/api/documents/:id/replace` | Replace file in mongoDB update record |
 
 ### Vehicles, Coupons, Contact, File Upload
 Additional routes mounted under `/api/vehicles`, `/api/coupons`, `/api/contact`, `/api/files`.
 
 ### Health check
 `GET /api/ping` — returns `{ message: 'pong', timestamp }`.
-
----
-
-## Key Features
 
 ### Authentication
 - Login by **phone number + vehicle plate number**
@@ -105,9 +87,9 @@ Additional routes mounted under `/api/vehicles`, `/api/coupons`, `/api/contact`,
 
 ### Document Management (`/pages`)
 - Three sections: **המסמכים שלי** (myDocs), **מסמכי ZEEKR** (zeekrDocs), **מסמכי הזמנה** (orderDocs)
-- Upload, replace, and delete documents (synced to Firebase Storage + MongoDB)
+- Upload, replace, and delete documents (synced to Storage + MongoDB)
 - If the API is unavailable, mock data is shown and uploads display the local filename/size
-- Backend: if MongoDB save fails after a successful Firebase upload, a `200` response with real file metadata is still returned so the UI reflects the upload correctly
+- Backend: if MongoDB save fails after a successful upload, a `200` response with real file metadata is still returned so the UI reflects the upload correctly
 
 ### Payment Flow
 - Multi-step wizard: Payment → Transfer → TransferDetails → PaymentFinalize
@@ -143,20 +125,6 @@ All major features degrade gracefully when MongoDB or the backend is unavailable
 | Leaflet / react-leaflet | 1.9 / 5 | Interactive map |
 | react-icons | 5 | Icon set |
 
-### Backend
-| Library | Version | Use |
-|---|---|---|
-| Express | 5 | HTTP framework |
-| Mongoose | 9 | MongoDB ODM |
-| Firebase Admin | 14 | Firebase Storage uploads |
-| Multer | 2 | Multipart file handling |
-| jsonwebtoken | 9 | JWT auth |
-| bcrypt | 6 | Password hashing |
-| Nodemailer | 8 | Contact form email sending |
-| Joi | 18 | Request validation |
-| mammoth / pdf-parse | — | Document text extraction |
-| cookie-parser | 1.4 | JWT cookie reading |
-
 ---
 
 ## How to Run
@@ -164,29 +132,27 @@ All major features degrade gracefully when MongoDB or the backend is unavailable
 ### Prerequisites
 - Node.js ≥ 18
 - MongoDB instance (local or Atlas) — optional; app works in offline mode without it
-- Firebase project with Storage enabled
 
 ### Backend
 ```bash
 cd backend
-cp .env.example .env        # fill in MONGODB_URI, JWT_SECRET, Firebase credentials, etc.
+cp .env.example .env 
 npm install
-npm run dev                 # starts on port 3000 (default)
+npm run dev
 ```
 
 #### Seed the database (optional)
 ```bash
-npm run seed:users          # inserts 3 demo users
-npm run seed:maps           # inserts 3 agency locations
-npm run seed:all            # both at once
+npm run seed:maps
+npm run seed:all
 ```
 
 ### Frontend
 ```bash
 cd frontend
-cp .env.example .env        # set VITE_BACKEND_URL=http://localhost:3000
+cp .env.example .env
 npm install
-npm run dev                 # starts on http://localhost:5173
+npm run dev
 ```
 
 ---
@@ -202,10 +168,6 @@ npm run dev                 # starts on http://localhost:5173
 | `FRONTEND_URL` | Allowed CORS origin |
 | `EMAIL_USER` | Gmail address for Nodemailer |
 | `EMAIL_PASS` | Gmail app password |
-| `FIREBASE_PROJECT_ID` | Firebase project ID |
-| `FIREBASE_CLIENT_EMAIL` | Firebase service account email |
-| `FIREBASE_PRIVATE_KEY` | Firebase service account private key |
-| `FIREBASE_STORAGE_BUCKET` | Firebase Storage bucket name |
 
 ### Frontend `.env`
 | Variable | Description |
@@ -214,16 +176,6 @@ npm run dev                 # starts on http://localhost:5173
 
 ---
 
-## Demo Credentials (offline / seed mode)
-
-| Name | Phone | Plate |
-|---|---|---|
-| יואב כהן | `0501234567` | `123-45-67` |
-| נועה לוי | `0529876543` | `456-78-90` |
-| דניאל מזרחי | `0541122334` | `789-12-34` |
-
----
-
 ## GitHub Contributions
-- Student 1: explain what this student built.
-- Student 2: explain what this student built.
+- Amit Frank: Backend focus and connection to frontend
+- Aviv Levi Keshet: Frontend focus and functionality of pages

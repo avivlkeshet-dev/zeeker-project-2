@@ -490,11 +490,18 @@ function Pages() {
       const setDocs = getSectionSetter(sectionType);
       if (!setDocs) return;
 
+      setDocs((prev) => prev.filter((doc) => doc.id !== docId));
+
+      if (String(docId).startsWith('z-') || String(docId).startsWith('o-')) {
+        return;
+      }
+
       const userId = getCurrentUserId();
       if (!userId) return;
 
-      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/document/${docId}`);
-      setDocs((prev) => prev.filter((doc) => doc.id !== docId));
+      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/documents/${docId}`, {
+        withCredentials: true
+      });
     } catch (error) {
       const message = error.response?.data?.message || 'שגיאה במחיקת המסמך';
       setDocumentsError(message);
@@ -562,7 +569,7 @@ function Pages() {
             title={doc.title}
             updatedAt={doc.updatedAt}
             errorMessage={doc.errorMessage}
-            showMenu
+            showMenu={false}
             onDelete={() => handleDeleteDoc(doc.id, doc.sectionType)}
             onReplace={(file) => handleReplaceDoc(doc.id, file, doc.sectionType)}
           />
