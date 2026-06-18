@@ -1,0 +1,151 @@
+.title {
+  font-size: 18px !important;
+  font-weight: 600;
+  color: #fff;
+}
+
+.update {
+  color: #B4B4C3 !important;
+  font-size: 16px !important;
+}
+
+.file {
+  height: 30px !important;
+  width: 22px !important;
+  object-fit: contain;
+  margin-right: 0;
+  flex-shrink: 0;
+}
+
+.menu {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  cursor: pointer;
+}
+
+.menuDiv {
+  margin-right: 0;
+  margin-left: 4px;
+  position: relative;
+}
+
+.document-menu-button {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.document-menu-dropdown {
+  position: absolute;
+  top: 28px;
+  left: 0;
+  background: #141414;
+  border: 1px solid #2f2f2f;
+  border-radius: 10px;
+  min-width: 120px;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.document-menu-item {
+  width: 100%;
+  text-align: right;
+  background: transparent;
+  color: #fff;
+  border: 0;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.document-menu-item:hover {
+  background: #222;
+}
+
+.document-menu-item--danger {
+  color: #ff7a7a;
+}
+
+.document-row-shell {
+  direction: rtl;
+  min-height: 72px;
+  gap: 12px;
+  overflow: visible;
+}
+
+.document-row-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.document-item-error {
+  color: #ff7a7a;
+  font-size: 12px;
+  line-height: 1.3;
+  padding-inline: 4px;
+}
+
+.my-docs.my-docs.text-white {
+  direction: rtl;
+  border-bottom: 1px solid #2b2c2e;
+  padding: 16px 0;
+  overflow: visible;
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 20px !important;
+  }
+
+  .update {
+    font-size: 14px !important;
+  }
+
+  .file {
+    height: 32px !important;
+    width: 24px !important;
+  }
+
+  .my-docs.my-docs.text-white {
+    padding: 20px 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .title {
+    font-size: 16px !important;
+  }
+
+  .update {
+    font-size: 12px !important;
+  }
+
+  .file {
+    height: 24px !important;
+    width: 18px !important;
+    margin-right: 12px;
+  }
+
+  .menu {
+    width: 20px;
+    height: 20px;
+  }
+
+  .menuDiv {
+    margin-left: 2px;
+  }
+
+  .my-docs.my-docs.text-white {
+    padding: 12px 0;
+  }
+
+  .document-row-shell {
+    min-height: 60px;
+    gap: 8px;
+  }
+}

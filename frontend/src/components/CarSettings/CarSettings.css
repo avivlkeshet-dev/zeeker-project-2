@@ -1,0 +1,182 @@
+.car-settings {
+    height: 100vh;
+    background-color: #000000;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.car-settings__nav-icon {
+    width: 12px;
+    height: 7px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.car-settings__car-number {
+    color: #9A9A9A;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.car-settings__tab--active {
+    color: #ffffff !important;
+    border-bottom: 2px solid #ffffff;
+    border-radius: 0;
+    font-weight: 600;
+    padding-bottom: 4px;
+}
+
+.car-settings__tabs {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    justify-content: center;
+}
+
+.car-settings__tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.car-settings__content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0 12px 24px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.car-settings__content::-webkit-scrollbar {
+    display: none;
+}
+
+.car-settings__hero {
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.car-settings__car-wrap {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    padding: 16px 0 0;
+}
+
+.car-settings__car-img {
+    width: 85%;
+    max-width: 320px;
+    object-fit: contain;
+}
+
+.car-settings__car-card {
+    background-color: #24292B;
+    border-radius: 20px;
+    margin-top: -55px;
+    padding: 65px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.car-settings__car-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.car-settings__car-title {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+.car-settings__car-plate {
+    color: #9A9A9A;
+    font-size: 13px;
+    margin: 4px 0 0;
+}
+
+.car-settings__action-row {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 8px 0 16px;
+    direction: rtl;
+}
+
+.car-settings__action-btn {
+    border: 1px solid #FF5800;
+    background: none;
+    border-radius: 33px;
+    color: #FF5800;
+    padding: 8px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    flex: 1;
+    max-width: 160px;
+    max-height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    transition: background-color 0.2s ease;
+}
+
+.car-settings__action-btn:hover {
+    background-color: rgba(255, 88, 0, 0.1);
+}
+
+.car-settings__section-title {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    direction: rtl;
+    text-align: center;
+    margin: 0 0 12px;
+}
+
+.car-settings__specs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    direction: rtl;
+}
+
+.car-settings__spec-card {
+    background-color: #1C1C1E;
+    border-radius: 12px;
+    padding: 14px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-align: center;
+}
+
+.car-settings__spec-icon {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.car-settings__spec-value {
+    font-size: 15px;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.2;
+}
+
+.car-settings__spec-label {
+    font-size: 11px;
+    color: #9A9A9A;
+    line-height: 1.3;
+}

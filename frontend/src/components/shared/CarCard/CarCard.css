@@ -1,0 +1,40 @@
+.db-card-wrap {
+    position: relative;
+    margin-top: 80px;
+}
+
+.db-car-card {
+    background-color: #1C2022;
+    border-radius: 20px;
+    padding: 0 16px 20px;
+    position: relative;
+}
+
+.db-car-card__img-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: -70px;
+    pointer-events: none;
+}
+
+.db-car-card__img {
+    width: 85%;
+    max-width: 280px;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.55));
+}
+
+.db-car-card__name {
+    color: #fff;
+    font-size: 22px;
+    font-weight: 700;
+    margin: 8px 0 4px;
+    text-align: center;
+}
+
+.db-car-card__plate {
+    font-size: 13px;
+    margin-bottom: 16px;
+    text-align: center;
+}

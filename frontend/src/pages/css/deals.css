@@ -1,0 +1,178 @@
+.deals-container {
+    background-color: black;
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 75px;
+    width: 100%;
+}
+
+.deals-list {
+    padding-bottom: 20px;
+    width: 100%;
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+.deals-bottom-fixed {
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    padding: 0 16px;
+}
+
+.deals-container__top-button {
+    border: none;
+    background-color: transparent;
+    color: white;
+}
+
+.deals-container__title {
+    font-weight: 500;
+    font-size: 20px;
+    color: white
+}
+
+.deals-container__bottom-button {
+    background-color: #FF5800;
+    border-radius: 20px;
+    border: none;color: white;
+    height: 35px;
+    width: min(420px, 100%);
+}
+
+.coupon-card-container {
+    position: relative;
+    width: min(420px, 100%);
+    background-color: #24292B;
+    border: 2px solid transparent;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: row-reverse;
+    overflow: hidden;
+    color: #FFFFFF;
+}
+
+.coupon-card-container.active-theme {
+    border-color: #E65C00;
+}
+
+.coupon-left-panel {
+    width: 80px;
+    align-self: stretch;
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.coupon-serial-text {
+    transform: rotate(-90deg);
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #FFFFFF;
+    white-space: nowrap;
+}
+
+.coupon-right-panel {
+    flex: 1;
+    direction: rtl;
+}
+
+.coupon-bullet-item {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 4px;
+    position: relative;
+    padding-right: 15px;
+}
+
+.coupon-bullet-item::before {
+    content: "•";
+    color: #A5A5A5;
+    position: absolute;
+    right: 0;
+    font-size: 16px;
+}
+
+.coupon-condition-text {
+    font-size: 11px;
+    color: #A5A5A5;
+    line-height: 1.4;
+}
+
+.coupon-divider-line {
+    position: relative;
+    width: 0px;
+    align-self: stretch;
+    border-left: 2px dashed #A5A5A5;
+    opacity: 0.4;
+}
+
+.coupon-divider-line::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 18px;
+    height: 18px;
+    background-color: #121212;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.coupon-divider-line::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: -10px;
+    width: 18px;
+    height: 18px;
+    background-color: #121212;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.coupon-card-container.active-theme .coupon-divider-line::before,
+.coupon-card-container.active-theme .coupon-divider-line::after {
+    border: 2px solid #E65C00;
+}
+
+@media (min-width: 768px) {
+    .deals-container {
+        padding: 24px 24px 96px;
+    }
+
+    .deals-list {
+        max-width: 760px;
+    }
+
+    .title-bar {
+        max-width: 760px;
+        margin: 0 auto 12px;
+    }
+
+    .deals-container__title {
+        font-size: 26px;
+    }
+
+    .deals-container__bottom-button {
+        height: 44px;
+        font-size: 16px;
+        width: min(520px, 100%);
+    }
+
+    .coupon-card-container {
+        width: min(620px, 100%);
+    }
+}
+
+@media (min-width: 1200px) {
+    .deals-list {
+        max-width: 920px;
+    }
+
+    .coupon-card-container {
+        width: min(680px, 100%);
+    }
+}

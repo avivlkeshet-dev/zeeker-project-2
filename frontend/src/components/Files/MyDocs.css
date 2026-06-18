@@ -1,0 +1,114 @@
+.my-docs {
+  font-size: 20px !important;
+  color: #fff;
+}
+
+.files-section-header {
+  direction: rtl;
+  background: #24292b;
+  min-height: 82px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+}
+
+.files-section-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.files-section-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.files-section-note {
+  text-align: right;
+}
+
+.files-section-accent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Separator {
+  color: #919495 !important;
+  margin: 0 8px !important;
+}
+
+.OrangePlus {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.NumOfFiles {
+  font-size: 14px;
+  color: #d1d1d1;
+}
+
+.MB {
+  font-size: 12px;
+  color: #d1d1d1;
+  margin-top: 8px !important;
+}
+
+body.pages-page {
+  background-color: black;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  min-height: 100vh;
+}
+
+@media (min-width: 768px) {
+  .my-docs {
+    font-size: 22px !important;
+  }
+
+  .OrangePlus {
+    width: 56px;
+    height: 56px;
+  }
+
+  .NumOfFiles {
+    font-size: 15px;
+  }
+
+  .MB {
+    font-size: 13px;
+  }
+
+  .files-section-header {
+    min-height: 88px;
+    padding: 16px 20px;
+  }
+}
+
+@media (max-width: 420px) {
+  .my-docs {
+    font-size: 16px !important;
+  }
+
+  .OrangePlus {
+    width: 40px;
+    height: 40px;
+  }
+
+  .NumOfFiles {
+    font-size: 12px;
+  }
+
+  .MB {
+    font-size: 11px;
+  }
+
+  .files-section-header {
+    min-height: 74px;
+    padding: 10px 12px;
+  }
+}
