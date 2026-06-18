@@ -123,7 +123,7 @@ router.get('/api/documents/download/:fileId', async (req, res) => {
     }
 });
 
-router.delete('/api/document/:id', async (req, res) => {
+router.delete('/api/documents/:id', async (req, res) => {
     try {
         const { id } = req.params;
 
