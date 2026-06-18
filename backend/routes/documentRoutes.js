@@ -5,10 +5,11 @@ const mammoth = require('mammoth');
 const Document = require('../models/Document');
 const { Readable } = require('stream');
 const mongoose = require('mongoose');
+const requireAuth = require('../controllers/authControllers');
 
 const router = express.Router();
 
-router.post('/api/documents', upload.single('document'), async (req, res) => {
+router.post('/api/documents', requireAuth, upload.single('document'), async (req, res) => {
     try {
         if(!req.file) {
             return res.status(400).json({ message: 'נדרש להעלות לפחות קובץ אחד' });
@@ -123,7 +124,7 @@ router.get('/api/documents/download/:fileId', async (req, res) => {
     }
 });
 
-router.delete('/api/documents/:id', async (req, res) => {
+router.delete('/api/documents/:id', requireAuth, async (req, res) => {
     try {
         const { id } = req.params;
 

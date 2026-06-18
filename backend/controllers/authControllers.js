@@ -1,6 +1,7 @@
 const Joi = require('joi');
 const User = require('../models/User');
 const { Schema } = require('mongoose');
+const jwt = require('jsonwebtoken');
 
 const registerValidation = (data) => {
     const schema = Joi.object({
@@ -28,6 +29,27 @@ const registerValidation = (data) => {
     return schema.validate(data);
 }
 
+const requireAuth = (req, res, next) => {
+    const token = req.cookies.jwt;
+
+    if(!token) {
+        return res.status(401).json({
+            message: 'גישה נדחתה: משתשמ לא מחובר'
+        });
+    }
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = decoded;
+        next();
+    } catch(error) {
+        return res.status(403).json({
+            message: 'טוקן לא תקף'
+        });
+    }
+}
+
 module.exports = {
-    registerValidation
+    registerValidation,
+    requireAuth
 };
