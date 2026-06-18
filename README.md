@@ -63,3 +63,22 @@ FRONTEND_URL=you_frontend_url
 
 ### **Some of the request are required to use tools in order to test the http requests**
 ### **Recommandation: use postman in order to test the contact form**
+
+### Auth — /api/users
+| Method | Path | Description |
+|---|---|---|
+| POST | /api/users | Register new user (multipart — driver's licence image) |
+| POST | /api/users/login | Login with phone + plate number; JWT cookie set |
+| GET | /api/users/me | Return current user from JWT cookie |
+| GET | /api/users/:id | Fetch user by ID |
+
+### Documents — /api/documents
+| Method | Path | Description |
+|---|---|---|
+| POST | /api/documents | Upload document to MongoDB storage |
+| GET | /api/documents/:userId | List all documents for a user |
+| GET | /api/documents/download/:fileId | A request to downloads the file |
+| DELETE | /api/documents/:id | Delete from Firebase + MongoDB |
+
+### Vehicles, Coupons, Contact, File Upload
+Additional routes mounted under /api/vehicles, /api/coupons, /api/contact, /api/documents.
