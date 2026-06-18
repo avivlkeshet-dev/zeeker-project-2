@@ -1,0 +1,249 @@
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import Header from '../components/Files/header.jsx';
+import MyDocs from '../components/Files/MyDocs.jsx';
+import Document from '../components/Files/Document.jsx';
+import Titles from '../components/Files/Titles.jsx';
+import Button from '../components/Files/Button.jsx';
+import OrderTitles from '../components/Files/OrderTitle.jsx';
+import './css/pages.css';
+
+const formatDateForDisplay = (dateValue) => {
+  if (!dateValue) return 'עודכן ב- --/--/----';
+  const date = new Date(dateValue);
+  if (Number.isNaN(date.getTime())) return 'עודכן ב- --/--/----';
+
+  const dd = String(date.getDate()).padStart(2, '0');
+  const mm = String(date.getMonth() + 1).padStart(2, '0');
+  const yyyy = date.getFullYear();
+  return `עודכן ב- ${dd}/${mm}/${yyyy}`;
+};
+
+const mapApiDocumentToUi = (documentItem) => ({
+  id: documentItem._id,
+  title: documentItem.fileName,
+  updatedAt: formatDateForDisplay(documentItem.createdAt),
+  isManaged: true,
+  sectionType: documentItem.fileType,
+  errorMessage: '',
+});
+
+  const buildMockDocs = () => ({
+  zeekrDocs: [
+    { id: 'z-1', title: 'חשבונית רכב', updatedAt: 'עודכן ב- 18/07/2021', sectionType: 'zeekrDocs', isManaged: false, errorMessage: '' },
+  ],
+  orderDocs: [
+    { id: 'o-1', title: 'חשבונית רכב', updatedAt: 'עודכן ב- 18/07/2022', sectionType: 'orderDocs', isManaged: false, errorMessage: '' },
+    { id: 'o-2', title: 'קבלת תשלום', updatedAt: 'עודכן ב- 18/07/2022', sectionType: 'orderDocs', isManaged: false, errorMessage: '' },
+  ],
+});
+
+function Pages() {
+  const [myDocs, setMyDocs] = useState([]);
+  const [zeekrDocs, setZeekrDocs] = useState([]);
+  const [orderDocs, setOrderDocs] = useState([]);
+  const [documentsError, setDocumentsError] = useState('');
+
+  useEffect(() => {
+    document.body.classList.add('pages-page');
+    const previousBodyBackground = document.body.style.backgroundColor;
+    const previousHtmlBackground = document.documentElement.style.backgroundColor;
+    document.body.style.backgroundColor = '#000';
+    document.documentElement.style.backgroundColor = '#000';
+
+    return () => {
+      document.body.classList.remove('pages-page');
+      document.body.style.backgroundColor = previousBodyBackground;
+      document.documentElement.style.backgroundColor = previousHtmlBackground;
+    };
+  }, []);
+
+  useEffect(() => {
+    const loadDocuments = async () => {
+      try {
+        
+        const meResponse = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/users/me`,{
+          withCredentials: true
+        });
+
+        const userId = meResponse.data._id;
+        if (!userId){
+          throw new Error('מזהה משתמש לא נמצא');
+        }
+
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/documents/${userId}`);
+        const documents = Array.isArray(response.data) ? response.data : [];
+        const mappedDocs = documents.map(mapApiDocumentToUi);
+
+        setMyDocs(mappedDocs.filter((doc) => doc.sectionType === 'myDocs'));
+        setZeekrDocs(mappedDocs.filter((doc) => doc.sectionType === 'zeekrDocs'));
+        setOrderDocs(mappedDocs.filter((doc) => doc.sectionType === 'orderDocs'));
+        const dbZeekrDocs = mappedDocs.filter((doc) => doc.sectionType === 'zeekrDocs');
+        const dbOrderDocs = mappedDocs.filter((doc) => doc.sectionType === 'orderDocs');
+        const mocks = buildMockDocs();
+        setZeekrDocs(dbZeekrDocs.length > 0 ? dbZeekrDocs : mocks.zeekrDocs);
+        setOrderDocs(dbOrderDocs.length > 0 ? dbOrderDocs : mocks.orderDocs);
+
+        setDocumentsError('');
+      } catch (error) {
+        const message = error.response?.data?.message || error.message || 'שגיאה בטעינת מסמכים';
+        setDocumentsError(message);
+
+        const mocks = buildMockDocs();
+        setZeekrDocs(mocks.zeekrDocs);
+        setOrderDocs(mocks.orderDocs);
+      }
+    };
+
+    loadDocuments();
+  }, []);
+
+  const getCurrentUserId = () => {
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+      setDocumentsError('פעולה נכשלה: משתמש לא מחובר');
+      return null;
+    }
+    return userId;
+  };
+
+  const getSectionSetter = (sectionType) => {
+    if (sectionType === 'myDocs') return setMyDocs;
+    if (sectionType === 'zeekrDocs') return setZeekrDocs;
+    if (sectionType === 'orderDocs') return setOrderDocs;
+    return null;
+  };
+
+  const handleUploadFromMyDocs = async (file) => {
+    try {
+      setDocumentsError('');
+      const userId = getCurrentUserId();
+      if (!userId) return;
+
+      const formData = new FormData();
+      formData.append('document', file);
+      formData.append('userId', userId);
+      formData.append('fileType', 'myDocs');
+
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/documents`, formData,
+        {withCredentials: true}
+      );
+      const savedDocument = response.data.document;
+
+      const appendedItem = mapApiDocumentToUi(savedDocument);
+      setMyDocs((prev) => [...prev, appendedItem]);
+    } catch (error) {
+      const message = error.response?.data?.message || 'שגיאה בהעלאת המסמך';
+      setDocumentsError(message);
+    }
+  };
+
+  const handleDeleteDoc = async (docId, sectionType) => {
+    try {
+      setDocumentsError('');
+      const setDocs = getSectionSetter(sectionType);
+      if (!setDocs) return;
+
+      setDocs((prev) => prev.filter((doc) => doc.id !== docId));
+
+      if (String(docId).startsWith('z-') || String(docId).startsWith('o-')) {
+        return;
+      }
+
+      const userId = getCurrentUserId();
+      if (!userId) return;
+
+      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/documents/${docId}`, {
+        withCredentials: true
+      });
+    } catch (error) {
+      const message = error.response?.data?.message || 'שגיאה במחיקת המסמך';
+      setDocumentsError(message);
+    }
+  };
+
+  const initialMockData = (buildMockDocs);
+
+  const handleReplaceDoc = async (docId, file, sectionType) => {
+    try {
+      setDocumentsError('');
+      const userId = getCurrentUserId();
+      if (!userId) return;
+
+      const setDocs = getSectionSetter(sectionType);
+      if (!setDocs) return;
+
+      const formData = new FormData();
+      formData.append('document', file);
+
+      const response = await axios.put(
+        `${import.meta.env.VITE_BACKEND_URL}/api/documents/${docId}/replace`,
+        formData
+      );
+
+      const replacedDoc = response.data.document;
+      setDocs((prev) =>
+        prev.map((doc) =>
+          doc.id === docId ? mapApiDocumentToUi(replacedDoc) : doc
+        )
+      );
+    } catch (error) {
+      const message = error.response?.data?.message || 'שגיאה בהחלפת המסמך';
+      setDocumentsError(message);
+    }
+  };
+
+
+
+  return (
+    <div className="pages-shell" style={{ backgroundColor: '#000' }}>
+      <Header />
+      <div className="pages-content">
+        {documentsError && (
+          <p className="text-danger text-end mt-2 mb-2">{documentsError}</p>
+        )}
+
+        <MyDocs numOfFiles={myDocs.length} onUploadFile={handleUploadFromMyDocs} />
+        {myDocs.map((doc) => (
+          <Document
+            key={doc.id}
+            title={doc.title}
+            updatedAt={doc.updatedAt}
+            errorMessage={doc.errorMessage}
+            showMenu
+            onDelete={() => handleDeleteDoc(doc.id, doc.sectionType)}
+            onReplace={(file) => handleReplaceDoc(doc.id, file, doc.sectionType)}
+          />
+        ))}
+
+        <Titles numOfFiles={zeekrDocs.length} />
+        {zeekrDocs.map((doc) => (
+          <Document
+            key={doc.id}
+            title={doc.title}
+            updatedAt={doc.updatedAt}
+            errorMessage={doc.errorMessage}
+            showMenu={false}
+            onDelete={() => handleDeleteDoc(doc.id, doc.sectionType)}
+            onReplace={(file) => handleReplaceDoc(doc.id, file, doc.sectionType)}
+          />
+        ))}
+
+        <OrderTitles numOfFiles={orderDocs.length} />
+        {orderDocs.map((doc) => (
+          <Document 
+            key={doc.id} 
+            title={doc.title} 
+            updatedAt={doc.updatedAt} 
+            errorMessage={doc.errorMessage} 
+            showMenu={false} 
+          />
+        ))}
+        <Button />
+      </div>
+    </div>
+  );
+}
+
+export default Pages;
+

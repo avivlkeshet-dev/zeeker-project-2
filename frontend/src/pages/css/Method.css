@@ -1,0 +1,14 @@
+.summary {
+    border: none;
+    border-radius: 15px;
+}
+
+.support-icon {
+    color: #FF5800;
+}
+
+.steps .total {
+    border: none;
+    border-radius: 15px !important;
+}
+
