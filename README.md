@@ -39,13 +39,21 @@ The core runtime environment is built on **Node.js**. Below are the primary libr
 - File upload
 - Contact form
 - Email sending
-- Leaflet Maps integration
+- Adding and deleting Documents
+
+### how to run the server
+```
+cd backend
+npm install
+npm run seed
+npm run dev
+```
 
 ## Environment Variables
 Create .env files based on the .env.example files.
 
 ```
-PORT=3000
+PORT=4_digits_port
 MONGODB_URI=your_mongodb_connection_string
 EMAIL_USER=your_email
 EMAIL_PASS=your_google_app_password
@@ -53,11 +61,43 @@ JWT_SECRET=your_jwt secret
 FRONTEND_URL=you_frontend_url
 ```
 
-### how to run the server
-```
-cd backend
-npm install
-npm run dev
-```
+### **Some of the request are required to use tools in order to test the http requests**
+### **Recommandation: use postman in order to test the contact form**
 
+### Auth — /api/users
+| Method | Path | Description |
+|---|---|---|
+| POST | /api/users | Register new user (multipart — driver's licence image) |
+| POST | /api/users/login | Login with phone + plate number; JWT cookie set |
+| GET | /api/users/me | Return current user from JWT cookie |
+| GET | /api/users/:id | Fetch user by ID |
 
+### Documents — /api/documents
+| Method | Path | Description |
+|---|---|---|
+| POST | /api/documents | Upload document to MongoDB storage |
+| GET | /api/documents/:userId | List all documents for a user |
+| GET | /api/documents/download/:fileId | A request to downloads the file |
+| DELETE | /api/documents/:id | Delete from Firebase + MongoDB |
+
+### Vehicles - /api/vehicles
+| Method | Path | Description |
+|---|---|---|
+| POST | /api/vehicles | Adds vehicle data and coordinates of where to buy the vehicle |
+| GET | /api/vehicles | Gets all the data of the vehicle from the database |
+| GET | /api/vehicles/:id | Gets a specific vehicle by his own id |
+| DELETE | /api/vehicle/:id | Deletes a specific vehicle from the database |
+
+### Coupons - /api/coupons
+| Method | Path | Description |
+|---|---|---|
+| GET | /api/coupons | gets all the coupons available after the users registers |
+
+### Contacts - /api/contacts
+| Method | Path | Description |
+|---|---|---|
+| POST | /api/contacts | A endpoint thatsends an email to the stored email address in the .env |
+| GET | /api/contacts | Gets all the the emails that were sent from the clients |
+
+### Vehicles, Coupons, Contact, File Upload
+Additional routes mounted under /api/vehicles, /api/coupons, /api/contact, /api/documents.
