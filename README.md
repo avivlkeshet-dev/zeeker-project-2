@@ -131,7 +131,6 @@ JWT_SECRET=your_jwt secret
 FRONTEND_URL=you_frontend_url
 ```
 
-
 ---
 
 ### Frontend `.env`
