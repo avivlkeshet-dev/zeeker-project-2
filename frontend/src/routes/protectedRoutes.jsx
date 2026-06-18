@@ -1,12 +1,15 @@
 import { Navigate, Outlet } from "react-router-dom";
 
+const isUserAuthenticated = () => {
+
+    const hasToken = document.cookie.split(';').some((item) => item.trim().startsWith('token='));
+
+    return hasToken || localStorage.getItem('isLoggedIn') === 'true';
+};
 
 const ProtectedRoutes = () => {
-    const isAuthenticated = !!localStorage.getItem('userId');
-    if (!isAuthenticated) {
-        return <Navigate to="/" replace />
-    }
-    return <Outlet />
+    const isAuthenticated = isUserAuthenticated();
+    return isAuthenticated? <Outlet /> : <Navigate to='/' replace />
 }
 
 export default ProtectedRoutes;

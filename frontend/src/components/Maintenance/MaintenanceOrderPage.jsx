@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import './MaintenanceOrderPage.css';
 
-// TODO: replace with API call to load garage data from DB
 const garage = {
     name: 'בכור כהן מוטורס',
     address: 'ההגנה 18, אור יהודה',

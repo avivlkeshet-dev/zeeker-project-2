@@ -1,7 +1,6 @@
 import { useRef, useEffect } from 'react';
 import './CarSettings.css';
 
-// Static spec definitions: id, label, icon — layout only
 const SPEC_DEFS = [
     { id: 'date',      label: 'מועד עליה לכביש',       icon: '../src/assets/Road.png' },
     { id: 'drive',     label: 'הנעה',                    icon: '../src/assets/Engine.png' },
@@ -19,7 +18,6 @@ const SPEC_DEFS = [
     { id: 'accel',     label: 'תאוצה מ-0 ל-100',         icon: '../src/assets/CarGo.png' },
 ];
 
-// Mock data — will be replaced with DB/API response
 const mockCarData = {
     date:      'ינואר 2020',
     drive:     'חשמלית',
@@ -37,7 +35,6 @@ const mockCarData = {
     accel:     '7.7 שניות',
 };
 
-// Merge definitions with data
 const specs = SPEC_DEFS.map((def) => ({ ...def, value: mockCarData[def.id] ?? '—' }));
 
 const tabs = ['היסטוריית טיפולים', 'דאשבורד', 'סוללה', 'הרכב'];
@@ -60,7 +57,6 @@ function CarSettings() {
 
     return (
         <div className="car-settings">
-            {/* Header */}
             <div className="TitleContainer">
                 <div className="d-flex align-items-center justify-content-between">
                     <img
@@ -76,7 +72,6 @@ function CarSettings() {
                 </div>
             </div>
 
-            {/* Tab bar */}
             <div ref={tabsRef} className="scroll-container car-settings__tabs">
                 {tabs.map((tab, i) => (
                     <div
@@ -88,24 +83,18 @@ function CarSettings() {
                 ))}
             </div>
 
-            {/* Scrollable content */}
             <div className="car-settings__content">
-                {/* Hero: car image overlapping dark card */}
                 <div className="car-settings__hero">
-                    {/* Car image */}
                     <div className="car-settings__car-wrap">
                         <img className="car-settings__car-img" src="../src/assets/car.png" alt="ZEEKR X" />
                     </div>
 
-                    {/* Dark card: name + plate + buttons */}
                     <div className="car-settings__car-card">
-                        {/* Car name & number */}
                         <div className="car-settings__car-info">
                             <h3 className="car-settings__car-title">ZEEKR X</h3>
                             <p className="car-settings__car-plate">מס' רכב {CAR_NUMBER}</p>
                         </div>
 
-                        {/* Action buttons */}
                         <div className="car-settings__action-row">
                             <button className="car-settings__action-btn text-white">מסמכי הרכב</button>
                             <button className="car-settings__action-btn text-white">הסכנות שלך</button>
@@ -113,7 +102,6 @@ function CarSettings() {
                     </div>
                 </div>
 
-                {/* Specs section */}
                 <p className="car-settings__section-title">פרטי הרכב שלך</p>
 
                 <div className="car-settings__specs-grid">

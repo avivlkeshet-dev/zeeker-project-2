@@ -202,7 +202,6 @@
     width: 105px;
 }
 
-/* Scrollable content area */
 .repair-page__content {
     flex: 1;
     overflow-y: auto;
@@ -217,7 +216,6 @@
     display: none;
 }
 
-/* Timeline - mirrors PaymentPage pattern */
 .repair-timeline-item {
     position: relative;
     margin-bottom: 16px;

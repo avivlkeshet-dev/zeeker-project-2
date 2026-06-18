@@ -59,28 +59,11 @@ function CarAgency() {
           setPlateNumber(response.data.plateNumber);
         }
       } catch {
-        // keep fallback plate
+
       }
     };
     fetchUserPlate();
   }, []);
-
-  // useEffect(() => {
-  //   const fetchMaps = async () => {
-  //     try {
-  //       const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/maps`);
-  //       const data = Array.isArray(response.data) && response.data.length > 0
-  //         ? response.data
-  //         : fallbackMapData;
-  //       setBusinesses(data);
-  //     } catch {
-  //       setBusinesses(fallbackMapData);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-  //   fetchMaps();
-  // }, []);
 
   const fetchVehicles = async () =>{
     try{

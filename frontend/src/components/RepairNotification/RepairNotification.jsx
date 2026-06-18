@@ -5,19 +5,16 @@ import ButtomNavbar from '../shared/ButtomNavbar';
 import { fallbackSeedUser } from '../../constants/fallbackSeedUser';
 import './RepairNotification.css';
 
-// TODO: replace with API call — load from /api/user/profile
 const mockUser = {
     firstName: fallbackSeedUser.firstName,
     notificationCount: 3,
 };
 
-// TODO: replace with API call — load from /api/car/:id
 const mockCar = {
     model: 'ZEEKR X',
     plate: '51-985-74',
 };
 
-// TODO: replace with API call — load from /api/service/next
 const mockNextService = {
     title: 'הטיפול הבא שלך מתקרב',
     date: '10/06/22',
@@ -28,17 +25,9 @@ const mockNextService = {
 function RepairNotification() {
     const [firstName, setFirstName] = useState(mockUser.firstName);
 
-    // TODO: replace mock with real API call
-    useEffect(() => {
-        // axios.get('/api/users/me', { withCredentials: true })
-        //   .then(r => setFirstName(r.data.firstName))
-        //   .catch(() => setFirstName('אורח'));
-    }, []);
-
     return (
         <div className="rn-page d-flex flex-column">
 
-            {/* ── Top nav ── */}
             <div className="rn-nav d-flex align-items-center justify-content-between px-3 pt-3 pb-2">
                 <button className="rn-nav__profile d-flex align-items-center gap-2">
                     <div className="rn-nav__profile-icon mb-1">
@@ -58,7 +47,6 @@ function RepairNotification() {
                 </button>
             </div>
 
-            {/* ── Car card with repair alert ── */}
             <CarCard model={mockCar.model} plate={mockCar.plate}>
                 <div className="rn-alert">
                     <div className="rn-alert__bell">
@@ -74,13 +62,11 @@ function RepairNotification() {
                 </div>
             </CarCard>
 
-            {/* ── Dots ── */}
             <div className="d-flex justify-content-center gap-2 mt-3">
                 <span className="rn-dot rn-dot--active"></span>
                 <span className="rn-dot"></span>
             </div>
 
-            {/* ── Services ── */}
             <div className="px-3 mt-4">
                 <h2 className="rn-services__title">לשירותך</h2>
                 <div className="rn-services__grid">

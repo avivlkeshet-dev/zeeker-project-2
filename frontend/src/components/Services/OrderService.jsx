@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './OrderService.css';
 
-// TODO: replace with API call to load garage data from DB
 const defaultGarage = {
     name: 'בכור כהן מוטורס',
     address: 'ההגנה 18, אור יהודה',

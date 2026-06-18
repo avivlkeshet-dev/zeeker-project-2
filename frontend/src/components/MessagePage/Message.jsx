@@ -17,7 +17,7 @@ function Messages() {
                 <p className='ContinueProcess mt-2 me-3 ms-3 text-white'>יש לסיים את התהליך עד לתאריך 30/07/23. עברנו שלב בתהליך המימון והשמחה רבה. מה שנשאר הוא להיכנס ולהשלים את התהליך.</p>
         </div>
         <div>
-            <button className="FinishProcessButton" onClick={() => window.location.href = "/"}>
+            <button className="FinishProcessButton mb-3" onClick={() => window.location.href = "/"}>
                 לסיום תהליך המימון
             </button>
         </div>

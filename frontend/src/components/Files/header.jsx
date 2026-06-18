@@ -9,13 +9,6 @@ function Header() {
 
     return (
         <div className='header text-white d-flex justify-content-between'>
-             {/* <Container fluid className='p-0'>
-      <Row>
-        <Col><img src="../src/assets/X.png" /></Col>
-        <Col>ZEEKR X</Col>
-        <Col><img src="../src/assets/Back.png" /></Col>
-      </Row>
-      </Container> */}
       <div className='back m-3' onClick={() => navigate('/dashboard')} role="button" tabIndex={0} onKeyDown={(event) => event.key === 'Enter' && navigate('/dashboard')}>
         <img src="../src/assets/Back.png" alt="Back to dashboard" />
       </div>

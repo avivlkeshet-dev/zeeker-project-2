@@ -1,14 +1,5 @@
 import './CarCard.css';
 
-/**
- * Shared car card component.
- *
- * Props:
- *  - model    {string}  – car model name, e.g. "ZEEKR X"
- *  - plate    {string}  – (optional) plate number; when omitted the plate row is hidden
- *  - children {node}    – any buttons / extra elements rendered below the plate
- *                         (each page supplies its own button styles)
- */
 function CarCard({ model, plate, children }) {
     return (
         <div className="db-card-wrap px-3">

@@ -1,4 +1,3 @@
-/* ── Root ───────────────────────────────────────────── */
 .dashboard {
     background-color: #000;
     min-height: 100vh;
@@ -8,7 +7,6 @@
     width: 100%;
 }
 
-/* ── Navbar ───────────────────────────────────────── */
 .db-nav {
     background-color: #000;
     position: relative;
@@ -80,7 +78,6 @@
     cursor: pointer;
 }
 
-/* ── Car card (page-specific button) ───────────────── */
 .db-car-card__docs-btn {
     background: transparent;
     border: 1.5px solid #FF5800;
@@ -91,7 +88,6 @@
     cursor: pointer;
 }
 
-/* ── Dots ───────────────────────────────────────────── */
 .db-dot {
     width: 8px;
     height: 8px;
@@ -104,7 +100,6 @@
     background-color: #fff;
 }
 
-/* ── Services ───────────────────────────────────────── */
 .db-services__title {
     font-size: 20px;
     font-weight: 600;
@@ -165,7 +160,6 @@
     line-height: 1.3;
 }
 
-/* ── Bottom Navbar ──────────────────────────────────────── */
 .fixed-bottom {
     padding-bottom: env(safe-area-inset-bottom, 0);
 }
@@ -176,7 +170,6 @@
     height: 65px;
 }
 
-/* Full-width dark bar */
 .zeekr-navbar-bg {
     position: absolute;
     inset: 0;
@@ -185,7 +178,6 @@
     z-index: 1;
 }
 
-/* Fake circular cutout behind FAB using page background color */
 .zeekr-navbar-bg::before {
     content: '';
     position: absolute;
@@ -202,7 +194,6 @@
     display: none;
 }
 
-/* Smooth concave shoulder corners on each side of the dip */
 .zeekr-corner {
     position: absolute;
     z-index: 2;
@@ -227,7 +218,6 @@
     z-index: 2;
 }
 
-/* Icon buttons (calendar, car, grid) */
 .zeekr-nav-btn {
     background: none;
     border: none;
@@ -242,7 +232,6 @@
     color: #fff;
 }
 
-/* Center FAB wrapper — protrudes above the bar */
 .zeekr-fab-wrapper {
     position: absolute;
     top: -28px;
@@ -253,7 +242,6 @@
     height: 60px;
 }
 
-/* Orange circular center button */
 .zeekr-orange-btn {
     width: 60px;
     height: 60px;
@@ -281,7 +269,6 @@
     line-height: 1.1;
 }
 
-/* Right-side pill: white background, dark text, home icon */
 .zeekr-pill-btn {
     background-color: #fff;
     border: none;

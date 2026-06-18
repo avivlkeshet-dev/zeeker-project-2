@@ -2,7 +2,6 @@ import "./RepairPage.css";
 import { useRef } from "react";
 import { useEffect } from "react";
 
-// TODO: replace with API call — load from /api/car/:id/repairs
 const repairHistory = [
   {
     id: 1,

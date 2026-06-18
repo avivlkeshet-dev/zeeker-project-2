@@ -11,13 +11,9 @@ function ZeekrBottomNavigation({ fabLabel }) {
   return (
     <div className="fixed-bottom d-flex justify-content-center">
       <div className="zeekr-navbar-container">
-        {/* The Curved Dark Background Bar */}
         <div className="zeekr-navbar-bg"></div>
-        {/* The Interactive Elements Layer */}
         <div className="zeekr-navbar-content w-100 h-100 d-flex align-items-center justify-content-between px-3">
-          {/* Left Side Icons */}
 
-          {/* Center Round Orange FAB Button */}
           <div className="zeekr-fab-wrapper">
             <button className="zeekr-orange-btn d-flex flex-column align-items-center justify-content-center">
               <span className="fab-text-top">{topLine}</span>
@@ -25,8 +21,6 @@ function ZeekrBottomNavigation({ fabLabel }) {
             </button>
           </div>
           <div className="d-flex align-items-center gap-3">
-            {/* Grid Menu Icon */}
-            {/* Pill Shaped Home Button ("ראשי") */}
             <button
               className={`zeekr-pill-btn d-flex align-items-center gap-2 ${activeTab === "home" ? "active" : ""}`}
               onClick={() => setActiveTab("home")}
@@ -41,7 +35,6 @@ function ZeekrBottomNavigation({ fabLabel }) {
               <HiSquares2X2 size={22} />
             </button>
           </div>
-          {/* Right Side Elements */}
           <div className="d-flex align-items-center gap-5">
             <button
               className={`zeekr-nav-btn ${activeTab === "car" ? "active" : ""}`}

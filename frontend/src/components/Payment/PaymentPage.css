@@ -131,7 +131,6 @@
     width: 100%;
 }
 
-/* Additional styling for better layout */
 .payment-page .cross,
 .payment-page .back {
     width: 16px;
@@ -149,7 +148,6 @@
     object-fit: contain;
 }
 
-/* Progress indicator styling */
 .payment-page .mt-2.text-center {
     position: relative;
     padding: 8px 0;
@@ -160,12 +158,10 @@
     height: auto;
 }
 
-/* Timeline container styling */
 .payment-page > .d-flex {
     position: relative;
 }
 
-/* Timeline container layout */
 .payment-page__timeline-container {
     padding: 0 20px 40px;
     width: 100%;
@@ -174,17 +170,15 @@
     overflow-y: auto;
     overflow-x: clip;
     flex: 1;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
-/* Scrollbar styling - hidden but functional */
 .payment-page__timeline-container::-webkit-scrollbar {
     width: 0;
     display: none;
 }
 
-/* Timeline item - each bubble with its circle */
 .timeline-item {
     position: relative;
     margin-bottom: 16px;
@@ -197,7 +191,6 @@
     margin-bottom: 0;
 }
 
-/* Timeline side - contains circle and connector line */
 .timeline-side {
     display: flex;
     flex-direction: column;
@@ -217,19 +210,17 @@
     z-index: 2;
 }
 
-/* Connector line - flex:1 fills height, negative margin bridges the 16px gap between items */
 .timeline-connector {
     width: 2px;
     background-color: #4A4A4A;
     flex: 1;
     margin-top: 6px;
-    margin-bottom: -32px; /* 16px item gap + 16px padding-top of next side */
+    margin-bottom: -32px;
     min-height: 20px;
     position: relative;
     z-index: 1;
 }
 
-/* Timeline track column */
 .timeline-track {
     display: flex;
     flex-direction: column;
@@ -247,7 +238,6 @@
     height: 20px;
 }
 
-/* Timeline connecting lines */
 .timeline-line {
     border-left: 2px solid #4A4A4A;
     height: 150px;
@@ -259,7 +249,6 @@
     height: 20px;
 }
 
-/* Textbox column */
 .textbox {
     direction: rtl;
     width: 100%;
@@ -267,7 +256,6 @@
     flex: 1;
 }
 
-/* Header fixed positioning */
 .payment-page .d-flex.text-white.justify-content-between {
     background-color: #000000;
     z-index: 10;
@@ -275,7 +263,6 @@
     flex-shrink: 0;
 }
 
-/* Progress indicator */
 .payment-page__progress {
     background-color: #000000;
     z-index: 9;
@@ -284,7 +271,6 @@
     flex-shrink: 0;
 }
 
-/* Content area styling */
 .payment-page .requestText {
     margin-bottom: 16px;
 }
@@ -295,7 +281,6 @@
     flex-shrink: 0;
 }
 
-/* Finish button container */
 .payment-page > .text-center {
     flex-shrink: 0;
     padding: 0;

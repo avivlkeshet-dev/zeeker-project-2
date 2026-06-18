@@ -5,19 +5,16 @@ import ButtomNavbar from '../shared/ButtomNavbar';
 import { fallbackSeedUser } from '../../constants/fallbackSeedUser';
 import './CarPurchase.css';
 
-// TODO: replace with API call — load from /api/user/profile
 const mockUser = {
     firstName: fallbackSeedUser.firstName,
     notificationCount: 0,
     pencilnotificationcount: 1,
 };
 
-// TODO: replace with API call — load from /api/car/:id
 const mockCar = {
     model: 'ZEEKR X',
 };
 
-// TODO: replace with API call — load from /api/order/:id
 const mockOrder = {
     ownerName: fallbackSeedUser.firstName,
     orderNumber: '714553',
@@ -27,17 +24,9 @@ const mockOrder = {
 function CarPurchase() {
     const [firstName, setFirstName] = useState(mockUser.firstName);
 
-    // TODO: replace mock with real API call
-    useEffect(() => {
-        // axios.get('/api/users/me', { withCredentials: true })
-        //   .then(r => setFirstName(r.data.firstName))
-        //   .catch(() => setFirstName('אורח'));
-    }, []);
-
     return (
         <div className="cp-page d-flex flex-column">
 
-            {/* ── Top nav ── */}
             <div className="cp-nav d-flex align-items-center justify-content-between px-3 pt-3 pb-2">
                 <button className="cp-nav__profile d-flex align-items-center gap-2">
                     <div className="cp-nav__profile-icon mb-1">
@@ -65,7 +54,6 @@ function CarPurchase() {
                 </div>
             </div>
 
-            {/* ── Car card with order details ── */}
             <CarCard model={mockCar.model}>
                 <p className="cp-card__order-name">ההזמנה של {mockOrder.ownerName}</p>
                 <p className="cp-card__order-number">מספר הזמנה - {mockOrder.orderNumber}</p>
@@ -78,7 +66,6 @@ function CarPurchase() {
                 <button className="cp-card__order-btn">פרטי הזמנה</button>
             </CarCard>
 
-            {/* ── Services ── */}
             <div className="px-3 mt-4">
                 <h2 className="cp-services__title text-center">לשירותך</h2>
                 <div className="cp-services__grid">

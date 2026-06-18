@@ -246,7 +246,6 @@ function TransferReport({ formData, updateForm }) {
             return;
         }
 
-        // using this local storage to grab the userId dynamically from the cache
         const userId = localStorage.getItem('userId');
 
         if(!userId) {
@@ -482,12 +481,11 @@ export default function CustomizedSteppers() {
     const [formData, setFormData] = useState({
     fullName: '',
     phoneNumber: '',
-    // Add these fields for the file data
     beneficiary: '',
     bank: '',
     branch: '',
     accountNumber: '',
-    uploadedFile: null // Stores file metadata like name and size
+    uploadedFile: null
 });
 
     const updateForm = (key, value) => {
@@ -499,7 +497,6 @@ export default function CustomizedSteppers() {
             setActiveStep((prev) => prev + 1);
         }
         else {
-            // navigate to a success page
             alert("הטופס נשלח בהצלחה");
         }
     }

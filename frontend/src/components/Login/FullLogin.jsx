@@ -50,6 +50,8 @@ function FullLogin() {
           localStorage.setItem('userId', loggedInUserId);
         }
 
+        localStorage.setItem('isLoggedIn','true');
+        
         window.location.href = "/dashboard";
       }
     } catch (error) {

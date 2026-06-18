@@ -1,8 +1,4 @@
-/* ============================================================
-   Personal registration page
-   ============================================================ */
-
-   .register{
+  .register{
     background-color: #000000;
    }
 .personal-page {
@@ -10,20 +6,18 @@
     color: #ffffff;
     min-height: 100vh;
     width: 100%;
-    /* Allow vertical scrolling while keeping the scrollbar hidden */
     overflow-y: auto;
     overflow-x: hidden;
-    scrollbar-width: none;          /* Firefox */
-    -ms-overflow-style: none;       /* IE / legacy Edge */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 .personal-page::-webkit-scrollbar {
     width: 0;
     height: 0;
-    display: none;                  /* Chrome / Safari / new Edge */
+    display: none;
 }
 
-/* ---------- Header (#bad-header) ---------- */
 .personal-header {
     display: flex;
     align-items: center;
@@ -66,7 +60,6 @@
     opacity: 0.8;
 }
 
-/* ---------- Stepper under the header ---------- */
 .personal-stepper {
     display: flex;
     flex-direction: row-reverse;
@@ -99,7 +92,6 @@
     background-color: #3a3e40;
 }
 
-/* Done step: orange checkmark + orange underline */
 .stepper-item--done .step-label,
 .stepper-item--done .step-check {
     color: #FF5800;
@@ -113,7 +105,6 @@
     background-color: #FF5800;
 }
 
-/* Current step: white text + white underline */
 .stepper-item--current .step-label {
     color: #ffffff;
     font-weight: 600;
@@ -123,12 +114,10 @@
     background-color: #ffffff;
 }
 
-/* Future step: empty label, gray underline (default bar color) */
 .stepper-item--future .step-label {
     color: transparent;
 }
 
-/* ---------- Form ---------- */
 .personal-form {
     padding: 16px;
     gap: 14px;
@@ -146,7 +135,6 @@
     font-weight: 500;
 }
 
-/* Input + trailing icon */
 .input-wrapper {
     position: relative;
     width: 100%;
@@ -155,7 +143,7 @@
 .input-wrapper input,
 .input-wrapper .form-select-field {
     width: 100%;
-    padding-inline-start: 40px; /* room for the icon on the LEFT in RTL */
+    padding-inline-start: 40px;
 }
 
 .input-icon {
@@ -172,7 +160,6 @@
     color: #919495;
 }
 
-/* Native select reset so the custom chevron is visible */
 .form-select-field {
     appearance: none;
     -webkit-appearance: none;
@@ -211,7 +198,7 @@ input:focus {
 }
 
 .input--readonly {
-    padding-inline-start: 12px !important; /* no icon, no reserved space */
+    padding-inline-start: 12px !important;
     cursor: default;
     caret-color: transparent;
     color: #6A6B70;
@@ -232,7 +219,6 @@ input:focus {
     font-size: 12px;
 }
 
-/* ---------- Upload section ---------- */
 .personal-upload-section {
     margin-top: 24px;
     display: flex;
@@ -288,7 +274,6 @@ input:focus {
     color: #FF5800;
 }
 
-/* ---------- Primary submit button ---------- */
 .primary-submit-btn {
     margin: 20px auto 32px;
     width: 90%;

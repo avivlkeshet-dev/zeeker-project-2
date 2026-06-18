@@ -9,13 +9,11 @@ import axios from 'axios';
 import { FaBell } from 'react-icons/fa';
 import { fallbackSeedUser } from '../constants/fallbackSeedUser';
 
-// TODO: replace with API call — load from /api/user/profile
 const mockUser = {
     firstName: fallbackSeedUser.firstName,
     notificationCount: 3,
 };
 
-// TODO: replace with API call — load from /api/car/:id
 const mockCar = {
     model: 'ZEEKR X',
     plate: '51-985-74',
@@ -45,7 +43,6 @@ function Dashboard() {
     return (
         <div className="dashboard d-flex flex-column">
 
-            {/* ── Top nav ── */}
             <div className="db-nav d-flex align-items-center justify-content-between px-3 pt-3 pb-2">
                 <button className="db-nav__profile d-flex align-items-center gap-2">
                     <div className="db-nav__profile-icon mb-1">
@@ -65,18 +62,15 @@ function Dashboard() {
                 </button>
             </div>
 
-            {/* ── Car card ── */}
             <CarCard model={mockCar.model} plate={mockCar.plate}>
                 <button className="db-car-card__docs-btn" onClick={() => navigate('/pages')}>המסמכים שלך</button>
             </CarCard>
 
-            {/* ── Dots ── */}
             <div className="db-dots d-flex justify-content-center gap-2 mt-3">
                 <span className="db-dot db-dot--active"></span>
                 <span className="db-dot"></span>
             </div>
 
-            {/* ── Services ── */}
             <div className="db-services px-3 mt-4">
                 <h2 className="db-services__title text-center">לשירותך</h2>
                 <div className="db-services__grid">

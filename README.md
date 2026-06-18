@@ -21,16 +21,6 @@ aviv-root/
 | `src/constants/fallbackSeedUser.js` | Shared offline-mode user mock |
 | `src/utils/` | Shared helpers (e.g. currency formatter) |
 
-### Backend (`backend/`)
-| Path | Purpose |
-|---|---|
-| `server.js` | Express app entry point, route mounting, DB connection |
-| `routes/` | REST route handlers (auth, documents, maps, vehicles, coupons, contact, file upload) |
-| `controllers/` | Multer, validation, and mongoDB helpers |
-| `models/` | Mongoose schemas (User, Document, Vehicle, Map, Coupon, Contact) |
-| `config/fallbackSeedUser.js` | Shared offline-mode user data |
-| `seed/` | One-time DB seed scripts for users and map locations |
-
 ---
 
 ## Page Routes
@@ -52,18 +42,6 @@ aviv-root/
 | `/deals` | `Deals` | Active deals / coupons |
 | `/message` | `MessagePage` | In-app messaging |
 | `/register` | `Personal` | Registration personal details form |
-
----
-
-## Backend API
-
-### Auth — `/api/users`
-| Method | Path | Description |
-|---|---|---|
-| `POST` | `/api/users` | Register new user (multipart — driver's licence image) |
-| `POST` | `/api/users/login` | Login with phone + plate number; JWT cookie set |
-| `GET` | `/api/users/me` | Return current user from JWT cookie |
-| `GET` | `/api/users/:id` | Fetch user by ID |
 
 ### Documents — `/api/documents`
 | Method | Path | Description |
@@ -127,26 +105,6 @@ All major features degrade gracefully when MongoDB or the backend is unavailable
 
 ---
 
-## How to Run
-
-### Prerequisites
-- Node.js ≥ 18
-- MongoDB instance (local or Atlas) — optional; app works in offline mode without it
-
-### Backend
-```bash
-cd backend
-cp .env.example .env 
-npm install
-npm run dev
-```
-
-#### Seed the database (optional)
-```bash
-npm run seed:maps
-npm run seed:all
-```
-
 ### Frontend
 ```bash
 cd frontend
@@ -158,16 +116,6 @@ npm run dev
 ---
 
 ## Environment Variables
-
-### Backend `.env`
-| Variable | Description |
-|---|---|
-| `MONGODB_URI` | MongoDB connection string |
-| `JWT_SECRET` | Secret for signing JWTs |
-| `PORT` | Server port (default `3000`) |
-| `FRONTEND_URL` | Allowed CORS origin |
-| `EMAIL_USER` | Gmail address for Nodemailer |
-| `EMAIL_PASS` | Gmail app password |
 
 ### Frontend `.env`
 | Variable | Description |
