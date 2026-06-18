@@ -89,10 +89,13 @@ FRONTEND_URL=you_frontend_url
 | DELETE | /api/vehicle/:id | Deletes a specific vehicle from the database |
 
 ### Coupons - /api/coupons
+| Method | Path | Description |
 |---|---|---|
 | GET | /api/coupons | gets all the coupons available after the users registers |
 
 ### Contacts - /api/contacts
+| Method | Path | Description |
+|---|---|---|
 | POST | /api/contacts | A endpoint thatsends an email to the stored email address in the .env |
 | GET | /api/contacts | Gets all the the emails that were sent from the clients |
 
