@@ -39,13 +39,21 @@ The core runtime environment is built on **Node.js**. Below are the primary libr
 - File upload
 - Contact form
 - Email sending
-- Leaflet Maps integration
+- Adding and deleting Documents
+
+### how to run the server
+```
+cd backend
+npm install
+npm run seed
+npm run dev
+```
 
 ## Environment Variables
 Create .env files based on the .env.example files.
 
 ```
-PORT=3000
+PORT=4_digits_port
 MONGODB_URI=your_mongodb_connection_string
 EMAIL_USER=your_email
 EMAIL_PASS=your_google_app_password
@@ -53,11 +61,4 @@ JWT_SECRET=your_jwt secret
 FRONTEND_URL=you_frontend_url
 ```
 
-### how to run the server
-```
-cd backend
-npm install
-npm run dev
-```
-
-
+**Some of the request are required to use tool in order to test the http requests**
